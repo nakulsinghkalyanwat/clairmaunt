@@ -1,0 +1,18 @@
+# Development server (not needed on Vercel)
+server.ps1
+
+# Node modules (if any)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
