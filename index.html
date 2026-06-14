@@ -216,8 +216,40 @@ html { scroll-padding-top: 80px; }
 .step-indicator.active .step-circle { background:#2929CC; color:#fff; border-color:#2929CC; }
 .step-indicator.active .step-label { color:#fff; }
 .step-indicator.completed .step-circle { background:#fff; color:#2929CC; border-color:#fff; }
-.form-step { animation: fadeIn 0.4s ease-out; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.form-step { width: 100%; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* SVG Progress wave movement animation */
+@keyframes wave-move {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-160px, 0, 0); }
+}
+.wave-front {
+  animation: wave-move 2.5s linear infinite;
+}
+.wave-back {
+  animation: wave-move 4s linear infinite reverse;
+}
+
+/* Water Ripple Animation */
+.water-ripple-span {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(41, 41, 204, 0.28) 0%, rgba(41, 41, 204, 0) 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 1;
+  transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 0.5s ease-out;
+  z-index: 50;
+}
+
+/* Color scheme fixes for native dropdown selects on Windows */
+#q-form select {
+  color-scheme: dark;
+}
+#q-form select option {
+  background-color: #1a1a3e !important;
+  color: #ffffff !important;
+}
 
 /* Footer Animations & Transitions */
 .footer-link {
@@ -246,27 +278,45 @@ html { scroll-padding-top: 80px; }
   transform-origin: bottom left;
 }
 .footer-contact-item {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .footer-contact-item:hover {
-  transform: translateX(6px);
+  transform: translateX(8px);
 }
 .footer-contact-item:hover .material-icons-outlined {
   color: #C9AA71 !important;
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.2) rotate(8deg);
+  text-shadow: 0 0 10px rgba(201, 170, 113, 0.4);
 }
 .footer-contact-item:hover a {
   color: #ffffff !important;
 }
 .footer-contact-item .material-icons-outlined, .footer-contact-item a {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .footer-social-icon {
-  transition: all 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  box-shadow: none !important;
+}
+.footer-social-icon svg {
+  fill: currentColor;
+  transition: fill 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .footer-social-icon:hover {
-  transform: scale(1.15) translateY(-4px);
-  box-shadow: 0 10px 25px -5px rgba(41, 41, 204, 0.4);
+  transform: scale(1.15) translateY(-4px) !important;
+  border-color: #C9AA71 !important;
+  background: rgba(201, 170, 113, 0.1) !important;
+  color: #C9AA71 !important;
+  box-shadow: 0 10px 25px rgba(201, 170, 113, 0.15) !important;
 }
 
 /* Custom Form Animations & Focus Glows */
@@ -1166,188 +1216,348 @@ html { scroll-padding-top: 80px; }
 <section id="quote" class="py-24 md:py-28 relative overflow-hidden" style="background:#0E0E2C">
   <div class="bg-orb-1"></div>
   <div class="bg-orb-2"></div>
-  <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle,#2929CC 1px,transparent 1px);background-size:40px 40px"></div>
-  <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,#2929CC,transparent)"></div>
-  <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
+  <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle,#2929CC,transparent)"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center mb-10 md:mb-14 reveal">
       <span class="s-label" style="color:rgba(201,170,113,.9);">Get A Custom Quote</span>
       <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">Request a<br/><em class="text-grad not-italic">Quotation</em></h2>
       <p class="text-white/50 font-light mt-4 md:mt-5 text-base md:text-lg">Tell us about your requirements and our team will prepare a customized quotation for your project.<br/><span class="text-royal font-semibold text-xs tracking-wider uppercase block mt-2">Estimated Response Time: Within 24 Hours</span></p>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="mb-10 reveal d1 hidden md:block" id="form-progress">
-      <div class="flex justify-between items-center relative">
-        <div class="absolute top-1/2 left-0 w-full h-[2px] bg-white/10 -z-10 transform -translate-y-1/2"></div>
-        <div id="progress-line" class="absolute top-1/2 left-0 h-[2px] bg-royal transition-all duration-500 -z-10 transform -translate-y-1/2" style="width: 0%;"></div>
-        
-        <div class="step-indicator active" data-step="1">
-          <div class="step-circle bg-royal text-white border-royal">1</div>
-          <div class="step-label">Contact</div>
-        </div>
-        <div class="step-indicator" data-step="2">
-          <div class="step-circle bg-[#1A1A3E] text-white/40 border-white/20">2</div>
-          <div class="step-label">Requirements</div>
-        </div>
-        <div class="step-indicator" data-step="3">
-          <div class="step-circle bg-[#1A1A3E] text-white/40 border-white/20">3</div>
-          <div class="step-label">Budget</div>
-        </div>
-        <div class="step-indicator" data-step="4">
-          <div class="step-circle bg-[#1A1A3E] text-white/40 border-white/20">4</div>
-          <div class="step-label">Files</div>
-        </div>
-      </div>
-    </div>
-    
-    <div id="q-form-card" class="glass p-6 md:p-10 lg:p-12 reveal d2 relative overflow-hidden">
-      <div id="q-card-glow"></div>
-      <form id="q-form" class="relative z-10" onsubmit="submitForm(event)">
-        <!-- STEP 1: Contact Details -->
-        <div id="step-1" class="form-step">
-          <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 1: Contact Details</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Full Name *</label><input id="q-name" type="text" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Company / Organization *</label><input id="q-company" type="text" required placeholder="Your Company Pvt. Ltd." class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Email Address *</label><input id="q-email" type="email" required placeholder="rahul@company.com" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Phone Number *</label><input id="q-phone" type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">City *</label><input id="q-city" type="text" required placeholder="Mumbai" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">State *</label><input id="q-state" type="text" required placeholder="Maharashtra" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            <div class="md:col-span-2"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Industry *</label><select id="q-industry" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="" style="background:#1a1a3e">Select Industry</option><option value="Hotel">Hotel</option><option value="Resort">Resort</option><option value="Restaurant">Restaurant</option><option value="Cafe">Cafe</option><option value="Wedding Planner">Wedding Planner</option><option value="Event Organizer">Event Organizer</option><option value="Corporate">Corporate</option><option value="Sports Organization">Sports Organization</option><option value="Educational Institution">Educational Institution</option><option value="Real Estate">Real Estate</option><option value="Healthcare">Healthcare</option><option value="Other">Other</option></select></div>
-          </div>
-          <div class="mt-8 flex justify-end"><button type="button" class="btn btn-blue" onclick="nextStep(2)">Next Step &rarr;</button></div>
-        </div>
-
-        <!-- STEP 2: Project Requirements -->
-        <div id="step-2" class="form-step hidden">
-          <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 2: Project Requirements</h3>
-          <div class="mb-6">
-            <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">What service are you interested in? *</label>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <label class="cursor-pointer"><input type="radio" name="q_service" value="Customized Water Bottles" class="hidden peer" onchange="toggleServiceFields()"/><div class="p-4 border border-white/20 rounded text-center text-sm text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Customized Water Bottles</div></label>
-              <label class="cursor-pointer"><input type="radio" name="q_service" value="Advertise On Bottles" class="hidden peer" onchange="toggleServiceFields()"/><div class="p-4 border border-white/20 rounded text-center text-sm text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Advertise On Bottles</div></label>
-              <label class="cursor-pointer"><input type="radio" name="q_service" value="Both Services" class="hidden peer" onchange="toggleServiceFields()"/><div class="p-4 border border-white/20 rounded text-center text-sm text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Both Services</div></label>
+    <!-- Responsive Grid Layout: Form Card Left, Progress Bottle Right -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Form Card Container -->
+      <div class="order-2 md:order-1 md:col-span-8 w-full">
+        <div id="q-form-card" class="glass p-6 md:p-10 lg:p-12 reveal d2 relative overflow-hidden">
+          <div id="q-card-glow"></div>
+          
+          <form id="q-form" class="relative z-10" onsubmit="submitForm(event)">
+            <!-- STEP 1: Contact Details -->
+            <div id="step-1" class="form-step">
+              <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 1: Contact Details</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Full Name *</label><input id="q-name" type="text" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Company / Organization *</label><input id="q-company" type="text" required placeholder="Your Company Pvt. Ltd." class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Email Address *</label><input id="q-email" type="email" required placeholder="rahul@company.com" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Phone Number *</label><input id="q-phone" type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">City *</label><input id="q-city" type="text" required placeholder="Mumbai" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">State *</label><input id="q-state" type="text" required placeholder="Maharashtra" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                <div class="md:col-span-2"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Industry *</label><select id="q-industry" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="" style="background:#1a1a3e">Select Industry</option><option value="Hotel">Hotel</option><option value="Resort">Resort</option><option value="Restaurant">Restaurant</option><option value="Cafe">Cafe</option><option value="Wedding Planner">Wedding Planner</option><option value="Event Organizer">Event Organizer</option><option value="Corporate">Corporate</option><option value="Sports Organization">Sports Organization</option><option value="Educational Institution">Educational Institution</option><option value="Real Estate">Real Estate</option><option value="Healthcare">Healthcare</option><option value="Other">Other</option></select></div>
+              </div>
+              <div class="mt-8 flex justify-end"><button type="button" class="btn btn-blue" onclick="nextStep(2)">Next Step &rarr;</button></div>
             </div>
-          </div>
 
-          <!-- Dynamic: Customized Water Bottles -->
-          <div id="fields-custom" class="hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Size *</label><select id="q-bottle-size" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Size</option><option value="250 ml">250 ml</option><option value="500 ml">500 ml</option><option value="1 Litre">1 Litre</option><option value="Not Sure">Not Sure</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Label Design Requirement *</label><select id="q-design-req" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="I Have My Own Design">I Have My Own Design</option><option value="Need ClairMaunt Design Team">Need ClairMaunt Design Team</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">QR Code Integration *</label><select id="q-qr" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
-              <div class="relative" id="datepicker-container">
-                <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Date *</label>
-                <div class="relative cursor-pointer" onclick="toggleCustomCalendar(event)">
-                  <input id="q-delivery-date-display" type="text" readonly placeholder="Select Date" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 cursor-pointer pr-10" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/>
-                  <span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none text-lg">calendar_today</span>
-                </div>
-                <input id="q-delivery-date" type="hidden" onchange="saveProgress()"/>
-                
-                <!-- Custom Datepicker Dropdown -->
-                <div id="custom-datepicker-dropdown" class="absolute left-0 mt-2 p-4 rounded-xl border border-white/10 glass shadow-2xl hidden z-50 w-72" style="background: rgba(14,14,44,0.96); backdrop-filter: blur(25px);">
-                  <div class="flex justify-between items-center mb-3">
-                    <button type="button" onclick="changeCustomMonth(-1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_left</span></button>
-                    <span id="custom-month-year" class="text-white text-xs font-semibold uppercase tracking-wider">June 2026</span>
-                    <button type="button" onclick="changeCustomMonth(1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_right</span></button>
-                  </div>
-                  <div class="grid grid-cols-7 gap-1 text-center text-[9px] text-white/50 font-bold uppercase tracking-wider mb-2">
-                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
-                  </div>
-                  <div id="custom-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs text-white">
-                  </div>
+            <!-- STEP 2: Project Requirements -->
+            <div id="step-2" class="form-step hidden">
+              <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 2: Project Requirements</h3>
+              <div class="mb-6">
+                <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">What service are you interested in? *</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <!-- Premium Selection Card 1 -->
+                  <label class="cursor-pointer group">
+                    <input type="radio" name="q_service" value="Customized Water Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
+                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
+                        <span class="material-icons-outlined text-2xl">water_drop</span>
+                      </div>
+                      <div>
+                        <h4 class="font-heading font-bold text-white text-base">Custom Bottles</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Branded Water</p>
+                      </div>
+                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
+                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      </div>
+                    </div>
+                  </label>
+                  
+                  <!-- Premium Selection Card 2 -->
+                  <label class="cursor-pointer group">
+                    <input type="radio" name="q_service" value="Advertise On Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
+                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
+                        <span class="material-icons-outlined text-2xl">campaign</span>
+                      </div>
+                      <div>
+                        <h4 class="font-heading font-bold text-white text-base">Bottle Ads</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Advertise program</p>
+                      </div>
+                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
+                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      </div>
+                    </div>
+                  </label>
+                  
+                  <!-- Premium Selection Card 3 -->
+                  <label class="cursor-pointer group">
+                    <input type="radio" name="q_service" value="Both Services" class="hidden peer" onchange="toggleServiceFields()"/>
+                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
+                        <span class="material-icons-outlined text-2xl">layers</span>
+                      </div>
+                      <div>
+                        <h4 class="font-heading font-bold text-white text-base">Both Services</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Full Partnership</p>
+                      </div>
+                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
+                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Location *</label><input id="q-delivery-loc" type="text" placeholder="Full Address / Pincode" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-            </div>
-          </div>
 
-          <!-- Dynamic: Advertise on Bottles -->
-          <div id="fields-ad" class="hidden space-y-6 mt-6 pt-6 border-t border-white/10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Campaign Objective *</label><select id="q-campaign-obj" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Objective</option><option value="Brand Awareness">Brand Awareness</option><option value="Lead Generation">Lead Generation</option><option value="Product Launch">Product Launch</option><option value="Restaurant Promotion">Restaurant Promotion</option><option value="Website Traffic">Website Traffic</option><option value="QR Campaign">QR Campaign</option><option value="Event Sponsorship">Event Sponsorship</option><option value="Other">Other</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Preferred Event Type *</label><select id="q-ad-event" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Preference</option><option value="Sports Tournament">Sports Tournament</option><option value="College Fest">College Fest</option><option value="Marathon">Marathon</option><option value="Corporate Event">Corporate Event</option><option value="Conference">Conference</option><option value="Exhibition">Exhibition</option><option value="Any Suitable Event">Any Suitable Event</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Target Audience</label><textarea id="q-audience" rows="1" placeholder="e.g. College students, IT professionals" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
+              <!-- Dynamic: Customized Water Bottles -->
+              <div id="fields-custom" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Size *</label><select id="q-bottle-size" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Size</option><option value="250 ml">250 ml</option><option value="500 ml">500 ml</option><option value="1 Litre">1 Litre</option><option value="Not Sure">Not Sure</option></select></div>
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Label Design Requirement *</label><select id="q-design-req" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="I Have My Own Design">I Have My Own Design</option><option value="Need ClairMaunt Design Team">Need ClairMaunt Design Team</option></select></div>
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">QR Code Integration *</label><select id="q-qr" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                  <div class="relative" id="datepicker-container">
+                    <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Date *</label>
+                    <div class="relative cursor-pointer" onclick="toggleCustomCalendar(event)">
+                      <input id="q-delivery-date-display" type="text" readonly placeholder="Select Date" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 cursor-pointer pr-10" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/>
+                      <span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none text-lg">calendar_today</span>
+                    </div>
+                    <input id="q-delivery-date" type="hidden" onchange="saveProgress()"/>
+                    
+                    <!-- Custom Datepicker Dropdown -->
+                    <div id="custom-datepicker-dropdown" class="absolute left-0 mt-2 p-4 rounded-xl border border-white/10 glass shadow-2xl hidden z-50 w-72" style="background: rgba(14,14,44,0.96); backdrop-filter: blur(25px);">
+                      <div class="flex justify-between items-center mb-3">
+                        <button type="button" onclick="changeCustomMonth(-1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_left</span></button>
+                        <span id="custom-month-year" class="text-white text-xs font-semibold uppercase tracking-wider">June 2026</span>
+                        <button type="button" onclick="changeCustomMonth(1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_right</span></button>
+                      </div>
+                      <div class="grid grid-cols-7 gap-1 text-center text-[9px] text-white/50 font-bold uppercase tracking-wider mb-2">
+                        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                      </div>
+                      <div id="custom-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs text-white">
+                      </div>
+                    </div>
+                  </div>
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Location *</label><input id="q-delivery-loc" type="text" placeholder="Full Address / Pincode" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+                </div>
+              </div>
+
+              <!-- Dynamic: Advertise on Bottles -->
+              <div id="fields-ad" class="hidden space-y-6 mt-6 pt-6 border-t border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Campaign Objective *</label><select id="q-campaign-obj" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Objective</option><option value="Brand Awareness">Brand Awareness</option><option value="Lead Generation">Lead Generation</option><option value="Product Launch">Product Launch</option><option value="Restaurant Promotion">Restaurant Promotion</option><option value="Website Traffic">Website Traffic</option><option value="QR Campaign">QR Campaign</option><option value="Event Sponsorship">Event Sponsorship</option><option value="Other">Other</option></select></div>
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Preferred Event Type *</label><select id="q-ad-event" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Preference</option><option value="Sports Tournament">Sports Tournament</option><option value="College Fest">College Fest</option><option value="Marathon">Marathon</option><option value="Corporate Event">Corporate Event</option><option value="Conference">Conference</option><option value="Exhibition">Exhibition</option><option value="Any Suitable Event">Any Suitable Event</option></select></div>
+                  <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Target Audience</label><textarea id="q-audience" rows="1" placeholder="e.g. College students, IT professionals" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
+                </div>
+              </div>
+              
+              <div class="mt-8 flex justify-between">
+                <button type="button" class="btn btn-outline-w" onclick="nextStep(1)">&larr; Back</button>
+                <button type="button" class="btn btn-blue" onclick="nextStep(3)">Next Step &rarr;</button>
+              </div>
             </div>
-          </div>
+
+            <!-- STEP 3: Quantity & Budget -->
+            <div id="step-3" class="form-step hidden">
+              <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 3: Quantity & Budget</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Quantity *</label><select id="q-qty-range" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Quantity</option><option value="500 - 1,000">500 – 1,000</option><option value="1,000 - 5,000">1,000 – 5,000</option><option value="5,000 - 10,000">5,000 – 10,000</option><option value="10,000+">10,000+</option></select></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Estimated Budget *</label><select id="q-budget" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Budget</option><option value="Under ₹5,000">Under ₹5,000</option><option value="₹5,000 - ₹15,000">₹5,000 – ₹15,000</option><option value="₹15,000 - ₹50,000">₹15,000 – ₹50,000</option><option value="₹50,000 - ₹1,00,000">₹50,000 – ₹1,00,000</option><option value="₹1,00,000+">₹1,00,000+</option></select></div>
+              </div>
+              <div class="mb-6">
+                <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">Expected Requirement *</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="One-Time Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">One-Time</div></label>
+                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Monthly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Monthly</div></label>
+                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Quarterly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Quarterly</div></label>
+                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Long-Term Partnership" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Long-Term</div></label>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div class="md:col-span-2"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">How Did You Hear About Us?</label><select id="q-source" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Google">Google</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="LinkedIn">LinkedIn</option><option value="Referral">Referral</option><option value="Event">Event</option><option value="Website">Website</option><option value="Other">Other</option></select></div>
+              </div>
+              <div class="mt-8 flex justify-between">
+                <button type="button" class="btn btn-outline-w" onclick="nextStep(2)">&larr; Back</button>
+                <button type="button" class="btn btn-blue" onclick="nextStep(4)">Next Step &rarr;</button>
+              </div>
+            </div>
+
+            <!-- STEP 4: Files & Submission -->
+            <div id="step-4" class="form-step hidden">
+              <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 4: Files & Details</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Logo (Optional)</label><div class="border border-dashed border-white/20 p-6 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi-logo').click()"><span class="material-icons-outlined text-white/30 text-2xl mb-2 block">cloud_upload</span><p id="fu-label-logo" class="text-white/40 text-xs">Drag & Drop or Click (Images only)</p></div><input id="fi-logo" type="file" class="hidden" accept="image/png, image/jpeg, image/svg+xml"/></div>
+                <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Design Files (Optional)</label><div class="border border-dashed border-white/20 p-6 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi-design').click()"><span class="material-icons-outlined text-white/30 text-2xl mb-2 block">folder_open</span><p id="fu-label-design" class="text-white/40 text-xs">Drag & Drop or Click (PDFs only)</p></div><input id="fi-design" type="file" class="hidden" accept="application/pdf"/></div>
+              </div>
+              <div class="mb-8"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Additional Notes</label><textarea id="q-notes" rows="4" placeholder="Tell us about your design preferences, event details, branding requirements, packaging requirements, custom cap colors, QR functionality, or any other special requests..." class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
+              <div class="mt-8 flex justify-between">
+                <button type="button" class="btn btn-outline-w" onclick="nextStep(3)">&larr; Back</button>
+                <button type="button" class="btn btn-blue" onclick="reviewStep()">Review Request &rarr;</button>
+              </div>
+            </div>
+
+            <!-- REVIEW STEP -->
+            <div id="step-review" class="form-step hidden">
+              <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Final Review</h3>
+              <div class="bg-white/5 border border-white/10 p-6 rounded mb-8 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                  <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Contact</strong><span id="rev-contact" class="text-white"></span></div>
+                  <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Service</strong><span id="rev-service" class="text-white"></span></div>
+                  <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Quantity</strong><span id="rev-qty" class="text-white"></span></div>
+                  <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Budget</strong><span id="rev-budget" class="text-white"></span></div>
+                  <div class="md:col-span-2"><strong class="text-white/50 block text-[10px] uppercase mb-1">Additional Details</strong><span id="rev-details" class="text-white italic"></span></div>
+                </div>
+              </div>
+              <div class="mt-8 flex justify-between items-center flex-wrap gap-4">
+                <button type="button" class="btn btn-outline-w" onclick="nextStep(4)">&larr; Edit Details</button>
+                <button id="q-submit-btn" type="submit" class="btn btn-blue py-4 px-8 shadow-xl text-sm w-full md:w-auto">Get My Custom Quote</button>
+              </div>
+            </div>
+          </form>
           
-          <div class="mt-8 flex justify-between">
-            <button type="button" class="btn btn-outline-w" onclick="nextStep(1)">&larr; Back</button>
-            <button type="button" class="btn btn-blue" onclick="nextStep(3)">Next Step &rarr;</button>
-          </div>
-        </div>
-
-        <!-- STEP 3: Quantity & Budget -->
-        <div id="step-3" class="form-step hidden">
-          <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 3: Quantity & Budget</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Quantity *</label><select id="q-qty-range" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Quantity</option><option value="500 - 1,000">500 – 1,000</option><option value="1,000 - 5,000">1,000 – 5,000</option><option value="5,000 - 10,000">5,000 – 10,000</option><option value="10,000+">10,000+</option></select></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Estimated Budget *</label><select id="q-budget" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Budget</option><option value="Under ₹5,000">Under ₹5,000</option><option value="₹5,000 - ₹15,000">₹5,000 – ₹15,000</option><option value="₹15,000 - ₹50,000">₹15,000 – ₹50,000</option><option value="₹50,000 - ₹1,00,000">₹50,000 – ₹1,00,000</option><option value="₹1,00,000+">₹1,00,000+</option></select></div>
-          </div>
-          <div class="mb-6">
-            <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">Expected Requirement *</label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <label class="cursor-pointer"><input type="radio" name="q_freq" value="One-Time Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">One-Time</div></label>
-              <label class="cursor-pointer"><input type="radio" name="q_freq" value="Monthly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Monthly</div></label>
-              <label class="cursor-pointer"><input type="radio" name="q_freq" value="Quarterly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Quarterly</div></label>
-              <label class="cursor-pointer"><input type="radio" name="q_freq" value="Long-Term Partnership" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Long-Term</div></label>
+          <!-- SUCCESS EXPERIENCE (Feature 6) -->
+          <div id="q-success" class="hidden text-center py-8 relative z-10 opacity-0 transition-opacity duration-500">
+            <!-- Large Hyper-realistic Filling Success Bottle -->
+            <div class="w-64 h-[350px] mx-auto relative mb-8 flex items-center justify-center">
+              <svg id="success-bottle-svg" width="160" height="340" viewBox="0 0 160 360" fill="none" class="mx-auto filter drop-shadow-[0_12px_24px_rgba(41,41,204,0.35)]">
+                <defs>
+                  <linearGradient id="success-liquid-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#2929CC" stop-opacity="0.85" />
+                    <stop offset="50%" stop-color="#4444E0" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#1E1E99" stop-opacity="0.85" />
+                  </linearGradient>
+                  <clipPath id="success-bottle-clip">
+                    <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" />
+                  </clipPath>
+                  <linearGradient id="success-glass-reflection" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+                    <stop offset="30%" stop-color="#ffffff" stop-opacity="0.05" />
+                    <stop offset="70%" stop-color="#ffffff" stop-opacity="0" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+                  </linearGradient>
+                </defs>
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+                <g clip-path="url(#success-bottle-clip)">
+                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.04)" />
+                  <!-- Success Liquid Group: animated translateY controlled by script -->
+                  <g id="success-liquid-group" transform="translate(0, 345)" style="transition: transform 2.5s cubic-bezier(0.25, 0.8, 0.25, 1);">
+                    <path class="wave-back" d="M 0,-10 Q 40,-20 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="#2929CC" opacity="0.4" />
+                    <path class="wave-front" d="M 0,-10 Q 40,0 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="url(#success-liquid-grad)" />
+                  </g>
+                </g>
+                <g id="success-bottle-label">
+                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1" />
+                  <path d="M 62,195 L 72,175 L 82,195 Z" fill="#2929CC" opacity="0.6" />
+                  <path d="M 72,175 L 80,195 L 64,195 Z" fill="#C9AA71" opacity="0.4" />
+                  <text x="80" y="215" text-anchor="middle" font-family="Playfair Display, serif" font-size="8" font-weight="700" fill="white" letter-spacing="0.5">ClairMaunt</text>
+                  <text x="80" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.5" fill="#C9AA71" letter-spacing="1">PREMIUM</text>
+                  <line x1="50" y1="232" x2="110" y2="232" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" />
+                  <text x="80" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#C9AA71">✓</text>
+                </g>
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="url(#success-glass-reflection)" pointer-events="none" />
+                <rect x="66" y="5" width="28" height="17" rx="2" fill="#C9AA71" stroke="#ffffff" stroke-width="0.5" />
+                <circle id="success-splash-ring" cx="80" cy="80" r="0" stroke="#C9AA71" stroke-width="1.5" fill="none" opacity="0" style="transition: all 0.6s ease-out;" />
+              </svg>
+            </div>
+            
+            <!-- Success Content (revealed after bottle filling animation completes) -->
+            <div id="success-message-content" class="opacity-0 transition-all duration-700" style="transform: translate3d(0, 15px, 0);">
+              <span class="inline-block text-gold text-xs font-semibold uppercase tracking-[.25em] mb-2">✓ Request Submitted Successfully</span>
+              <h3 class="font-display text-4xl font-bold text-white mb-4">Thank You!</h3>
+              <p class="text-white/70 font-light text-base max-w-lg mx-auto mb-2">Your quotation request has been received successfully.</p>
+              <p class="text-white/45 font-light text-sm max-w-md mx-auto mb-10">Our team will review your requirements and respond within 24 hours.</p>
+              
+              <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="window.scrollTo(0,0); location.reload();" class="btn btn-outline-w">Return Home</button>
+                <a href="#customization" class="btn btn-blue">Explore Services</a>
+                <button onclick="resetQuotationForm()" class="btn btn-outline-w">Request Another Quote</button>
+              </div>
             </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            <div class="md:col-span-2"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">How Did You Hear About Us?</label><select id="q-source" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Google">Google</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="LinkedIn">LinkedIn</option><option value="Referral">Referral</option><option value="Event">Event</option><option value="Website">Website</option><option value="Other">Other</option></select></div>
-          </div>
-          <div class="mt-8 flex justify-between">
-            <button type="button" class="btn btn-outline-w" onclick="nextStep(2)">&larr; Back</button>
-            <button type="button" class="btn btn-blue" onclick="nextStep(4)">Next Step &rarr;</button>
-          </div>
         </div>
+      </div>
 
-        <!-- STEP 4: Files & Submission -->
-        <div id="step-4" class="form-step hidden">
-          <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 4: Files & Details</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Logo (Optional)</label><div class="border border-dashed border-white/20 p-6 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi-logo').click()"><span class="material-icons-outlined text-white/30 text-2xl mb-2 block">cloud_upload</span><p id="fu-label-logo" class="text-white/40 text-xs">Drag & Drop or Click (Images only)</p></div><input id="fi-logo" type="file" class="hidden" accept="image/png, image/jpeg, image/svg+xml"/></div>
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Design Files (Optional)</label><div class="border border-dashed border-white/20 p-6 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi-design').click()"><span class="material-icons-outlined text-white/30 text-2xl mb-2 block">folder_open</span><p id="fu-label-design" class="text-white/40 text-xs">Drag & Drop or Click (PDFs only)</p></div><input id="fi-design" type="file" class="hidden" accept="application/pdf"/></div>
-          </div>
-          <div class="mb-8"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Additional Notes</label><textarea id="q-notes" rows="4" placeholder="Tell us about your design preferences, event details, branding requirements, packaging requirements, custom cap colors, QR functionality, or any other special requests..." class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
-          <div class="mt-8 flex justify-between">
-            <button type="button" class="btn btn-outline-w" onclick="nextStep(3)">&larr; Back</button>
-            <button type="button" class="btn btn-blue" onclick="reviewStep()">Review Request &rarr;</button>
-          </div>
-        </div>
-
-        <!-- REVIEW STEP -->
-        <div id="step-review" class="form-step hidden">
-          <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Final Review</h3>
-          <div class="bg-white/5 border border-white/10 p-6 rounded mb-8 text-sm">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
-              <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Contact</strong><span id="rev-contact" class="text-white"></span></div>
-              <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Service</strong><span id="rev-service" class="text-white"></span></div>
-              <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Quantity</strong><span id="rev-qty" class="text-white"></span></div>
-              <div><strong class="text-white/50 block text-[10px] uppercase mb-1">Budget</strong><span id="rev-budget" class="text-white"></span></div>
-              <div class="md:col-span-2"><strong class="text-white/50 block text-[10px] uppercase mb-1">Additional Details</strong><span id="rev-details" class="text-white italic"></span></div>
+      <!-- Right Column: Progress Bottle Indicator & Trust Statistics -->
+      <div class="order-1 md:order-2 md:col-span-4 w-full flex flex-col gap-6">
+        
+        <!-- Progress Bottle Indicator Card (Feature 1) -->
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 lg:p-8 relative overflow-hidden glass flex flex-col items-center justify-center text-center reveal d1">
+          <div class="absolute inset-0 opacity-10 bg-gradient-to-b from-royal to-transparent"></div>
+          <div class="relative z-10 flex flex-col items-center w-full">
+            
+            <!-- Dynamic SVG Progress Bottle -->
+            <div class="w-48 h-96 relative flex items-center justify-center">
+              <svg id="progress-bottle-svg" width="160" height="360" viewBox="0 0 160 360" fill="none" class="filter drop-shadow-[0_10px_20px_rgba(41,41,204,0.3)]">
+                <defs>
+                  <linearGradient id="liquid-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#2929CC" stop-opacity="0.85" />
+                    <stop offset="50%" stop-color="#4444E0" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#1E1E99" stop-opacity="0.85" />
+                  </linearGradient>
+                  <clipPath id="bottle-clip">
+                    <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" />
+                  </clipPath>
+                  <linearGradient id="glass-reflection" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+                    <stop offset="30%" stop-color="#ffffff" stop-opacity="0.05" />
+                    <stop offset="70%" stop-color="#ffffff" stop-opacity="0" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+                  </linearGradient>
+                </defs>
+                
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+                
+                <g clip-path="url(#bottle-clip)">
+                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.05)" />
+                  <!-- Water level: starts at 278px Y translation for Step 1 (25% filled) -->
+                  <g id="progress-liquid-group" transform="translate(0, 278)" style="transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <path class="wave-back" d="M 0,-10 Q 40,-20 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="#2929CC" opacity="0.4" />
+                    <path class="wave-front" d="M 0,-10 Q 40,0 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="url(#liquid-grad)" />
+                  </g>
+                </g>
+                
+                <g id="progress-bottle-label">
+                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1" />
+                  <path d="M 62,195 L 72,175 L 82,195 Z" fill="#2929CC" opacity="0.6" />
+                  <path d="M 72,175 L 80,195 L 64,195 Z" fill="#C9AA71" opacity="0.4" />
+                  <text x="80" y="215" text-anchor="middle" font-family="Playfair Display, serif" font-size="8" font-weight="700" fill="white" letter-spacing="0.5">ClairMaunt</text>
+                  <text x="80" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.5" fill="#C9AA71" letter-spacing="1">PREMIUM</text>
+                  <line x1="50" y1="232" x2="110" y2="232" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" />
+                  <text x="80" y="242" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.5" fill="white" opacity="0.5">500 ml</text>
+                </g>
+                
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="url(#glass-reflection)" pointer-events="none" />
+                <rect x="66" y="5" width="28" height="17" rx="2" fill="#C9AA71" stroke="#ffffff" stroke-width="0.5" />
+                <path d="M 42,120 Q 40,220 42,310" stroke="white" stroke-width="2" opacity="0.25" stroke-linecap="round" pointer-events="none" />
+              </svg>
             </div>
+            
+            <div id="progress-percent" class="text-gold font-semibold text-lg tracking-widest uppercase mt-4">25% Complete</div>
+            <div class="text-white/45 text-[10px] uppercase tracking-widest mt-1">Consultation Progress</div>
           </div>
-          <div class="mt-8 flex justify-between items-center flex-wrap gap-4">
-            <button type="button" class="btn btn-outline-w" onclick="nextStep(4)">&larr; Edit Details</button>
-            <button id="q-submit-btn" type="submit" class="btn btn-blue py-4 px-8 shadow-xl text-sm w-full md:w-auto">Get My Custom Quote</button>
+        </div>
+        
+        <!-- Animated Trust Statistics (Feature 5) -->
+        <div id="trust-stats-grid" class="grid grid-cols-2 gap-4 w-full">
+          <!-- Stat 1 -->
+          <div class="bg-white/5 border border-white/8 rounded-2xl p-4 text-center glass reveal d1 flex flex-col justify-center min-h-[100px]">
+            <div class="font-display text-2xl font-bold text-white"><span class="stat-count" data-target="50">0</span>+</div>
+            <div class="text-white/45 text-[9px] uppercase tracking-wider mt-1">Events Served</div>
+          </div>
+          <!-- Stat 2 -->
+          <div class="bg-white/5 border border-white/8 rounded-2xl p-4 text-center glass reveal d2 flex flex-col justify-center min-h-[100px]">
+            <div class="font-display text-2xl font-bold text-white"><span class="stat-count" data-target="50000">0</span>+</div>
+            <div class="text-white/45 text-[9px] uppercase tracking-wider mt-1">Bottles Delivered</div>
+          </div>
+          <!-- Stat 3 -->
+          <div class="bg-white/5 border border-white/8 rounded-2xl p-4 text-center glass reveal d3 flex flex-col justify-center min-h-[100px]">
+            <div class="font-display text-2xl font-bold text-white"><span class="stat-count" data-target="100">0</span>%</div>
+            <div class="text-white/45 text-[9px] uppercase tracking-wider mt-1">Client Satisfaction</div>
+          </div>
+          <!-- Stat 4 -->
+          <div class="bg-white/5 border border-white/8 rounded-2xl p-4 text-center glass reveal d4 flex flex-col justify-center min-h-[100px]">
+            <div class="font-display text-2xl font-bold text-white"><span class="stat-count" data-target="24">0</span>h</div>
+            <div class="text-white/45 text-[9px] uppercase tracking-wider mt-1">Quote Turnaround</div>
           </div>
         </div>
 
-      </form>
-      
-      <!-- SUCCESS PAGE -->
-      <div id="q-success" class="hidden text-center py-8">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold/10 border border-gold/30 mb-6 pulse-gold shadow-[0_0_20px_rgba(201,170,113,0.2)]">
-          <span class="material-icons text-gold text-4xl">check</span>
-        </div>
-        <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Thank You For Choosing ClairMaunt</h3>
-        <p class="text-white/55 font-light text-base md:text-lg mb-2 max-w-lg mx-auto">Our team has received your request and will prepare a customized quotation based on your requirements.</p>
-        <p class="text-royal font-semibold text-sm tracking-wider uppercase mb-8">Expected Response Time: Within 24 Hours</p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <button onclick="window.scrollTo(0,0); location.reload();" class="btn btn-outline-w">Return To Home</button>
-          <a href="#customization" class="btn btn-blue">Explore Our Services</a>
-        </div>
       </div>
     </div>
   </div>
@@ -1640,19 +1850,41 @@ const totalSteps = 4;
 
 function updateProgress() {
   const line = document.getElementById('progress-line');
-  if(line) line.style.width = ((currentStep - 1) / (totalSteps - 1)) * 100 + '%';
+  const stepNum = (currentStep === 'review') ? 4 : currentStep;
+  
+  if(line) line.style.width = ((stepNum - 1) / (totalSteps - 1)) * 100 + '%';
   document.querySelectorAll('.step-indicator').forEach(ind => {
     const step = parseInt(ind.getAttribute('data-step'));
-    if(step === currentStep) {
+    if(step === stepNum) {
       ind.classList.add('active');
       ind.classList.remove('completed');
-    } else if(step < currentStep) {
+    } else if(step < stepNum) {
       ind.classList.add('completed');
       ind.classList.remove('active');
     } else {
       ind.classList.remove('active', 'completed');
     }
   });
+
+  // Update SVG Progress Bottle filling level (Feature 1)
+  const progressLiquid = document.getElementById('progress-liquid-group');
+  const percentText = document.getElementById('progress-percent');
+  if (progressLiquid) {
+    let yTranslate = 278; // Step 1: 25% (translate to 278px)
+    let pct = "25%";
+    if (stepNum === 2) {
+      yTranslate = 212; // Step 2: 50%
+      pct = "50%";
+    } else if (stepNum === 3) {
+      yTranslate = 146; // Step 3: 75%
+      pct = "75%";
+    } else if (stepNum === 4) {
+      yTranslate = 80;  // Step 4 & Review: 100%
+      pct = "100%";
+    }
+    progressLiquid.style.transform = `translate(0, ${yTranslate}px)`;
+    if (percentText) percentText.textContent = `${pct} Complete`;
+  }
 }
 
 function nextStep(step) {
@@ -1668,32 +1900,78 @@ function nextStep(step) {
   const nextEl = document.getElementById('step-' + step);
   
   if (currentEl && currentEl !== nextEl) {
-    currentEl.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+    const currentIdx = (currentStep === 'review') ? 5 : parseInt(currentStep);
+    const nextIdx = (step === 'review') ? 5 : parseInt(step);
+    const isForward = nextIdx > currentIdx;
+    
+    // Smooth Height Transition for Form Container
+    const form = document.getElementById('q-form');
+    const startHeight = form.offsetHeight;
+    form.style.height = startHeight + 'px';
+    form.style.position = 'relative';
+    form.style.overflow = 'hidden';
+    form.style.transition = 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    
+    // Transition Outgoing Step
+    currentEl.style.position = 'absolute';
+    currentEl.style.width = '100%';
+    currentEl.style.top = '0';
+    currentEl.style.left = '0';
+    currentEl.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    
+    // Transition Incoming Step
+    nextEl.classList.remove('hidden');
+    nextEl.style.position = 'absolute';
+    nextEl.style.width = '100%';
+    nextEl.style.top = '0';
+    nextEl.style.left = '0';
+    nextEl.style.opacity = '0';
+    nextEl.style.transform = isForward ? 'translate3d(80px, 0, 0)' : 'translate3d(-80px, 0, 0)';
+    nextEl.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    
+    // Force DOM repaint to get next step height
+    const targetHeight = nextEl.offsetHeight;
+    
+    // Animate height and horizontal slide/fade
+    nextEl.offsetHeight; // force reflow
+    form.style.height = targetHeight + 'px';
+    
     currentEl.style.opacity = '0';
-    currentEl.style.transform = 'translateY(-6px)';
+    currentEl.style.transform = isForward ? 'translate3d(-80px, 0, 0)' : 'translate3d(80px, 0, 0)';
+    
+    nextEl.style.opacity = '1';
+    nextEl.style.transform = 'translate3d(0, 0, 0)';
     
     setTimeout(() => {
+      // Reset transition styles post-animation
       currentEl.classList.add('hidden');
-      currentEl.style.opacity = '';
+      currentEl.style.position = '';
+      currentEl.style.width = '';
+      currentEl.style.top = '';
+      currentEl.style.left = '';
       currentEl.style.transform = '';
+      currentEl.style.opacity = '';
+      currentEl.style.transition = '';
       
-      nextEl.classList.remove('hidden');
-      nextEl.style.opacity = '0';
-      nextEl.style.transform = 'translateY(6px)';
-      nextEl.style.transition = 'opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+      nextEl.style.position = '';
+      nextEl.style.width = '';
+      nextEl.style.top = '';
+      nextEl.style.left = '';
+      nextEl.style.transform = '';
+      nextEl.style.opacity = '';
+      nextEl.style.transition = '';
       
-      // Force hardware repaint
-      nextEl.offsetHeight;
-      
-      nextEl.style.opacity = '1';
-      nextEl.style.transform = 'translateY(0)';
-    }, 220);
+      form.style.height = '';
+      form.style.overflow = '';
+      form.style.transition = '';
+    }, 400);
   } else {
     document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
     nextEl.classList.remove('hidden');
   }
   
   if(typeof step === 'number') { currentStep = step; updateProgress(); }
+  else if(step === 'review') { currentStep = 'review'; }
   saveProgress();
 }
 
@@ -1898,7 +2176,12 @@ function loadProgress() {
     toggleServiceFields();
   } catch(e) {}
 }
-window.addEventListener('DOMContentLoaded', loadProgress);
+window.addEventListener('DOMContentLoaded', () => {
+  loadProgress();
+  initInputRipples();
+  initStatsCounter();
+  updateProgress();
+});
 
 // Form Submit
 async function submitForm(e){
@@ -1971,13 +2254,221 @@ async function submitForm(e){
   }
 
   localStorage.removeItem('clairmaunt_quote');
-  const form=document.getElementById('q-form');
-  const success=document.getElementById('q-success');
-  const pb=document.getElementById('form-progress');
-  if(pb) pb.style.display = 'none';
-  form.style.transition='opacity .4s,transform .4s';
-  form.style.opacity='0'; form.style.transform='scale(.97)';
-  setTimeout(()=>{ form.style.display='none'; success.classList.remove('hidden'); success.style.opacity='0'; setTimeout(()=>{ success.style.transition='opacity .5s'; success.style.opacity='1'; },50); },400);
+  const form = document.getElementById('q-form');
+  const success = document.getElementById('q-success');
+  
+  form.style.transition = 'opacity .4s, transform .4s';
+  form.style.opacity = '0';
+  form.style.transform = 'scale(.97)';
+  
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.classList.remove('hidden');
+    success.style.opacity = '0';
+    
+    // Reset success components
+    const successLiquid = document.getElementById('success-liquid-group');
+    const successSplash = document.getElementById('success-splash-ring');
+    const successMsg = document.getElementById('success-message-content');
+    
+    if (successLiquid) successLiquid.style.transform = 'translate(0, 345px)';
+    if (successSplash) {
+      successSplash.style.transition = 'none';
+      successSplash.setAttribute('r', '0');
+      successSplash.style.opacity = '0';
+    }
+    if (successMsg) {
+      successMsg.style.opacity = '0';
+      successMsg.style.transform = 'translate3d(0, 15px, 0)';
+    }
+    
+    setTimeout(() => {
+      success.style.transition = 'opacity 0.5s';
+      success.style.opacity = '1';
+      
+      // Start bottle filling animation
+      setTimeout(() => {
+        if (successLiquid) {
+          successLiquid.style.transform = 'translate(0, 22px)';
+        }
+        
+        // After 2.5s (filling duration), trigger splash ring ripple and reveal message
+        setTimeout(() => {
+          if (successSplash) {
+            successSplash.style.transition = 'all 0.8s cubic-bezier(0.1, 0.8, 0.3, 1)';
+            successSplash.setAttribute('r', '35');
+            successSplash.style.opacity = '0.8';
+            
+            setTimeout(() => {
+              successSplash.style.opacity = '0';
+            }, 500);
+          }
+          
+          // Reveal luxury success message content
+          if (successMsg) {
+            successMsg.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            successMsg.style.transform = 'translate3d(0, 0, 0)';
+            successMsg.style.opacity = '1';
+          }
+        }, 2500);
+      }, 300);
+    }, 50);
+  }, 400);
+}
+
+// Wrap input/select/textarea dynamically to support ripple (Feature 2)
+function initInputRipples() {
+  const inputs = document.querySelectorAll('#q-form input:not([type="file"]):not([type="radio"]), #q-form select, #q-form textarea');
+  inputs.forEach(input => {
+    let wrapper = input.parentElement;
+    
+    // Wrap with relative div if parent is not already a wrapper/relative layout container
+    if (!wrapper.classList.contains('relative') && !wrapper.classList.contains('input-ripple-wrapper')) {
+      const newWrapper = document.createElement('div');
+      newWrapper.className = 'input-ripple-wrapper relative w-full';
+      input.parentNode.insertBefore(newWrapper, input);
+      newWrapper.appendChild(input);
+      wrapper = newWrapper;
+    }
+    
+    // Bind click and focus triggers
+    input.addEventListener('click', (e) => {
+      createRipple(e, wrapper);
+    });
+    input.addEventListener('focus', () => {
+      createRipple(null, wrapper);
+    });
+  });
+  
+  // Custom styled radio options select elements
+  const radioLabels = document.querySelectorAll('#q-form label.cursor-pointer');
+  radioLabels.forEach(label => {
+    label.addEventListener('click', (e) => {
+      createRipple(e, label);
+    });
+  });
+}
+
+function createRipple(event, container) {
+  // Remove existing active ripples
+  container.querySelectorAll('.water-ripple-span').forEach(r => r.remove());
+  
+  const ripple = document.createElement('span');
+  ripple.className = 'water-ripple-span';
+  
+  let x, y;
+  if (event) {
+    const rect = container.getBoundingClientRect();
+    x = event.clientX - rect.left;
+    y = event.clientY - rect.top;
+  } else {
+    // Fallback: center ripple point on focus event
+    x = container.offsetWidth / 2;
+    y = container.offsetHeight / 2;
+  }
+  
+  ripple.style.left = `${x}px`;
+  ripple.style.top = `${y}px`;
+  
+  const size = Math.max(container.offsetWidth, container.offsetHeight) * 1.6;
+  ripple.style.width = `${size}px`;
+  ripple.style.height = `${size}px`;
+  
+  container.appendChild(ripple);
+  
+  // Execute scale and fade transitions
+  requestAnimationFrame(() => {
+    ripple.style.transform = 'translate(-50%, -50%) scale(1)';
+    ripple.style.opacity = '0';
+  });
+  
+  setTimeout(() => {
+    ripple.remove();
+  }, 500);
+}
+
+// Intersection Observer staggered countup trust stats (Feature 5)
+function initStatsCounter() {
+  const statsSection = document.getElementById('trust-stats-grid');
+  if (!statsSection) return;
+
+  const countUp = (el) => {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 2000;
+    const start = 0;
+    const startTime = performance.now();
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.floor(ease * (target - start) + start);
+      
+      if (target >= 1000) {
+        el.textContent = currentVal.toLocaleString('en-IN');
+      } else {
+        el.textContent = currentVal;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        el.textContent = target >= 1000 ? target.toLocaleString('en-IN') : target;
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.stat-count');
+        counters.forEach((counter, idx) => {
+          setTimeout(() => {
+            countUp(counter);
+          }, idx * 150);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  observer.observe(statsSection);
+}
+
+// Form reset handling function
+function resetQuotationForm() {
+  const form = document.getElementById('q-form');
+  const success = document.getElementById('q-success');
+  
+  if (form) {
+    form.reset();
+    form.style.display = 'block';
+    form.style.opacity = '1';
+    form.style.transform = 'none';
+    form.style.height = '';
+  }
+  
+  if (success) {
+    success.classList.add('hidden');
+    success.style.opacity = '0';
+  }
+  
+  const fuLogo = document.getElementById('fu-label-logo');
+  if (fuLogo) fuLogo.textContent = 'Drag & Drop or Click (Images only)';
+  const fuDesign = document.getElementById('fu-label-design');
+  if (fuDesign) fuDesign.textContent = 'Drag & Drop or Click (PDFs only)';
+  
+  currentStep = 1;
+  document.querySelectorAll('.form-step').forEach((el, idx) => {
+    if (idx === 0) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+  
+  updateProgress();
+  toggleServiceFields();
 }
 
 // File upload label
