@@ -1073,16 +1073,16 @@ function updateSponsorMask(val) {
     <div class="glass p-6 md:p-10 lg:p-12 reveal d1">
       <form id="q-form" onsubmit="submitForm(event)">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Your Name *</label><input type="text" required placeholder="Rahul Sharma" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Company Name</label><input type="text" placeholder="Your Company Pvt. Ltd." class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Email Address *</label><input type="email" required placeholder="rahul@company.com" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Phone Number *</label><input type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Quantity Required *</label><input type="number" required placeholder="e.g. 500" min="500" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Event Type *</label><select required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="" style="background:#1a1a3e">Select event type</option><option value="wedding" style="background:#1a1a3e">Wedding</option><option value="hotel" style="background:#1a1a3e">Hotel / Resort</option><option value="restaurant" style="background:#1a1a3e">Restaurant / Cafe</option><option value="corporate" style="background:#1a1a3e">Corporate Event</option><option value="sports" style="background:#1a1a3e">Sports Tournament</option><option value="conference" style="background:#1a1a3e">Conference</option><option value="exhibition" style="background:#1a1a3e">Exhibition / Trade Fair</option><option value="education" style="background:#1a1a3e">Educational Institution</option><option value="partner" style="background:#1a1a3e">Partner Branding Program</option><option value="other" style="background:#1a1a3e">Other</option></select></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Your Name *</label><input id="q-name" type="text" required placeholder="Rahul Sharma" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Company Name</label><input id="q-company" type="text" placeholder="Your Company Pvt. Ltd." class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Email Address *</label><input id="q-email" type="email" required placeholder="rahul@company.com" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Phone Number *</label><input id="q-phone" type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Quantity Required *</label><input id="q-quantity" type="number" required placeholder="e.g. 500" min="500" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Event Type *</label><select id="q-event" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="" style="background:#1a1a3e">Select event type</option><option value="wedding" style="background:#1a1a3e">Wedding</option><option value="hotel" style="background:#1a1a3e">Hotel / Resort</option><option value="restaurant" style="background:#1a1a3e">Restaurant / Cafe</option><option value="corporate" style="background:#1a1a3e">Corporate Event</option><option value="sports" style="background:#1a1a3e">Sports Tournament</option><option value="conference" style="background:#1a1a3e">Conference</option><option value="exhibition" style="background:#1a1a3e">Exhibition / Trade Fair</option><option value="education" style="background:#1a1a3e">Educational Institution</option><option value="partner" style="background:#1a1a3e">Partner Branding Program</option><option value="other" style="background:#1a1a3e">Other</option></select></div>
         </div>
         <div class="mb-6"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Logo / Brand Assets</label><div class="border border-dashed border-white/20 p-8 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi').click()"><span class="material-icons-outlined text-white/30 text-3xl mb-3 block">cloud_upload</span><p id="fu-label" class="text-white/40 text-sm">Drop files here or click to browse</p><p class="text-white/25 text-xs mt-1">PNG, JPG, PDF — Max 10MB</p></div><input id="fi" type="file" class="hidden" accept=".png,.jpg,.jpeg,.pdf,.ai,.eps,.svg"/></div>
-        <div class="mb-8"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Message / Special Requirements</label><textarea rows="4" placeholder="Tell us about your event, design preferences, delivery date, or special requirements..." class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
-        <button type="submit" class="btn btn-blue w-full py-4">Submit Quote Request</button>
+        <div class="mb-8"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Message / Special Requirements</label><textarea id="q-details" rows="4" placeholder="Tell us about your event, design preferences, delivery date, or special requirements..." class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
+        <button id="q-submit-btn" type="submit" class="btn btn-blue w-full py-4">Submit Quote Request</button>
       </form>
       <div id="q-success" class="hidden text-center py-12">
         <span class="material-icons text-green-400 text-5xl mb-4 block">check_circle</span>
@@ -1149,7 +1149,13 @@ function updateSponsorMask(val) {
 </footer>
 
 <!-- ── SCRIPTS ── -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// Supabase Initialization
+const supabaseUrl = 'https://tgjemawospfmczctkrpp.supabase.co';
+const supabaseKey = 'sb_publishable_Zw2QZQyGUVLHqJ8yFZZrtw_B1Editz9';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 // Nav scroll
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled',window.scrollY>60); });
@@ -1182,8 +1188,36 @@ function toggleFaq(btn){
 }
 
 // Form
-function submitForm(e){
+async function submitForm(e){
   e.preventDefault();
+  
+  const btn = document.getElementById('q-submit-btn');
+  const originalText = btn.textContent;
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  
+  const name = document.getElementById('q-name').value;
+  const company = document.getElementById('q-company').value;
+  const email = document.getElementById('q-email').value;
+  const phone = document.getElementById('q-phone').value;
+  const quantity = document.getElementById('q-quantity').value;
+  const timeline = document.getElementById('q-event').value; // Using Event Type as timeline/category
+  const details = document.getElementById('q-details').value;
+
+  const { data, error } = await supabase
+    .from('quotes')
+    .insert([
+      { name, company, email, phone, quantity, timeline, details }
+    ]);
+
+  if (error) {
+    console.error('Error inserting data:', error);
+    alert('There was an error submitting your quote. Please check your network and try again.');
+    btn.textContent = originalText;
+    btn.disabled = false;
+    return;
+  }
+
   const form=document.getElementById('q-form');
   const success=document.getElementById('q-success');
   form.style.transition='opacity .4s,transform .4s';
