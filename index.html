@@ -275,27 +275,88 @@ html { scroll-padding-top: 80px; }
       </div>
 
       <!-- Right: Real photo + Bottle overlay -->
+      <!-- Right: Real photo + Bottle overlay -->
       <div class="relative flex justify-center items-center lg:items-start w-full lg:col-span-7" style="min-height:350px;">
+        <!-- Scroll Reveal Container -->
         <div class="reveal d1 w-full max-w-sm sm:max-w-md lg:max-w-full aspect-[4/3] lg:scale-105" style="position:relative;">
-          <img src="clairmaunt_hero_premium_bottle.png" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:contain;image-rendering:high-quality;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.55));"/>
-          <!-- Floating badge top-right -->
-          <div class="glass absolute rounded-xl px-4 py-3" style="top:5%;right:5%;animation:float 6s ease-in-out 1s infinite">
-            <div class="flex items-center gap-2">
-              <span class="material-icons-outlined text-sm" style="color:#4444E0">qr_code_scanner</span>
-              <div><div class="text-white text-xs font-semibold">QR Enabled</div><div class="text-white/45 text-[10px]">Smart Bottles</div></div>
+          <!-- 3D Interactive Parallax Tilt Container -->
+          <div id="hero-bottle-container" class="w-full h-full relative" style="transform-style: preserve-3d; perspective: 1000px; transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);">
+            <!-- Dynamic Glow Background -->
+            <div id="hero-bottle-glow" class="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none rounded-full blur-[60px]" style="background: radial-gradient(circle at 50% 50%, rgba(41, 41, 204, 0.45) 0%, transparent 70%); width: 80%; height: 80%; left: 10%; top: 10%; z-index: 0;"></div>
+            
+            <!-- Bottle Image (translated in Z-space) -->
+            <img id="hero-bottle-img" src="clairmaunt_hero_premium_bottle.png" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:contain;image-rendering:high-quality;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.55)); transform: translateZ(30px); position:relative; z-index:10; pointer-events:none;"/>
+            
+            <!-- Floating badge top-right (further translated in Z-space for parallax depth) -->
+            <div class="glass absolute rounded-xl px-4 py-3 z-20" style="top:5%;right:5%;animation:float 6s ease-in-out 1s infinite; transform: translateZ(55px);">
+              <div class="flex items-center gap-2">
+                <span class="material-icons-outlined text-sm" style="color:#4444E0">qr_code_scanner</span>
+                <div><div class="text-white text-xs font-semibold">QR Enabled</div><div class="text-white/45 text-[10px]">Smart Bottles</div></div>
+              </div>
             </div>
-          </div>
-          <!-- Floating badge bottom-left -->
-          <div class="glass absolute rounded-xl px-4 py-3" style="bottom:8%;left:5%;animation:float 6s ease-in-out 3s infinite">
-            <div class="flex items-center gap-2">
-              <span class="material-icons-outlined text-sm" style="color:#4444E0">design_services</span>
-              <div><div class="text-white text-xs font-semibold">Custom Labels</div><div class="text-white/45 text-[10px]">Your Design</div></div>
+            <!-- Floating badge bottom-left (further translated in Z-space for parallax depth) -->
+            <div class="glass absolute rounded-xl px-4 py-3 z-20" style="bottom:8%;left:5%;animation:float 6s ease-in-out 3s infinite; transform: translateZ(55px);">
+              <div class="flex items-center gap-2">
+                <span class="material-icons-outlined text-sm" style="color:#4444E0">design_services</span>
+                <div><div class="text-white text-xs font-semibold">Custom Labels</div><div class="text-white/45 text-[10px]">Your Design</div></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Parallax Interactive Tilt & Glow Script -->
+  <script>
+    (() => {
+      function initTilt() {
+        const container = document.getElementById('hero-bottle-container');
+        const glow = document.getElementById('hero-bottle-glow');
+        if (!container || !glow) return;
+
+        console.log("Tilt script fully initialized and elements bound successfully.");
+
+        container.parentNode.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          // Rotation intensity (max 15 degrees)
+          const rotateX = ((centerY - y) / centerY) * 15;
+          const rotateY = ((x - centerX) / centerX) * 15;
+          
+          // Apply 3D rotation and dynamic scale
+          container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.06, 1.06, 1.06)`;
+          
+          // Dynamic tracking glow position
+          const glowX = (x / rect.width) * 100;
+          const glowY = (y / rect.height) * 100;
+          glow.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(41, 41, 204, 0.65) 0%, transparent 60%)`;
+          glow.style.opacity = '1';
+        });
+
+        container.parentNode.addEventListener('mouseenter', () => {
+          glow.style.opacity = '1';
+        });
+
+        container.parentNode.addEventListener('mouseleave', () => {
+          // Reset container transform and glow opacity smoothly
+          container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          glow.style.opacity = '0';
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTilt);
+      } else {
+        initTilt();
+      }
+    })();
+  </script>
 
   <!-- Scroll arrow -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
