@@ -1454,7 +1454,8 @@ async function submitForm(e){
     budget: document.getElementById('q-budget')?.value || null,
     frequency: document.querySelector('input[name="q_freq"]:checked')?.value || null,
     source: document.getElementById('q-source')?.value || null,
-    details: document.getElementById('q-notes')?.value || null
+    details: document.getElementById('q-notes')?.value || null,
+    timeline: "Not specified"
   };
   
   let score = 0;
