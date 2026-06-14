@@ -268,6 +268,62 @@ html { scroll-padding-top: 80px; }
   transform: scale(1.15) translateY(-4px);
   box-shadow: 0 10px 25px -5px rgba(41, 41, 204, 0.4);
 }
+
+/* Custom Form Animations & Focus Glows */
+#q-form input[type="text"],
+#q-form input[type="email"],
+#q-form input[type="tel"],
+#q-form select,
+#q-form textarea {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+#q-form input[type="text"]:focus,
+#q-form input[type="email"]:focus,
+#q-form input[type="tel"]:focus,
+#q-form select:focus,
+#q-form textarea:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: #C9AA71 !important;
+  box-shadow: 0 0 15px rgba(201, 170, 113, 0.22), inset 0 2px 4px rgba(0,0,0,0.15) !important;
+  transform: translateY(-1px);
+}
+.cursor-pointer input[type="radio"] + div {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.cursor-pointer:hover input[type="radio"]:not(:checked) + div {
+  border-color: rgba(201, 170, 113, 0.4) !important;
+  background: rgba(201, 170, 113, 0.05) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 170, 113, 0.08);
+}
+.cursor-pointer input[type="radio"]:checked + div {
+  border-color: #C9AA71 !important;
+  background: rgba(41, 41, 204, 0.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px -5px rgba(41, 41, 204, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+.step-indicator.active .step-circle {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(41, 41, 204, 0.45) !important;
+  background: #2929CC !important;
+  border-color: #2929CC !important;
+  color: #ffffff !important;
+}
+.step-indicator.completed .step-circle {
+  background: #C9AA71 !important;
+  border-color: #C9AA71 !important;
+  color: #0E0E2C !important;
+  box-shadow: 0 0 12px rgba(201, 170, 113, 0.25) !important;
+}
+@keyframes pulse-gold {
+  0% { box-shadow: 0 0 0 0 rgba(201, 170, 113, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(201, 170, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 170, 113, 0); }
+}
+.pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
 </style>
 </head>
 <body>
@@ -1225,8 +1281,8 @@ html { scroll-padding-top: 80px; }
       
       <!-- SUCCESS PAGE -->
       <div id="q-success" class="hidden text-center py-8">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
-          <span class="material-icons text-green-400 text-4xl">check</span>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold/10 border border-gold/30 mb-6 pulse-gold shadow-[0_0_20px_rgba(201,170,113,0.2)]">
+          <span class="material-icons text-gold text-4xl">check</span>
         </div>
         <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Thank You For Choosing ClairMaunt</h3>
         <p class="text-white/55 font-light text-base md:text-lg mb-2 max-w-lg mx-auto">Our team has received your request and will prepare a customized quotation based on your requirements.</p>
@@ -1550,8 +1606,36 @@ function nextStep(step) {
     required.forEach(el => { if(!el.value) { el.style.borderColor = 'red'; valid = false; } else { el.style.borderColor = 'rgba(255,255,255,.12)'; } });
     if(!valid) { alert("Please fill in all required fields."); return; }
   }
-  document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
-  document.getElementById('step-' + step).classList.remove('hidden');
+  
+  const currentEl = document.getElementById('step-' + currentStep) || document.querySelector('.form-step:not(.hidden)');
+  const nextEl = document.getElementById('step-' + step);
+  
+  if (currentEl && currentEl !== nextEl) {
+    currentEl.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+    currentEl.style.opacity = '0';
+    currentEl.style.transform = 'translateY(-6px)';
+    
+    setTimeout(() => {
+      currentEl.classList.add('hidden');
+      currentEl.style.opacity = '';
+      currentEl.style.transform = '';
+      
+      nextEl.classList.remove('hidden');
+      nextEl.style.opacity = '0';
+      nextEl.style.transform = 'translateY(6px)';
+      nextEl.style.transition = 'opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+      
+      // Force hardware repaint
+      nextEl.offsetHeight;
+      
+      nextEl.style.opacity = '1';
+      nextEl.style.transform = 'translateY(0)';
+    }, 220);
+  } else {
+    document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+    nextEl.classList.remove('hidden');
+  }
+  
   if(typeof step === 'number') { currentStep = step; updateProgress(); }
   saveProgress();
 }
