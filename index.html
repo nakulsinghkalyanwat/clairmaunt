@@ -324,6 +324,56 @@ html { scroll-padding-top: 80px; }
 .pulse-gold {
   animation: pulse-gold 2s infinite;
 }
+
+/* Ambient Orbs & Interactive Spotlight Card styles */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -45px) scale(1.1); }
+  66% { transform: translate(-20px, 25px) scale(0.95); }
+}
+.bg-orb-1 {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(41, 41, 204, 0.08) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: float-orb 15s ease-in-out infinite;
+  top: -15%;
+  left: -15%;
+  pointer-events: none;
+}
+.bg-orb-2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(201, 170, 113, 0.05) 0%, transparent 70%);
+  filter: blur(70px);
+  animation: float-orb 22s ease-in-out infinite alternate;
+  bottom: -20%;
+  right: -15%;
+  pointer-events: none;
+}
+#q-form-card {
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  z-index: 10;
+}
+#q-form-card:hover {
+  border-color: rgba(201, 170, 113, 0.22) !important;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(41, 41, 204, 0.08) !important;
+}
+#q-card-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(201, 170, 113, 0.12) 0%, rgba(41, 41, 204, 0.06) 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  filter: blur(50px);
+}
 </style>
 </head>
 <body>
@@ -1110,6 +1160,8 @@ html { scroll-padding-top: 80px; }
 </section>
 
 <section id="quote" class="py-24 md:py-28 relative overflow-hidden" style="background:#0E0E2C">
+  <div class="bg-orb-1"></div>
+  <div class="bg-orb-2"></div>
   <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle,#2929CC 1px,transparent 1px);background-size:40px 40px"></div>
   <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,#2929CC,transparent)"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
@@ -1144,8 +1196,9 @@ html { scroll-padding-top: 80px; }
       </div>
     </div>
     
-    <div class="glass p-6 md:p-10 lg:p-12 reveal d2 relative">
-      <form id="q-form" onsubmit="submitForm(event)">
+    <div id="q-form-card" class="glass p-6 md:p-10 lg:p-12 reveal d2 relative overflow-hidden">
+      <div id="q-card-glow"></div>
+      <form id="q-form" class="relative z-10" onsubmit="submitForm(event)">
         <!-- STEP 1: Contact Details -->
         <div id="step-1" class="form-step">
           <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 1: Contact Details</h3>
@@ -1931,6 +1984,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click
 
 // Init first tab reveals
 document.querySelectorAll('#tp-wedding .reveal').forEach(el=>el.classList.add('in'));
+
+// Form card spotlight glow tracking
+(() => {
+  const card = document.getElementById('q-form-card');
+  const glow = document.getElementById('q-card-glow');
+  if (!card || !glow) return;
+  
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    glow.style.left = `${x}px`;
+    glow.style.top = `${y}px`;
+    glow.style.opacity = '1';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+})();
 </script>
 </body>
 </html>
