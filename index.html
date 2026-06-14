@@ -1240,10 +1240,101 @@ html { scroll-padding-top: 80px; }
     </div>
     <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
       <span class="text-white/25 text-xs tracking-wider">© 2025 ClairMaunt. All rights reserved.</span>
-      <div class="flex gap-6"><a href="#" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Privacy Policy</a><a href="#" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Terms of Service</a></div>
+      <div class="flex gap-6">
+        <a href="javascript:void(0)" onclick="openLegalModal('privacy')" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="openLegalModal('terms')" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Terms of Use</a>
+      </div>
     </div>
   </div>
 </footer>
+
+<!-- ── LEGAL MODAL ── -->
+<div id="legal-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-md" style="transition: opacity 0.3s ease;">
+  <div class="bg-[#0E0E2C] border border-white/10 rounded-3xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden shadow-2xl relative">
+    <!-- Modal Header -->
+    <div class="px-6 py-4 md:px-8 md:py-5 border-b border-white/10 flex justify-between items-center bg-[#090924]">
+      <div class="flex gap-4 md:gap-6">
+        <button id="tab-privacy" onclick="showLegalTab('privacy')" class="font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-gold text-gold transition-colors hover:text-white focus:outline-none">Privacy Policy</button>
+        <button id="tab-terms" onclick="showLegalTab('terms')" class="font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-transparent text-white/45 transition-colors hover:text-white focus:outline-none">Terms of Use</button>
+      </div>
+      <button onclick="closeLegalModal()" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/55 hover:text-white hover:border-white/20 transition-all focus:outline-none">
+        <span class="material-icons text-sm">close</span>
+      </button>
+    </div>
+    
+    <!-- Modal Content -->
+    <div class="flex-1 overflow-y-auto p-6 md:p-8 text-white/70 font-light text-xs md:text-sm space-y-6 leading-relaxed scrollbar-thin scrollbar-thumb-white/15 scrollbar-track-transparent">
+      <!-- Privacy Policy Section -->
+      <div id="content-privacy" class="space-y-6">
+        <h2 class="font-display text-2xl font-bold text-white mb-2">ClairMaunt Privacy Policy</h2>
+        <p class="text-xs text-white/45">Last Updated: June 15, 2026</p>
+        <p>At ClairMaunt, a brand of ClairMaunt Solutions, tagline <strong>"Your Brand In Every Hand"</strong>, we are committed to protecting the privacy, confidentiality, and security of the personal and business data you share with us. We handle your brand identity and data with the highest standards of integrity, discretion, and care.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">1. Information We Collect</h3>
+        <p>We collect information that you voluntarily provide to us when you request quotations, upload design files, contact us, or interact with our communication channels.</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Personal Information:</strong> Name, email address, mobile number, job title, and shipping/billing address.</li>
+          <li><strong>Business Information:</strong> Company name, industry type, GSTIN or local tax identifiers, event details, delivery locations, marketing objectives, target audience, budget, quantity, and order frequency.</li>
+          <li><strong>Uploaded Files:</strong> Brand logos, design files, custom label graphics, and QR code marketing materials.</li>
+          <li><strong>Automatically Collected Data:</strong> IP address, browser type, referral URL, page views, and cookies.</li>
+        </ul>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">2. How We Use Your Information</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>To generate custom design mockups, calculate pricing quotes, manage production timelines, and arrange shipping logistics for customized bottle orders.</li>
+          <li>To generate and print functional QR codes for menus, social media, catalogs, and event landing pages.</li>
+          <li>To administer our "Advertise On Bottles" program and coordinate sponsorships.</li>
+          <li>To process quotation requests, contact form submissions, and communicate via email, phone, or WhatsApp.</li>
+        </ul>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">3. Third-Party Services and Data Disclosure</h3>
+        <p>We do not sell, rent, or trade your personal or business data. We share information only with trusted service providers who perform operations on our behalf (cloud database hosting, payment processing, shipping/logistics companies). Finalized layouts are shared with our BIS-certified bottling partners to print labels and package your customized bottles, subject to strict confidentiality controls.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">4. Data Security</h3>
+        <p>We implement administrative, technical, and physical security practices, including SSL/TLS encryption for all site forms and uploads, to protect your personal and design files. However, no electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">5. Data Retention</h3>
+        <p>We retain your logo assets, mockups, and business information for as long as necessary to fulfill orders, facilitate easy customer re-orders, or comply with legal requirements. You may request data deletion at any time.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">6. User Rights & Grievance Compliance</h3>
+        <p>In compliance with the Indian Information Technology Act, 2000, the SPDI Rules 2011, and GDPR guidelines, you have the right to access, rectify, restrict, or request the deletion of your personal data. You may withdraw your consent at any time.</p>
+        <p><strong>Grievance Officer Contact:</strong> Grievance Officer, ClairMaunt Solutions, Amrapali Plaza, Amrapali Circle, Vaishali Nagar, Jaipur, Rajasthan — 302021. Email: <a href="mailto:clairmaunt@gmail.com" class="text-gold hover:underline">clairmaunt@gmail.com</a>.</p>
+      </div>
+      
+      <!-- Terms of Use Section -->
+      <div id="content-terms" class="space-y-6 hidden">
+        <h2 class="font-display text-2xl font-bold text-white mb-2">ClairMaunt Terms of Use</h2>
+        <p class="text-xs text-white/45">Last Updated: June 15, 2026</p>
+        <p>Welcome to ClairMaunt. These Terms of Use govern your access to and use of this website, including quotation requests, file uploads, design consultations, QR code configurations, and custom branded water services provided by ClairMaunt.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">1. Description of Services</h3>
+        <p>ClairMaunt is a premium custom bottled water and branding solutions platform. We design, print, manufacture, and ship customized bottled water for events and corporate entities. We offer QR-enabled labels linking to websites/digital catalogs, and provide the "Advertise On Bottles" program for sponsor label placements.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">2. User Responsibilities & Brand Logo Ownership</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Accuracy:</strong> You agree to provide accurate corporate, event, and contact details.</li>
+          <li><strong>Logo Ownership:</strong> You retain complete ownership of all trademarks, logo assets, and designs you upload. You grant ClairMaunt a limited license to print your designs to fulfill your orders, and a limited license to show high-quality photographs of finished custom bottles in our portfolio.</li>
+          <li><strong>Content Responsibility:</strong> You represent and warrant that you own or have permission to print all uploaded designs. You are solely responsible for hosting and maintaining the destination link of any printed QR codes. ClairMaunt is not responsible for broken links or the content hosted on QR landing pages.</li>
+        </ul>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">3. Pricing & Order Confirmation</h3>
+        <p>All quotes are non-binding. Price quotes are valid only for the period specified in the quotation. Orders are confirmed and production starts only after receiving signed proof layout approval and completion of the advance payment terms as specified in the Proforma Invoice.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">4. Production & Delivery Disclaimer</h3>
+        <p>All water bottled under the ClairMaunt brand complies with BIS and FSSAI guidelines. Shipping and delivery timelines are estimates. ClairMaunt is not liable for transport delays caused by courier transits, weather conditions, road restrictions, or force majeure events.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">5. Cancellation & Refund Policy</h3>
+        <p>Because our products are custom-printed for your brand, orders cannot be canceled or refunded once production begins following layout proof approval. In case of physical damage during transit or printing defects, you must report the issue with photo evidence within 48 hours of delivery for replacements.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">6. Governing Law & Jurisdiction</h3>
+        <p>These Terms and your use of our services shall be governed by and construed in accordance with the laws of India. Any legal dispute arising under these Terms shall be subject to the exclusive jurisdiction of the competent courts in Jaipur, Rajasthan, India.</p>
+        
+        <h3 class="font-heading text-lg font-semibold text-white">7. Contact Information</h3>
+        <p>For inquiries, please contact us at <a href="mailto:clairmaunt@gmail.com" class="text-gold hover:underline">clairmaunt@gmail.com</a>, call <a href="tel:+918824967809" class="text-gold hover:underline">+91-8824967809</a>, or visit us at Vaishali Nagar, Jaipur, Rajasthan — 302021.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ── SCRIPTS ── -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1252,6 +1343,41 @@ html { scroll-padding-top: 80px; }
 const supabaseUrl = 'https://tgjemawospfmczctkrpp.supabase.co';
 const supabaseKey = 'sb_publishable_Zw2QZQyGUVLHqJ8yFZZrtw_B1Editz9';
 const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// Legal Modal Functions
+function openLegalModal(tab) {
+  const modal = document.getElementById('legal-modal');
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  showLegalTab(tab);
+}
+function closeLegalModal() {
+  const modal = document.getElementById('legal-modal');
+  modal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function showLegalTab(tab) {
+  const privacyTab = document.getElementById('tab-privacy');
+  const termsTab = document.getElementById('tab-terms');
+  const privacyContent = document.getElementById('content-privacy');
+  const termsContent = document.getElementById('content-terms');
+  
+  if (tab === 'privacy') {
+    privacyTab.className = "font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-gold text-gold transition-colors hover:text-white focus:outline-none";
+    termsTab.className = "font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-transparent text-white/45 transition-colors hover:text-white focus:outline-none";
+    privacyContent.classList.remove('hidden');
+    termsContent.classList.add('hidden');
+  } else {
+    termsTab.className = "font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-gold text-gold transition-colors hover:text-white focus:outline-none";
+    privacyTab.className = "font-heading font-semibold text-sm md:text-base pb-1 border-b-2 border-transparent text-white/45 transition-colors hover:text-white focus:outline-none";
+    termsContent.classList.remove('hidden');
+    privacyContent.classList.add('hidden');
+  }
+}
+// Backdrop Click Close
+document.getElementById('legal-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeLegalModal();
+});
 
 // Nav scroll & Reading Progress
 const navWrap = document.getElementById('nav-wrap');
