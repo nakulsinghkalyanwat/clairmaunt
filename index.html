@@ -1082,7 +1082,28 @@ html { scroll-padding-top: 80px; }
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Size *</label><select id="q-bottle-size" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Size</option><option value="250 ml">250 ml</option><option value="500 ml">500 ml</option><option value="1 Litre">1 Litre</option><option value="Not Sure">Not Sure</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Label Design Requirement *</label><select id="q-design-req" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="I Have My Own Design">I Have My Own Design</option><option value="Need ClairMaunt Design Team">Need ClairMaunt Design Team</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">QR Code Integration *</label><select id="q-qr" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Date *</label><input id="q-delivery-date" type="date" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+              <div class="relative" id="datepicker-container">
+                <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Date *</label>
+                <div class="relative cursor-pointer" onclick="toggleCustomCalendar(event)">
+                  <input id="q-delivery-date-display" type="text" readonly placeholder="Select Date" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 cursor-pointer pr-10" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/>
+                  <span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none text-lg">calendar_today</span>
+                </div>
+                <input id="q-delivery-date" type="hidden" onchange="saveProgress()"/>
+                
+                <!-- Custom Datepicker Dropdown -->
+                <div id="custom-datepicker-dropdown" class="absolute left-0 mt-2 p-4 rounded-xl border border-white/10 glass shadow-2xl hidden z-50 w-72" style="background: rgba(14,14,44,0.96); backdrop-filter: blur(25px);">
+                  <div class="flex justify-between items-center mb-3">
+                    <button type="button" onclick="changeCustomMonth(-1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_left</span></button>
+                    <span id="custom-month-year" class="text-white text-xs font-semibold uppercase tracking-wider">June 2026</span>
+                    <button type="button" onclick="changeCustomMonth(1, event)" class="p-1 hover:bg-white/10 rounded transition-colors text-white flex items-center justify-center"><span class="material-icons text-base">chevron_right</span></button>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1 text-center text-[9px] text-white/50 font-bold uppercase tracking-wider mb-2">
+                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                  </div>
+                  <div id="custom-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs text-white">
+                  </div>
+                </div>
+              </div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Location *</label><input id="q-delivery-loc" type="text" placeholder="Full Address / Pincode" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
             </div>
           </div>
@@ -1382,6 +1403,143 @@ function reviewStep() {
   document.getElementById('rev-details').textContent = notes;
 }
 
+// Custom Datepicker Logic
+let customCalendarDate = new Date();
+let selectedDateStr = "";
+
+function toggleCustomCalendar(e) {
+  if (e) e.stopPropagation();
+  const dropdown = document.getElementById('custom-datepicker-dropdown');
+  if (dropdown) {
+    const isHidden = dropdown.classList.contains('hidden');
+    if (isHidden) {
+      dropdown.classList.remove('hidden');
+      renderCustomCalendar();
+    } else {
+      dropdown.classList.add('hidden');
+    }
+  }
+}
+
+function renderCustomCalendar() {
+  const dropdown = document.getElementById('custom-datepicker-dropdown');
+  if (!dropdown || dropdown.classList.contains('hidden')) return;
+
+  const monthYearEl = document.getElementById('custom-month-year');
+  const daysGrid = document.getElementById('custom-days-grid');
+  
+  const year = customCalendarDate.getFullYear();
+  const month = customCalendarDate.getMonth();
+  
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  if (monthYearEl) {
+    monthYearEl.textContent = `${months[month]} ${year}`;
+  }
+
+  // Get first day of the month & total days
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  
+  // Clear days grid
+  daysGrid.innerHTML = "";
+
+  // Add weekday spacers
+  for (let i = 0; i < firstDayIndex; i++) {
+    const spacer = document.createElement('div');
+    daysGrid.appendChild(spacer);
+  }
+
+  // Today details for past verification
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  // Add days
+  for (let day = 1; day <= totalDays; day++) {
+    const dayEl = document.createElement('button');
+    dayEl.type = 'button';
+    dayEl.textContent = day;
+    
+    // Formatting date string
+    const formatMonth = String(month + 1).padStart(2, '0');
+    const formatDay = String(day).padStart(2, '0');
+    const dateStr = `${year}-${formatMonth}-${formatDay}`;
+    
+    const cellDate = new Date(year, month, day);
+    
+    // Day styles
+    dayEl.className = "w-8 h-8 rounded-lg flex items-center justify-center transition-all focus:outline-none hover:bg-white/10 cursor-pointer";
+    
+    if (cellDate < today) {
+      // Disable past days
+      dayEl.disabled = true;
+      dayEl.className += " opacity-25 cursor-not-allowed hover:bg-transparent text-white/40";
+    } else {
+      if (dateStr === selectedDateStr) {
+        // Selected style (gold fill with dark text)
+        dayEl.className += " bg-gold text-[#0E0E2C] font-semibold hover:bg-gold/90";
+      } else if (cellDate.getTime() === today.getTime()) {
+        // Today style
+        dayEl.className += " border border-royal text-royal-light font-medium";
+      }
+      
+      dayEl.onclick = (e) => {
+        e.stopPropagation();
+        selectCustomDate(dateStr);
+      };
+    }
+    
+    daysGrid.appendChild(dayEl);
+  }
+}
+
+function changeCustomMonth(direction, e) {
+  if (e) e.stopPropagation();
+  customCalendarDate.setMonth(customCalendarDate.getMonth() + direction);
+  renderCustomCalendar();
+}
+
+function selectCustomDate(dateStr) {
+  selectedDateStr = dateStr;
+  
+  const displayEl = document.getElementById('q-delivery-date-display');
+  const hiddenInput = document.getElementById('q-delivery-date');
+  
+  if (displayEl && hiddenInput) {
+    hiddenInput.value = dateStr;
+    displayEl.value = formatDateForDisplay(dateStr);
+    
+    // Trigger saveProgress if it exists
+    if (typeof saveProgress === 'function') {
+      saveProgress();
+    }
+  }
+  
+  // Close dropdown
+  const dropdown = document.getElementById('custom-datepicker-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+}
+
+// Format YYYY-MM-DD to DD Month YYYY
+function formatDateForDisplay(dateStr) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return dateStr;
+  const year = parts[0];
+  const month = parseInt(parts[1], 10) - 1;
+  const day = parts[2];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${parseInt(day, 10)} ${months[month]} ${year}`;
+}
+
+// Close datepicker when clicking outside
+document.addEventListener('click', (e) => {
+  const container = document.getElementById('datepicker-container');
+  const dropdown = document.getElementById('custom-datepicker-dropdown');
+  if (container && dropdown && !container.contains(e.target)) {
+    dropdown.classList.add('hidden');
+  }
+});
+
 // File upload UI handlers
 document.getElementById('fi-logo')?.addEventListener('change', function(){ if(this.files.length>0) document.getElementById('fu-label-logo').textContent='✓ '+this.files[0].name; });
 document.getElementById('fi-design')?.addEventListener('change', function(){ if(this.files.length>0) document.getElementById('fu-label-design').textContent='✓ '+this.files[0].name; });
@@ -1407,7 +1565,14 @@ function loadProgress() {
         if(radio) radio.checked = true;
       } else {
         const el = document.getElementById(k);
-        if(el) el.value = data[k];
+        if(el) {
+          el.value = data[k];
+          if(k === 'q-delivery-date') {
+            selectedDateStr = data[k];
+            const displayEl = document.getElementById('q-delivery-date-display');
+            if(displayEl) displayEl.value = formatDateForDisplay(data[k]);
+          }
+        }
       }
     });
     toggleServiceFields();
