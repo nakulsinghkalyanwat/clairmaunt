@@ -64,12 +64,55 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .reveal.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
 
-/* Nav */
-#nav{transition:all .4s ease}
-#nav.scrolled{background:rgba(14,14,44,.96)!important;backdrop-filter:blur(20px);box-shadow:0 1px 30px rgba(41,41,204,.15)}
-.nav-a{position:relative;text-decoration:none}
-.nav-a::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:#2929CC;transition:width .3s ease}
-.nav-a:hover::after{width:100%}
+/* Nav Redesign: Floating Glassmorphic Island */
+.nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:50;padding:1.2rem 1.5rem;pointer-events:none;transition:padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
+.nav-wrapper.scrolled{padding:0.6rem 1.5rem}
+#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative}
+#nav.scrolled{background:rgba(14,14,44,0.92);border-color:rgba(41,41,204,0.25);box-shadow:0 20px 40px -10px rgba(41,41,204,0.2), 0 0 0 1px rgba(41, 41, 204, 0.15)}
+.nav-a{position:relative;text-decoration:none;z-index:1}
+.logo-container:hover .logo-peak-1{transform:translateY(-3px)}
+.logo-container:hover .logo-peak-2{transform:translateY(-5px)}
+.logo-container:hover .logo-peak-3{transform:translateY(-2px)}
+.logo-peak{transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);transform-origin:bottom}
+#nav-pill {
+  position: absolute;
+  background: rgba(41, 41, 204, 0.15);
+  border: 1px solid rgba(201, 170, 113, 0.35);
+  border-radius: 9999px;
+  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  transform: scale(0.9);
+}
+#nav-pill.active {
+  opacity: 1;
+  transform: scale(1);
+}
+#scroll-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #2929CC, #C9AA71, #2929CC);
+  background-size: 200% auto;
+  width: 0%;
+  transition: width 0.1s ease-out;
+  border-radius: 0 1px 1px 0;
+  z-index: 20;
+  animation: shine-scroll 3s linear infinite;
+}
+@keyframes shine-scroll {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Shimmer on CTA button */
+.btn-shimmer{position:relative;overflow:hidden}
+.btn-shimmer::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right,transparent,rgba(255,255,255,0.25),transparent);transform:skewX(-25deg);transition:none}
+.btn-shimmer:hover::before{animation:shimmer 1.5s infinite}
+@keyframes shimmer{100%{left:200%}}
 
 /* Glassmorphism */
 .glass{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12)}
@@ -180,61 +223,67 @@ html { scroll-padding-top: 80px; }
 <body>
 
 <!-- ── NAVIGATION ── -->
-<nav id="nav" class="fixed top-0 left-0 w-full z-50" style="background:transparent">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="flex justify-between items-center h-20">
+<div class="nav-wrapper" id="nav-wrap">
+  <nav id="nav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
 
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-3 flex-shrink-0">
-        <svg width="44" height="32" viewBox="0 0 260 180" fill="none">
-          <polygon points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
-          <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
-          <polygon points="62,143 130,18 198,143" fill="#4444E0"/>
-          <polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/>
-          <polygon points="175,92 200,55 250,143 210,143" fill="#4444E0"/>
-          <polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/>
-          <polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity="0.55"/>
-          <line x1="10" y1="146" x2="250" y2="146" stroke="#4444E0" stroke-width="2.5"/>
-        </svg>
-        <div class="flex flex-col leading-none">
-          <span class="font-heading font-bold text-lg tracking-wide text-white">ClairMaunt</span>
-          <span class="text-[9px] tracking-[.2em] uppercase text-white/50 mt-0.5">Your Brand In Every Hand</span>
+        <!-- Logo -->
+        <a href="#" class="logo-container flex items-center gap-3 flex-shrink-0">
+          <svg width="44" height="32" viewBox="0 0 260 180" fill="none">
+            <polygon class="logo-peak logo-peak-1" points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
+            <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
+            <polygon class="logo-peak logo-peak-2" points="62,143 130,18 198,143" fill="#4444E0"/>
+            <polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/>
+            <polygon class="logo-peak logo-peak-3" points="175,92 200,55 250,143 210,143" fill="#4444E0"/>
+            <polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/>
+            <polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity="0.55"/>
+            <line x1="10" y1="146" x2="250" y2="146" stroke="#4444E0" stroke-width="2.5"/>
+          </svg>
+          <div class="flex flex-col leading-none">
+            <span class="font-heading font-bold text-lg tracking-wide text-white">ClairMaunt</span>
+            <span class="text-[9px] tracking-[.2em] uppercase text-white/50 mt-0.5">Your Brand In Every Hand</span>
+          </div>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden lg:flex items-center gap-8 relative" id="desktop-links" style="position: relative;">
+          <div id="nav-pill"></div>
+          <a href="#why-us" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Why Us</a>
+          <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Industries</a>
+          <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Customization</a>
+          <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Advertise</a>
+          <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Brand Experience</a>
+          <a href="#quote" class="btn btn-blue btn-shimmer ml-2">Get a Quote</a>
         </div>
-      </a>
 
-      <!-- Desktop links -->
-      <div class="hidden lg:flex items-center gap-8">
-        <a href="#why-us" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Why Us</a>
-        <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Industries</a>
-        <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Customization</a>
-        <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Advertise</a>
-        <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Brand Experience</a>
-        <a href="#quote" class="btn btn-blue ml-2">Get a Quote</a>
+        <!-- Hamburger -->
+        <button id="mob-toggle" class="lg:hidden text-white p-2">
+          <span class="material-icons">menu</span>
+        </button>
       </div>
-
-      <!-- Hamburger -->
-      <button id="mob-toggle" class="lg:hidden text-white p-2">
-        <span class="material-icons">menu</span>
-      </button>
     </div>
-  </div>
-  <!-- Mobile menu -->
-  <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm transform -translate-x-full transition-transform duration-300 z-[60]" style="background:rgba(14,14,44,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5);">
-    <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
-      <div class="flex justify-between items-center mb-4">
-        <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
-        <button onclick="closeMob()" class="text-white"><span class="material-icons">close</span></button>
+    <!-- Mobile menu -->
+    <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm transform -translate-x-full transition-transform duration-300 z-[60]" style="background:rgba(14,14,44,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5);">
+      <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
+        <div class="flex justify-between items-center mb-4">
+          <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
+          <button onclick="closeMob()" class="text-white"><span class="material-icons">close</span></button>
+        </div>
+        <a href="#why-us" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
+        <a href="#industries" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
+        <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
+        <a href="#advertise" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
+        <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
+        <a href="#quote" onclick="closeMob()" class="btn btn-blue text-center mt-4">Get a Quote</a>
       </div>
-      <a href="#why-us" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
-      <a href="#industries" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
-      <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
-      <a href="#advertise" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
-      <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
-      <a href="#quote" onclick="closeMob()" class="btn btn-blue text-center mt-4">Get a Quote</a>
     </div>
-  </div>
-  <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
-</nav>
+    <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <!-- Scroll indicator -->
+    <div id="scroll-indicator"></div>
+  </nav>
+</div>
 
 <!-- ── HERO ── -->
 <section id="hero" class="relative min-h-screen flex items-center overflow-hidden" style="background:#0E0E2C">
@@ -1306,9 +1355,58 @@ const supabaseUrl = 'https://tgjemawospfmczctkrpp.supabase.co';
 const supabaseKey = 'sb_publishable_Zw2QZQyGUVLHqJ8yFZZrtw_B1Editz9';
 const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-// Nav scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled',window.scrollY>60); });
+// Nav scroll & Reading Progress
+const navWrap = document.getElementById('nav-wrap');
+const nav = document.getElementById('nav');
+const scrollIndicator = document.getElementById('scroll-indicator');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 50;
+  if (navWrap) navWrap.classList.toggle('scrolled', scrolled);
+  if (nav) nav.classList.toggle('scrolled', scrolled);
+  
+  // Calculate reading progress percent
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolledPct = height > 0 ? (winScroll / height) * 100 : 0;
+  if (scrollIndicator) {
+    scrollIndicator.style.width = scrolledPct + '%';
+  }
+});
+
+// Desktop Links Sliding Pill Logic
+(() => {
+  const desktopLinks = document.getElementById('desktop-links');
+  const navPill = document.getElementById('nav-pill');
+  if (!desktopLinks || !navPill) return;
+
+  const navLinks = desktopLinks.querySelectorAll('.nav-a');
+  
+  function updatePill(linkEl) {
+    const rect = linkEl.getBoundingClientRect();
+    const parentRect = desktopLinks.getBoundingClientRect();
+    
+    const left = rect.left - parentRect.left;
+    const top = rect.top - parentRect.top;
+    const width = rect.width;
+    const height = rect.height;
+    
+    navPill.style.left = `${left}px`;
+    navPill.style.top = `${top}px`;
+    navPill.style.width = `${width}px`;
+    navPill.style.height = `${height}px`;
+    navPill.classList.add('active');
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => updatePill(link));
+    link.addEventListener('focus', () => updatePill(link));
+  });
+
+  desktopLinks.addEventListener('mouseleave', () => {
+    navPill.classList.remove('active');
+  });
+})();
 
 // Mobile menu
 document.getElementById('mob-toggle').addEventListener('click',()=>{ document.getElementById('mob-menu').classList.toggle('open'); });
