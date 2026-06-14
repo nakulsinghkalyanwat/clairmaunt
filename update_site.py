@@ -303,36 +303,6 @@ html { scroll-padding-top: 80px; }
       </div>
     </div>
 
-    <!-- Section 4 & 5: BUSINESSES & EVENTS -->
-    <div class="grid lg:grid-cols-2 gap-16 mb-28 reveal">
-      <div>
-        <h3 class="font-heading text-3xl font-bold text-white mb-8">Perfect For These Businesses</h3>
-        <div class="flex flex-wrap gap-3">
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Restaurants</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Hotels & Resorts</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Real Estate</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Healthcare Clinics</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Coaching Institutes</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Startups</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Local Businesses</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Retail Stores</span>
-          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">E-commerce Brands</span>
-        </div>
-      </div>
-      <div>
-        <h3 class="font-heading text-3xl font-bold text-white mb-8">Target Event Types</h3>
-        <div class="flex flex-wrap gap-3">
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Sports Tournaments</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Marathons</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">College Festivals</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Corporate Events</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Trade Shows</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Conferences</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Exhibitions</span>
-          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Awareness Campaigns</span>
-        </div>
-      </div>
-    </div>
 
     <!-- Section 7: CASE STUDY & SECTION 8: BOLD STATEMENT -->
     <div class="grid lg:grid-cols-2 gap-12 items-center mb-20 reveal">
