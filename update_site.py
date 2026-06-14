@@ -118,7 +118,7 @@ html { scroll-padding-top: 80px; }
     <!-- Section 3: CUSTOMER JOURNEY IMAGE & Section 4: TIMELINE -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 md:mb-28">
       <div class="relative flex justify-center items-center h-[500px] reveal d1 rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-        <img src="customer_journey_scan.png" alt="Customer Scanning Custom Bottle QR" class="w-full h-full object-cover" />
+        <img src="clairmaunt_marketing_ecosystem.png" alt="ClairMaunt Luxury Marketing Ecosystem Infographic showing Use Cases and Outcomes" class="w-full h-full object-cover" />
       </div>
       
       <div class="reveal d2">
