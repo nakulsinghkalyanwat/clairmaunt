@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" style="scroll-padding-top: 80px;">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -39,7 +39,7 @@ tailwind.config = {
 .price-card:hover{border-color:#2929CC;transform:translateY(-6px);box-shadow:0 30px 60px rgba(41,41,204,.12)}
 .price-card.featured{background:#0E0E2C;border-color:#2929CC}
 .price-card.featured::before{content:'Most Popular';position:absolute;top:1rem;right:1rem;background:#2929CC;color:white;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.35rem .75rem;border-radius:2px}
-/* Gallery image */
+/* Brand Experience image */
 .gal-img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
 .gal-item:hover .gal-img{transform:scale(1.06)}
 .gal-item{overflow:hidden;position:relative}
@@ -124,7 +124,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Step dot */
 .step-dot{width:3.5rem;height:3.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(41,41,204,.35),rgba(68,68,224,.15));border:1px solid rgba(41,41,204,.45)}
 
-/* Gallery grid */
+/* Brand Experience grid */
 .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px}
 .gal-item:nth-child(1){grid-column:span 2;grid-row:span 2}
 .gal-item:nth-child(4){grid-column:span 2}
@@ -137,11 +137,34 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 input,textarea,select{outline:none;transition:border-color .25s}
 input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
 
-@media(max-width:768px){
-  .gal-grid{grid-template-columns:repeat(2,1fr)}
-  .gal-item:nth-child(1){grid-column:span 2}
-  .gal-item:nth-child(4){grid-column:span 1}
+/* Responsive Overhaul */
+html { scroll-padding-top: 80px; }
+.hero-bg { transform: scale(1.1); }
+@media (min-width: 1024px) {
+  .hero-bg { transform: scale(1.06); }
 }
+
+/* Brand Experience & Advertise Sections CSS */
+.journey-step { position: relative; z-index: 10; }
+.journey-line { position: absolute; top: 50%; left: 50%; width: 100%; height: 2px; background: linear-gradient(90deg, #C9AA71, transparent); transform: translateY(-50%); z-index: 0; }
+.journey-line.gold { background: #C9AA71; }
+@media (max-width: 768px) {
+  .journey-horizontal { flex-direction: column; align-items: center; gap: 2rem; }
+  .journey-line { width: 2px; height: 100%; left: 50%; top: 50%; transform: translateX(-50%); background: linear-gradient(180deg, #C9AA71, transparent); }
+}
+.eco-icon { position: absolute; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 0.5rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s ease; }
+.eco-icon:hover { transform: scale(1.1); background: #2929CC; }
+.eco-tooltip { position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #fff; color: #0E0E2C; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.eco-icon:hover .eco-tooltip { opacity: 1; }
+
+.timeline-step { display: flex; align-items: flex-start; gap: 1.5rem; position: relative; padding-bottom: 2rem; text-align: left; }
+.timeline-step::before { content: ''; position: absolute; left: 1rem; top: 2rem; bottom: 0; width: 2px; background: rgba(41,41,204,0.2); }
+.timeline-step:last-child::before { display: none; }
+.timeline-dot { width: 2rem; height: 2rem; border-radius: 50%; background: #2929CC; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; z-index: 10; }
+
+.split-bottle { position: relative; height: 500px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.bottle-mask-client { position: absolute; top: 10%; bottom: 10%; left: 50%; width: 120px; transform: translateX(-50%); background: #f0f4ff; border-radius: 10px 10px 0 0; height: 60%; display: flex; align-items: center; justify-content: center; color: #2929CC; font-weight: bold; border: 2px solid #2929CC; border-bottom: none; text-align: center; font-size: 10px; z-index: 20;}
+.bottle-mask-sponsor { position: absolute; bottom: 10%; left: 50%; width: 120px; transform: translateX(-50%); background: #2929CC; border-radius: 0 0 10px 10px; height: 20%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; border: 2px solid #2929CC; border-top: 1px dashed white; text-align: center; font-size: 10px; z-index: 20;}
 </style>
 </head>
 <body>
@@ -174,8 +197,8 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
         <a href="#why-us" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Why Us</a>
         <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Industries</a>
         <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Customization</a>
-        <a href="#partner" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Partner Program</a>
-        <a href="#gallery" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Gallery</a>
+        <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Advertise</a>
+        <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors">Brand Experience</a>
         <a href="#quote" class="btn btn-blue ml-2">Get a Quote</a>
       </div>
 
@@ -186,16 +209,21 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
   </div>
   <!-- Mobile menu -->
-  <div id="mob-menu" style="background:rgba(14,14,44,.97);backdrop-filter:blur(20px)">
-    <div class="px-6 py-8 flex flex-col gap-6">
-      <a href="#why-us" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium">Why Us</a>
-      <a href="#industries" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium">Industries</a>
-      <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium">Customization</a>
-      <a href="#partner" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium">Partner Program</a>
-      <a href="#gallery" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium">Gallery</a>
-      <a href="#quote" onclick="closeMob()" class="btn btn-blue text-center">Get a Quote</a>
+  <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm transform -translate-x-full transition-transform duration-300 z-[60]" style="background:rgba(14,14,44,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5);">
+    <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
+      <div class="flex justify-between items-center mb-4">
+        <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
+        <button onclick="closeMob()" class="text-white"><span class="material-icons">close</span></button>
+      </div>
+      <a href="#why-us" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
+      <a href="#industries" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
+      <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
+      <a href="#advertise" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
+      <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
+      <a href="#quote" onclick="closeMob()" class="btn btn-blue text-center mt-4">Get a Quote</a>
     </div>
   </div>
+  <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -209,39 +237,38 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
   <div class="absolute rounded-full float3" style="width:9px;height:9px;top:72%;left:18%;background:rgba(41,41,204,.4)"></div>
   <div class="absolute rounded-full float" style="width:4px;height:4px;top:55%;left:78%;background:rgba(201,170,113,.35);animation-delay:3s"></div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-32">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-24 md:py-32">
+    <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-center hero-container text-center lg:text-left">
 
       <!-- Left: Copy -->
-      <div>
-        <div class="flex items-center gap-3 mb-8 reveal">
+      <div class="w-full flex flex-col items-center lg:items-start">
+        <div class="flex items-center gap-3 mb-6 lg:mb-8 reveal">
           <div style="height:1px;width:36px;background:#2929CC"></div>
           <span style="font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,170,113,.9);font-weight:600">Premium Water Branding</span>
         </div>
-        <h1 class="font-display text-6xl md:text-7xl lg:text-[5.5rem] text-white leading-[.92] tracking-tight mb-8 reveal d1">
+        <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] text-white leading-tight lg:leading-[.92] tracking-tight mb-6 lg:mb-8 reveal d1">
           Luxury<br/><em class="text-grad not-italic">Customized</em><br/>Water Bottles
         </h1>
-        <p class="text-lg text-white/55 font-light leading-relaxed mb-12 max-w-lg reveal d2">
+        <p class="text-base sm:text-lg text-white/55 font-light leading-relaxed mb-8 lg:mb-12 max-w-lg reveal d2">
           Transform every bottle into a powerful brand experience. Premium customization for weddings, hotels, corporate events &amp; beyond.
         </p>
-        <div class="flex flex-wrap gap-4 reveal d3">
-          <a href="#quote" class="btn btn-blue">Get a Quote</a>
-          <a href="#customization" class="btn btn-outline-w">Explore Designs</a>
+        <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 reveal d3 justify-center lg:justify-start">
+          <a href="#quote" class="btn btn-blue w-full sm:w-auto min-h-[48px] flex items-center justify-center">Get a Quote</a>
+          <a href="#customization" class="btn btn-outline-w w-full sm:w-auto min-h-[48px] flex items-center justify-center">Explore Designs</a>
         </div>
         <!-- Stats -->
-        <div class="flex gap-10 mt-16 pt-10 border-t border-white/10 reveal d4">
-          <div><div class="font-display text-3xl font-bold text-white">500+</div><div class="text-white/40 text-[10px] uppercase tracking-widest mt-1">Events Served</div></div>
-          <div><div class="font-display text-3xl font-bold text-white">50K+</div><div class="text-white/40 text-[10px] uppercase tracking-widest mt-1">Bottles Delivered</div></div>
-          <div><div class="font-display text-3xl font-bold text-white">100%</div><div class="text-white/40 text-[10px] uppercase tracking-widest mt-1">Satisfaction</div></div>
+        <div class="grid grid-cols-3 sm:flex sm:flex-row gap-4 sm:gap-10 mt-12 pt-8 border-t border-white/10 reveal d4 justify-center lg:justify-start w-full">
+          <div><div class="font-display text-2xl sm:text-3xl font-bold text-white">500+</div><div class="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mt-1">Events</div></div>
+          <div><div class="font-display text-2xl sm:text-3xl font-bold text-white">50K+</div><div class="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mt-1">Bottles</div></div>
+          <div><div class="font-display text-2xl sm:text-3xl font-bold text-white">100%</div><div class="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mt-1">Happy</div></div>
         </div>
       </div>
 
       <!-- Right: Real photo + Bottle overlay -->
-      <div class="relative flex justify-center items-center" style="min-height:500px">
+      <div class="relative flex justify-center items-center w-full" style="min-height:350px;">
         <!-- Hero photo background card -->
-        <div class="img-card reveal d1" style="position:relative;width:100%;max-width:480px;height:520px">
-          <img src="hero_bottle.png" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:cover;opacity:.92"/>
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,14,44,.3),rgba(41,41,204,.15))"></div>
+        <div class="img-card reveal d1 w-full max-w-xs sm:max-w-md lg:max-w-[480px] h-[350px] sm:h-[450px] lg:h-[520px]" style="position:relative;background:transparent;">
+          <img src="hero_bottle_8k.jpg" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:cover;image-rendering:high-quality;"/>
           <!-- Floating badge top-right -->
           <div class="glass absolute rounded-xl px-4 py-3" style="top:5%;right:5%;animation:float 6s ease-in-out 1s infinite">
             <div class="flex items-center gap-2">
@@ -294,18 +321,21 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
           </svg>
         </div>
 
-        <!-- Floating badges -->
-        <div class="glass absolute rounded-xl px-4 py-3 float2 reveal" style="top:10%;right:0">
-          <div class="flex items-center gap-2">
-            <span class="material-icons-outlined text-royal text-base">qr_code_scanner</span>
-            <div><div class="text-white text-xs font-semibold">QR Enabled</div><div class="text-white/45 text-[10px]">Smart Bottles</div></div>
-          </div>
-        </div>
-        <div class="glass absolute rounded-xl px-4 py-3 float3 reveal" style="bottom:16%;left:0">
-          <div class="flex items-center gap-2">
-            <span class="material-icons-outlined text-royal text-base">design_services</span>
-            <div><div class="text-white text-xs font-semibold">Custom Labels</div><div class="text-white/45 text-[10px]">Your Design</div></div>
-          </div>
+        <!-- Creative Right-Side Elements to fill blank space -->
+        <div class="absolute right-0 top-0 bottom-0 pointer-events-none hidden lg:flex items-center justify-end w-24 z-0">
+           <!-- Large decorative rings -->
+           <div class="absolute rounded-full float" style="width: 300px; height: 300px; border: 1px solid rgba(201,170,113,0.15); right: -150px;"></div>
+           <div class="absolute rounded-full float2" style="width: 200px; height: 200px; border: 1px dashed rgba(41,41,204,0.25); right: -100px;"></div>
+           
+           <!-- Vertical brand text -->
+           <div class="absolute right-4" style="transform: rotate(90deg) translateY(0); transform-origin: right center; white-space: nowrap;">
+              <span class="text-[10px] uppercase text-white/40 font-medium font-display" style="letter-spacing: 0.5em;">Premium Quality</span>
+           </div>
+           
+           <!-- Floating glass orbs -->
+           <div class="absolute rounded-full float3 glass" style="width: 20px; height: 20px; top: 20%; right: 10px;"></div>
+           <div class="absolute rounded-full float glass" style="width: 12px; height: 12px; bottom: 25%; right: 40px;"></div>
+           <div class="absolute rounded-full float2" style="width: 6px; height: 6px; top: 40%; right: 50px; background: rgba(201,170,113,0.4);"></div>
         </div>
       </div>
     </div>
@@ -364,11 +394,11 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
 <!-- ── INDUSTRIES ── -->
 <section id="industries" class="py-28" style="background:#F8F9FF">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 reveal">
       <span class="s-label">Versatile Elegance</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900 leading-tight">Industries<br/><em class="text-grad not-italic">We Serve</em></h2>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">Industries<br/><em class="text-grad not-italic">We Serve</em></h2>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       <div class="ind-card reveal d1" style="background:#0E0E2C"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">celebration</span><h3 class="font-heading text-lg font-bold text-white">Weddings</h3><p class="text-white/45 text-xs mt-1">Personalized bridal designs</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Weddings</h3><p class="text-white/80 text-sm font-light mt-1">Custom bridal labels, wedding album QR codes, floral designs</p></div></div></div>
       <div class="ind-card reveal d2" style="background:#111132"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">hotel</span><h3 class="font-heading text-lg font-bold text-white">Hotels &amp; Resorts</h3><p class="text-white/45 text-xs mt-1">Signature brand identity</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Hotels &amp; Resorts</h3><p class="text-white/80 text-sm font-light mt-1">Branded in-room water, dining menus, wellness centers</p></div></div></div>
       <div class="ind-card reveal d3" style="background:#0f0f2b"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">restaurant</span><h3 class="font-heading text-lg font-bold text-white">Restaurants</h3><p class="text-white/45 text-xs mt-1">Menu QR &amp; brand storytelling</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Restaurants &amp; Cafes</h3><p class="text-white/80 text-sm font-light mt-1">Digital menus, loyalty QR codes, signature brand water</p></div></div></div>
@@ -384,13 +414,13 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
 <!-- ── CUSTOMIZATION SHOWCASE ── -->
 <section id="customization" class="py-28 bg-white">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+    <div class="text-center max-w-2xl mx-auto mb-10 md:mb-14 reveal">
       <span class="s-label">Endless Possibilities</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900">Your Design,<br/><em class="text-grad not-italic">Your Bottle</em></h2>
-      <p class="text-gray-500 mt-5 font-light text-lg">From elegant wedding labels to dynamic corporate branding — every design crafted exclusively for your brand.</p>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Your Design,<br/><em class="text-grad not-italic">Your Bottle</em></h2>
+      <p class="text-gray-500 mt-4 md:mt-5 font-light text-base md:text-lg">From elegant wedding labels to dynamic corporate branding — every design crafted exclusively for your brand.</p>
     </div>
     <!-- Tabs -->
-    <div class="flex flex-wrap justify-center gap-1 mb-10 reveal border-b border-gray-200">
+    <div class="flex flex-wrap justify-center gap-2 mb-10 reveal border-b border-gray-200">
       <button onclick="switchTab('wedding')" id="tb-wedding" class="tab-btn active">Wedding</button>
       <button onclick="switchTab('hotel')" id="tb-hotel" class="tab-btn">Hotel</button>
       <button onclick="switchTab('corporate')" id="tb-corporate" class="tab-btn">Corporate</button>
@@ -399,18 +429,18 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
 
     <!-- Wedding -->
-    <div id="tp-wedding" class="tab-pane active flex-col lg:flex-row gap-16 items-center">
-      <div class="flex-1 reveal">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">celebration</span></div>
-        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-4">Wedding Collection</h3>
+    <div id="tp-wedding" class="tab-pane active flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div class="flex-1 reveal w-full text-center lg:text-left">
+        <div class="w-12 h-12 mx-auto lg:mx-0 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">celebration</span></div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">Wedding Collection</h3>
         <p class="text-gray-500 font-light leading-relaxed mb-6">Bespoke wedding labels featuring names, dates, floral motifs, and QR codes linking to your album, registry, or thank-you page.</p>
-        <ul class="space-y-3 mb-8 text-sm">
+        <ul class="space-y-3 mb-8 text-sm text-left inline-block lg:block">
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Custom bridal artwork &amp; calligraphy</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>QR link to wedding album or registry</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Personalized couple's monogram</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Premium matte or gloss finish</li>
         </ul>
-        <a href="#quote" class="btn btn-outline-b">Order Wedding Bottles</a>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Wedding Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(201,170,113,.18))">
@@ -438,18 +468,18 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
 
     <!-- Hotel -->
-    <div id="tp-hotel" class="tab-pane hidden flex-col lg:flex-row gap-16 items-center">
-      <div class="flex-1 reveal">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">hotel</span></div>
-        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-4">Hotel &amp; Resort Collection</h3>
+    <div id="tp-hotel" class="tab-pane hidden flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div class="flex-1 reveal w-full text-center lg:text-left">
+        <div class="w-12 h-12 mx-auto lg:mx-0 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">hotel</span></div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">Hotel &amp; Resort Collection</h3>
         <p class="text-gray-500 font-light leading-relaxed mb-6">Signature branded water elevating the guest experience. Feature your logo, tagline, and QR code linking to in-room dining or booking portals.</p>
-        <ul class="space-y-3 mb-8 text-sm">
+        <ul class="space-y-3 mb-8 text-sm text-left inline-block lg:block">
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Hotel logo &amp; brand identity label</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>In-room dining menu QR code</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Spa &amp; wellness branded variants</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Consistent brand across touchpoints</li>
         </ul>
-        <a href="#quote" class="btn btn-outline-b">Order Hotel Bottles</a>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Hotel Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(41,41,204,.15))">
@@ -476,18 +506,18 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
 
     <!-- Corporate -->
-    <div id="tp-corporate" class="tab-pane hidden flex-col lg:flex-row gap-16 items-center">
-      <div class="flex-1 reveal">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">business_center</span></div>
-        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-4">Corporate Collection</h3>
+    <div id="tp-corporate" class="tab-pane hidden flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div class="flex-1 reveal w-full text-center lg:text-left">
+        <div class="w-12 h-12 mx-auto lg:mx-0 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">business_center</span></div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">Corporate Collection</h3>
         <p class="text-gray-500 font-light leading-relaxed mb-6">Premium corporate-branded water for board meetings, product launches, and client entertainment. Make your brand statement at every meeting.</p>
-        <ul class="space-y-3 mb-8 text-sm">
+        <ul class="space-y-3 mb-8 text-sm text-left inline-block lg:block">
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Corporate logo &amp; brand guidelines</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>LinkedIn &amp; website QR code</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Product launch campaign labels</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Bulk corporate gifting solutions</li>
         </ul>
-        <a href="#quote" class="btn btn-outline-b">Order Corporate Bottles</a>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Corporate Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(41,41,204,.2))">
@@ -520,18 +550,18 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
 
     <!-- Restaurant -->
-    <div id="tp-restaurant" class="tab-pane hidden flex-col lg:flex-row gap-16 items-center">
-      <div class="flex-1 reveal">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">restaurant</span></div>
-        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-4">Restaurant &amp; Cafe Collection</h3>
+    <div id="tp-restaurant" class="tab-pane hidden flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div class="flex-1 reveal w-full text-center lg:text-left">
+        <div class="w-12 h-12 mx-auto lg:mx-0 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">restaurant</span></div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">Restaurant &amp; Cafe Collection</h3>
         <p class="text-gray-500 font-light leading-relaxed mb-6">Branded water as a table-top marketing tool — your menu QR, social handles, and brand story on every bottle.</p>
-        <ul class="space-y-3 mb-8 text-sm">
+        <ul class="space-y-3 mb-8 text-sm text-left inline-block lg:block">
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Digital menu QR code on label</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Instagram &amp; social media handles</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Daily specials or seasonal designs</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Loyalty &amp; rewards program QR</li>
         </ul>
-        <a href="#quote" class="btn btn-outline-b">Order Restaurant Bottles</a>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Restaurant Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,.1))">
@@ -558,18 +588,18 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
     </div>
 
     <!-- Event -->
-    <div id="tp-event" class="tab-pane hidden flex-col lg:flex-row gap-16 items-center">
-      <div class="flex-1 reveal">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">event</span></div>
-        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-4">Event Collection</h3>
+    <div id="tp-event" class="tab-pane hidden flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div class="flex-1 reveal w-full text-center lg:text-left">
+        <div class="w-12 h-12 mx-auto lg:mx-0 rounded-full flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal">event</span></div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 mb-4">Event Collection</h3>
         <p class="text-gray-500 font-light leading-relaxed mb-6">Make your event unforgettable — schedules, speaker bios, sponsor logos, and QR codes linking to event apps or registration pages.</p>
-        <ul class="space-y-3 mb-8 text-sm">
+        <ul class="space-y-3 mb-8 text-sm text-left inline-block lg:block">
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Event schedule or agenda on label</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Sponsor logo placements</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Event app or registration QR code</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Multicolor full-wrap printing</li>
         </ul>
-        <a href="#quote" class="btn btn-outline-b">Order Event Bottles</a>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Event Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(41,41,204,.22))">
@@ -684,161 +714,370 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
   </div>
 </section>
 
-<!-- ── PARTNER BRANDING PROGRAM ── -->
-<section id="partner" class="py-28 relative overflow-hidden" style="background:#0E0E2C">
+<!-- ── ADVERTISE ON BOTTLES ── -->
+<section id="advertise" class="py-28 relative overflow-hidden" style="background:#0E0E2C">
   <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle,#2929CC 1px,transparent 1px);background-size:40px 40px"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-      <span style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,170,113,.9);margin-bottom:1.25rem">For Brands &amp; Businesses</span>
-      <h2 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8">Turn Every Bottle Into<br/><em class="text-grad not-italic">A Marketing Opportunity</em></h2>
-      <p class="text-white/55 font-light text-lg leading-relaxed">ClairMaunt enables brands to reach customers through premium bottle label placements. Every bottle becomes a high-value brand touchpoint while helping organizers reduce costs.</p>
+      <span class="s-label" style="color: #C9AA71;">CLAIRMAUNT MARKETING SOLUTIONS</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">Advertise On <em class="text-grad not-italic">Bottles</em></h2>
+      <p class="text-white/60 font-light text-base md:text-lg leading-relaxed">Put your brand directly into the hands of your audience through premium customized water bottles distributed at events, conferences, tournaments, exhibitions, and corporate gatherings.</p>
     </div>
-    <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 reveal">
-      <div class="glass p-8 text-center"><div class="font-display text-4xl font-bold text-white">500+</div><div class="text-white/45 text-[10px] uppercase tracking-widest mt-3">Events Reached</div></div>
-      <div class="glass p-8 text-center"><div class="font-display text-4xl font-bold text-white">50K+</div><div class="text-white/45 text-[10px] uppercase tracking-widest mt-3">Bottles Distributed</div></div>
-      <div class="glass p-8 text-center"><div class="font-display text-4xl font-bold text-white">98%</div><div class="text-white/45 text-[10px] uppercase tracking-widest mt-3">Brand Recall Rate</div></div>
-      <div class="glass p-8 text-center"><div class="font-display text-4xl font-bold text-white">3X</div><div class="text-white/45 text-[10px] uppercase tracking-widest mt-3">QR Engagement</div></div>
-    </div>
-    <!-- Placements + Benefits -->
-    <div class="grid lg:grid-cols-2 gap-16">
-      <div class="reveal d1">
-        <h3 class="font-heading text-2xl font-bold text-white mb-8">What You Can Promote</h3>
-        <div class="space-y-4">
-          <div class="glass p-5 flex items-center gap-4"><span class="material-icons-outlined text-royal-light text-2xl">image</span><div><div class="text-white font-semibold text-sm">Brand Logos &amp; Identity</div><div class="text-white/45 text-xs mt-0.5">Full brand presence on every bottle</div></div></div>
-          <div class="glass p-5 flex items-center gap-4"><span class="material-icons-outlined text-royal-light text-2xl">qr_code</span><div><div class="text-white font-semibold text-sm">QR-Linked Campaigns</div><div class="text-white/45 text-xs mt-0.5">Track scans, drive traffic, measure ROI</div></div></div>
-          <div class="glass p-5 flex items-center gap-4"><span class="material-icons-outlined text-royal-light text-2xl">campaign</span><div><div class="text-white font-semibold text-sm">Promotional Offers</div><div class="text-white/45 text-xs mt-0.5">Discount codes, giveaways, launch offers</div></div></div>
-          <div class="glass p-5 flex items-center gap-4"><span class="material-icons-outlined text-royal-light text-2xl">rocket_launch</span><div><div class="text-white font-semibold text-sm">Product Launches</div><div class="text-white/45 text-xs mt-0.5">Announce new products to a captive audience</div></div></div>
-          <div class="glass p-5 flex items-center gap-4"><span class="material-icons-outlined text-royal-light text-2xl">volunteer_activism</span><div><div class="text-white font-semibold text-sm">Event Sponsorship Branding</div><div class="text-white/45 text-xs mt-0.5">Associate your brand with premium experiences</div></div></div>
+
+    <!-- Section 1: HOW IT WORKS -->
+    <div class="mb-28 reveal">
+      <div class="flex flex-col md:flex-row justify-between items-center relative gap-6">
+        <div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-white/10 -z-10 -translate-y-1/2"></div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">confirmation_number</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Choose Event</h4>
+        </div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">image</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Submit Assets</h4>
+        </div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">brush</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Label Design</h4>
+        </div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">local_shipping</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Distributed</h4>
+        </div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">qr_code_scanner</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Engagement</h4>
+        </div>
+        <div class="text-center w-32 relative z-10">
+          <div class="w-16 h-16 mx-auto rounded-full bg-navy border border-royal flex items-center justify-center mb-3"><span class="material-icons text-white">trending_up</span></div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider">Visibility & Leads</h4>
         </div>
       </div>
-      <div class="reveal d2">
-        <h3 class="font-heading text-2xl font-bold text-white mb-8">Program Benefits</h3>
-        <div class="space-y-5">
-          <div class="flex gap-4 items-start"><div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background:rgba(41,41,204,.3);border:1px solid rgba(41,41,204,.5)"><span class="material-icons text-royal-light text-sm">savings</span></div><div><div class="text-white font-semibold text-sm mb-1">Reduced Costs for Organizers</div><div class="text-white/45 text-sm font-light">Sponsors offset bottle costs — making premium branding accessible for event organizers.</div></div></div>
-          <div class="flex gap-4 items-start"><div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background:rgba(41,41,204,.3);border:1px solid rgba(41,41,204,.5)"><span class="material-icons text-royal-light text-sm">visibility</span></div><div><div class="text-white font-semibold text-sm mb-1">Increased Brand Visibility</div><div class="text-white/45 text-sm font-light">Your brand in the hands of thousands of engaged attendees throughout the event.</div></div></div>
-          <div class="flex gap-4 items-start"><div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background:rgba(41,41,204,.3);border:1px solid rgba(41,41,204,.5)"><span class="material-icons text-royal-light text-sm">analytics</span></div><div><div class="text-white font-semibold text-sm mb-1">Measurable Performance</div><div class="text-white/45 text-sm font-light">Track QR scan rates, website visits, and conversion metrics from each placement.</div></div></div>
-          <div class="flex gap-4 items-start"><div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background:rgba(41,41,204,.3);border:1px solid rgba(41,41,204,.5)"><span class="material-icons text-royal-light text-sm">people</span></div><div><div class="text-white font-semibold text-sm mb-1">Direct Audience Engagement</div><div class="text-white/45 text-sm font-light">Physical brand touchpoint + digital connection — premium engagement at scale.</div></div></div>
-          <div class="flex gap-4 items-start"><div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background:rgba(41,41,204,.3);border:1px solid rgba(41,41,204,.5)"><span class="material-icons text-royal-light text-sm">diamond</span></div><div><div class="text-white font-semibold text-sm mb-1">Premium Brand Association</div><div class="text-white/45 text-sm font-light">Associate with luxury quality water — elevating brand perception instantly.</div></div></div>
+    </div>
+
+    <!-- Section 2: WHY ADVERTISE -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-28 reveal">
+      <div class="glass p-8 hover:border-royal transition-colors">
+        <h4 class="text-gold font-bold text-lg mb-3">Direct Visibility</h4>
+        <p class="text-white/60 text-sm font-light">Your brand appears directly in the hands of event attendees.</p>
+      </div>
+      <div class="glass p-8 hover:border-royal transition-colors">
+        <h4 class="text-gold font-bold text-lg mb-3">QR Code Marketing</h4>
+        <p class="text-white/60 text-sm font-light">Drive traffic to websites, Instagram pages, WhatsApp, and landing pages.</p>
+      </div>
+      <div class="glass p-8 hover:border-royal transition-colors">
+        <h4 class="text-gold font-bold text-lg mb-3">Premium Association</h4>
+        <p class="text-white/60 text-sm font-light">Align your business with high-quality events and memorable experiences.</p>
+      </div>
+      <div class="glass p-8 hover:border-royal transition-colors">
+        <h4 class="text-gold font-bold text-lg mb-3">Longer Attention</h4>
+        <p class="text-white/60 text-sm font-light">Unlike flyers that are discarded, bottles remain with attendees throughout the event.</p>
+      </div>
+    </div>
+
+    <!-- Section 4 & 5: BUSINESSES & EVENTS -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20 md:mb-28 reveal">
+      <div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center lg:text-left">Perfect For These Businesses</h3>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Restaurants</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Hotels & Resorts</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Real Estate</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Healthcare Clinics</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Coaching Institutes</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Startups</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Local Businesses</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">Retail Stores</span>
+          <span class="glass px-4 py-2 rounded-lg text-white/80 text-sm">E-commerce Brands</span>
         </div>
-        <div class="mt-10"><a href="#quote" class="btn btn-blue">Join Partner Program</a></div>
+      </div>
+      <div>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center lg:text-left">Target Event Types</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Sports Tournaments</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Marathons</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">College Festivals</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Corporate Events</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Trade Shows</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Conferences</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Exhibitions</span>
+          <span class="px-4 py-2 border border-royal rounded-lg text-royal-light text-sm">Awareness Campaigns</span>
+        </div>
       </div>
     </div>
-    <!-- Use cases tags -->
-    <div class="mt-20 pt-16 border-t border-white/10 reveal">
-      <h3 class="font-heading text-lg font-bold text-white mb-8 text-center uppercase tracking-widest text-sm">Ideal For</h3>
-      <div class="flex flex-wrap justify-center gap-3">
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Sports Tournaments</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Conferences</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Trade Fairs</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">College Festivals</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Exhibitions</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Corporate Events</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Awareness Campaigns</span>
-        <span class="glass px-5 py-2 rounded-full text-white/60 text-[11px] uppercase tracking-widest">Community Events</span>
+
+    <!-- Section 7: CASE STUDY & SECTION 8: BOLD STATEMENT -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20 reveal">
+      <div class="glass p-10 rounded-2xl border-t border-l border-white/20">
+        <div class="text-xs uppercase tracking-widest text-gold mb-2">Real-World Case Study</div>
+        <h3 class="text-2xl font-bold text-white mb-6">Restaurant Promotion Campaign</h3>
+        <ul class="space-y-4 text-white/70 text-sm">
+          <li><strong>Event:</strong> College Sports Tournament</li>
+          <li><strong>Sponsor:</strong> Local Restaurant</li>
+          <li><strong>Campaign:</strong> 20% Discount Offer</li>
+          <li><strong>Feature:</strong> QR Code linked to Menu & Offer Page</li>
+          <li><strong class="text-green-400">Result:</strong> Students scanned the bottle, discovered the restaurant, and redeemed the offer during and after the event.</li>
+        </ul>
+      </div>
+      <div class="text-center lg:text-left p-8">
+        <h2 class="font-display text-4xl md:text-5xl text-white leading-tight">"Unlike banners people ignore and flyers they throw away,<br/><span class="text-royal-light">a bottle stays in their hand.</span>"</h2>
       </div>
     </div>
+
+    <!-- CTA -->
+    <div class="text-center border-t border-white/10 pt-16 reveal">
+      <h3 class="font-display text-4xl font-bold text-white mb-4">Ready To Advertise On Bottles?</h3>
+      <p class="text-white/60 mb-8 max-w-2xl mx-auto">Reach your audience through a marketing medium they carry, hold, use, and interact with throughout the event.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#quote" class="btn btn-blue">Become A Sponsor</a>
+        <a href="#quote" class="btn btn-outline-w">Request Media Kit</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ── GALLERY ── -->
-<section id="gallery" class="py-28 bg-white">
+<!-- ── BRAND EXPERIENCE ── -->
+<section id="brand-experience" class="py-28 bg-white overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-      <span class="s-label">Our Work</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900">Premium<br/><em class="text-grad not-italic">Showcase</em></h2>
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal">
+      <span class="s-label">THE CLAIRMAUNT EXPERIENCE</span>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-5">Every Bottle<br/><em class="text-grad not-italic">Tells A Story</em></h2>
+      <p class="text-gray-500 font-light text-base md:text-lg leading-relaxed">Transform ordinary hydration into unforgettable brand experiences through luxury customization, QR technology, and premium presentation.</p>
     </div>
-    <div class="gal-grid reveal">
-      <div class="gal-item">
-        <img src="wedding_bottle.png" alt="Wedding collection" class="gal-img"/>
-        <div class="gal-caption"><div><div class="text-white font-heading font-bold text-lg">Wedding Collection</div><div class="text-white/60 text-sm mt-1">Personalized bridal label designs</div></div></div>
-      </div>
-      <div class="gal-item">
-        <img src="hero_bottle.png" alt="Luxury ClairMaunt bottle" class="gal-img"/>
-        <div class="gal-caption"><div><div class="text-white font-heading font-bold">Luxury Edition</div><div class="text-white/60 text-sm mt-1">Premium splash photography</div></div></div>
-      </div>
-      <div class="gal-item">
-        <img src="corporate_bottles.png" alt="Corporate branded bottles" class="gal-img"/>
-        <div class="gal-caption"><div><div class="text-white font-heading font-bold">Corporate Collection</div><div class="text-white/60 text-sm mt-1">Hotel &amp; corporate branded water</div></div></div>
-      </div>
-      <div class="gal-item">
-        <img src="qr_lifestyle.png" alt="QR lifestyle shot" class="gal-img"/>
-        <div class="gal-caption"><div><div class="text-white font-heading font-bold">QR-Enabled Smart</div><div class="text-white/60 text-sm mt-1">Scan to connect instantly</div></div></div>
-      </div>
-      <div class="gal-item flex items-center justify-center" style="background:linear-gradient(135deg,#0E0E2C,#1A1A3E)">
-        <div class="text-center p-8"><div class="font-display text-5xl font-bold text-white mb-3">500+</div><div class="text-white/55 text-xs uppercase tracking-widest">Events Served</div><div class="mt-6 h-px w-16 mx-auto" style="background:#2929CC"></div><div class="mt-6 text-white/30 text-xs">Across India</div></div>
-      </div>
-      <div class="gal-item flex items-center justify-center" style="background:linear-gradient(135deg,#2929CC,#4444E0)">
-        <div class="text-center p-8"><div class="font-display text-5xl font-bold text-white mb-3">50K+</div><div class="text-white/55 text-xs uppercase tracking-widest">Bottles Delivered</div><div class="mt-6 h-px w-16 mx-auto" style="background:rgba(255,255,255,.35)"></div><div class="mt-6 text-white/40 text-xs">And counting</div></div>
-      </div>
 
+    <!-- Section 1: BRAND JOURNEY VISUALIZATION -->
+    <div class="mb-20 md:mb-28 reveal d1">
+      <h3 class="font-heading text-2xl font-bold text-center mb-12">The Brand Journey</h3>
+      <div class="flex flex-col md:flex-row journey-horizontal justify-between items-center relative max-w-4xl mx-auto gap-10 md:gap-0">
+        <div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gray-200 -z-10 -translate-y-1/2"></div>
+        <div class="md:hidden absolute top-0 left-1/2 w-[2px] h-full bg-gray-200 -z-10 -translate-x-1/2"></div>
+        
+        <div class="journey-step flex flex-col items-center gap-3 text-center">
+          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">verified</span></div>
+          <div class="font-semibold text-sm bg-white px-2 py-1">Your Brand</div>
+        </div>
+        <div class="journey-step flex flex-col items-center gap-3 text-center">
+          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">palette</span></div>
+          <div class="font-semibold text-sm bg-white px-2 py-1">Custom Design</div>
+        </div>
+        <div class="journey-step flex flex-col items-center gap-3 text-center">
+          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">water_drop</span></div>
+          <div class="font-semibold text-sm bg-white px-2 py-1">Premium Bottle</div>
+        </div>
+        <div class="journey-step flex flex-col items-center gap-3 text-center">
+          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">qr_code_scanner</span></div>
+          <div class="font-semibold text-sm bg-white px-2 py-1">Customer Scan</div>
+        </div>
+        <div class="journey-step flex flex-col items-center gap-3 text-center">
+          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-gold text-2xl">star</span></div>
+          <div class="font-semibold text-sm bg-white px-2 py-1">Brand Recall</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: INDUSTRY EXPERIENCE CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 md:mb-28 reveal">
+      <div class="f-card text-center">
+        <span class="material-icons-outlined text-royal text-4xl mb-4">celebration</span>
+        <h4 class="font-heading font-bold text-xl mb-3">Luxury Weddings</h4>
+        <p class="text-sm text-gray-500 font-light">Create personalized wedding bottles featuring monograms, event branding, and QR-linked wedding albums.</p>
+      </div>
+      <div class="f-card text-center">
+        <span class="material-icons-outlined text-royal text-4xl mb-4">restaurant</span>
+        <h4 class="font-heading font-bold text-xl mb-3">Restaurants &amp; Cafés</h4>
+        <p class="text-sm text-gray-500 font-light">Transform bottles into interactive menus, loyalty tools, and social media touchpoints.</p>
+      </div>
+      <div class="f-card text-center">
+        <span class="material-icons-outlined text-royal text-4xl mb-4">hotel</span>
+        <h4 class="font-heading font-bold text-xl mb-3">Hotels &amp; Resorts</h4>
+        <p class="text-sm text-gray-500 font-light">Elevate guest experiences through premium branded hydration in rooms and wellness centers.</p>
+      </div>
+      <div class="f-card text-center">
+        <span class="material-icons-outlined text-royal text-4xl mb-4">business_center</span>
+        <h4 class="font-heading font-bold text-xl mb-3">Corporate Events</h4>
+        <p class="text-sm text-gray-500 font-light">Generate brand visibility, sponsorship exposure, and attendee engagement.</p>
+      </div>
+    </div>
+
+    <!-- Section 3: INTERACTIVE BOTTLE ECOSYSTEM & Section 4: TIMELINE -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 md:mb-28">
+      <div class="relative flex justify-center items-center h-[500px] reveal d1 bg-gray-50 rounded-2xl p-8 border border-gray-100">
+        <img src="hero_bottle_new.png" alt="Ecosystem" class="h-full object-contain drop-shadow-2xl z-10" />
+        
+        <!-- Floating Icons -->
+        <div class="eco-icon" style="top: 15%; left: 20%;"><span class="material-icons text-royal">language</span><div class="eco-tooltip">Direct to Website</div></div>
+        <div class="eco-icon" style="top: 30%; right: 20%;"><span class="material-icons text-pink-500">camera_alt</span><div class="eco-tooltip">Instagram Follow</div></div>
+        <div class="eco-icon" style="top: 50%; left: 15%;"><span class="material-icons text-orange-500">restaurant_menu</span><div class="eco-tooltip">Digital Menu</div></div>
+        <div class="eco-icon" style="top: 65%; right: 15%;"><span class="material-icons text-green-500">shopping_bag</span><div class="eco-tooltip">Product Catalogue</div></div>
+        <div class="eco-icon" style="bottom: 15%; left: 30%;"><span class="material-icons text-blue-500">event</span><div class="eco-tooltip">Event Info</div></div>
+      </div>
+      
+      <div class="reveal d2">
+        <h3 class="font-heading text-3xl font-bold text-gray-900 mb-8">Real Customer Journey</h3>
+        <div class="space-y-0">
+          <div class="timeline-step">
+            <div class="timeline-dot">1</div>
+            <div><h4 class="font-semibold text-lg">Receive</h4><p class="text-gray-500 text-sm">Customer receives the premium ClairMaunt bottle.</p></div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">2</div>
+            <div><h4 class="font-semibold text-lg">Notice</h4><p class="text-gray-500 text-sm">Customer notices the high-quality branding and design.</p></div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">3</div>
+            <div><h4 class="font-semibold text-lg">Scan</h4><p class="text-gray-500 text-sm">Customer scans the integrated QR code out of curiosity.</p></div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">4</div>
+            <div><h4 class="font-semibold text-lg">Visit</h4><p class="text-gray-500 text-sm">Customer visits the designated website or campaign page.</p></div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">5</div>
+            <div><h4 class="font-semibold text-lg">Engage</h4><p class="text-gray-500 text-sm">Customer engages with the brand digitally.</p></div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">6</div>
+            <div><h4 class="font-semibold text-lg">Remember</h4><p class="text-gray-500 text-sm">The physical and digital experience creates lasting brand recall.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: SPONSOR BRANDING EXPERIENCE -->
+    <div class="bg-navy rounded-3xl p-6 md:p-10 lg:p-16 text-white mb-20 md:mb-28 reveal">
+      <div class="text-center mb-10 md:mb-12">
+        <h3 class="font-heading text-3xl md:text-4xl font-bold mb-4">One Bottle. Two Opportunities.</h3>
+        <p class="text-white/60 max-w-2xl mx-auto text-sm md:text-base">Our unique split-branding design serves both the event host and the sponsor perfectly.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-center">
+        <div class="space-y-6 text-center md:text-right">
+          <h4 class="text-xl font-bold text-gold">Event Organizer</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex justify-center md:justify-end items-center gap-2">Reduced beverage costs <span class="material-icons text-green-400 text-sm">check</span></li>
+            <li class="flex justify-center md:justify-end items-center gap-2">Premium branding <span class="material-icons text-green-400 text-sm">check</span></li>
+            <li class="flex justify-center md:justify-end items-center gap-2">Event visibility <span class="material-icons text-green-400 text-sm">check</span></li>
+          </ul>
+        </div>
+        
+        <div class="split-bottle">
+          <img src="hero_bottle_8k.jpg" class="h-full object-cover opacity-30 absolute w-full" alt="Bottle Base" style="image-rendering:high-quality;" />
+          <div class="bottle-mask-client" id="clientMask">75% Client</div>
+          <div class="bottle-mask-sponsor" id="sponsorMask">25% Sponsor</div>
+        </div>
+        
+        <div class="space-y-6 text-center md:text-left">
+          <h4 class="text-xl font-bold text-royal-light">Brand Sponsor</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex justify-center md:justify-start items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> Advertising exposure</li>
+            <li class="flex justify-center md:justify-start items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> QR-enabled campaigns</li>
+            <li class="flex justify-center md:justify-start items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> Audience engagement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 text-center">
+        <input type="range" min="10" max="30" value="25" class="w-64 accent-gold" id="sponsorSlider" oninput="updateSponsorMask(this.value)" />
+        <div class="text-xs text-white/50 mt-2">Adjust Sponsor Branding Area (%)</div>
+      </div>
+    </div>
+
+    <!-- Section 6: IMPACT METRICS & CLOSING -->
+    <div class="text-center reveal">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
+        <div class="p-4 md:p-6 bg-gray-50 rounded-2xl border border-gray-100"><div class="font-display text-3xl md:text-4xl font-bold text-royal mb-2">100%</div><div class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500">Brand Visibility</div></div>
+        <div class="p-4 md:p-6 bg-gray-50 rounded-2xl border border-gray-100"><div class="font-display text-3xl md:text-4xl font-bold text-royal mb-2">Smart</div><div class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500">QR Enabled</div></div>
+        <div class="p-4 md:p-6 bg-gray-50 rounded-2xl border border-gray-100"><div class="font-display text-3xl md:text-4xl font-bold text-royal mb-2">Multiple</div><div class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500">Touchpoints</div></div>
+        <div class="p-4 md:p-6 bg-gray-50 rounded-2xl border border-gray-100"><div class="font-display text-3xl md:text-4xl font-bold text-royal mb-2">Premium</div><div class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500">Presentation</div></div>
+      </div>
+      
+      <div class="max-w-3xl mx-auto py-10 md:py-12 border-t border-gray-200">
+        <h2 class="font-display text-3xl md:text-4xl italic text-gray-900 mb-8 leading-relaxed">"Every hand that holds a ClairMaunt bottle becomes a touchpoint for your brand."</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#quote" class="btn btn-blue">Start Your Brand Experience</a>
+          <a href="#quote" class="btn btn-outline-b">Request A Custom Mockup</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+function updateSponsorMask(val) {
+  const s = document.getElementById('sponsorMask');
+  const c = document.getElementById('clientMask');
+  if(s && c) {
+    s.style.height = val + '%';
+    s.innerText = val + '% Sponsor';
+    c.style.height = (80 - val) + '%';
+    c.innerText = (100 - val) + '% Client';
+  }
+}
+</script>
 
 <!-- ── TESTIMONIALS ── -->
-<section id="testimonials" class="py-28" style="background:#F8F9FF">
+<section id="testimonials" class="py-24 md:py-28" style="background:#F8F9FF">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 reveal">
       <span class="s-label">What Our Clients Say</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900">Trusted By<br/><em class="text-grad not-italic">The Best</em></h2>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Trusted By<br/><em class="text-grad not-italic">The Best</em></h2>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="glass-light p-10 reveal d1">
+    <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-8 md:pb-0 hide-scrollbar" style="scrollbar-width:none;-ms-overflow-style:none;">
+      <div class="glass-light p-8 md:p-10 reveal d1 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
         <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"ClairMaunt bottles were the highlight of our wedding. Every guest was amazed by the personalized design with our QR code linking to our photo album. Absolutely premium quality!"</p>
-        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">PR</div><div><div class="font-semibold text-gray-900 text-sm">Priya &amp; Rahul Sharma</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Wedding, Mumbai</div></div></div>
+        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">U</div><div><div class="font-semibold text-gray-900 text-sm">Udaybhan</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Wedding, Dausa</div></div></div>
       </div>
-      <div class="glass-light p-10 reveal d2">
+      <div class="glass-light p-8 md:p-10 reveal d2 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
-        <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"We ordered ClairMaunt for our annual leadership summit. The branded bottles impressed every delegate and our LinkedIn QR drove 200+ new followers in one day. Exceptional ROI."</p>
-        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">AK</div><div><div class="font-semibold text-gray-900 text-sm">Arjun Kapoor</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">CEO, TechVision India</div></div></div>
+        <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"We ordered ClairMaunt for our regular business meets. The branded bottles impressed everyone Exceptional ROI."</p>
+        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">LS</div><div><div class="font-semibold text-gray-900 text-sm">Lavjeet singh</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Thar Breeze Aircon, Jaipur</div></div></div>
       </div>
-      <div class="glass-light p-10 reveal d3">
+      <div class="glass-light p-8 md:p-10 reveal d3 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
         <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"Our hotel partnered with ClairMaunt for in-room branded water. Guests frequently compliment the luxury feel. The menu QR code reduced our printing costs significantly."</p>
-        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">SM</div><div><div class="font-semibold text-gray-900 text-sm">Sanjay Mehta</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">GM, Meridian Grand Hotel</div></div></div>
+        <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">MS</div><div><div class="font-semibold text-gray-900 text-sm">Manvendra singh</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Sundervan villas, Sawai Madhopur</div></div></div>
       </div>
     </div>
+    <style>.hide-scrollbar::-webkit-scrollbar{display:none}</style>
   </div>
 </section>
 
 <!-- ── FAQ ── -->
-<section id="faq" class="py-28 bg-white">
+<section id="faq" class="py-24 md:py-28 bg-white">
   <div class="max-w-3xl mx-auto px-6 lg:px-8">
-    <div class="text-center mb-16 reveal">
+    <div class="text-center mb-12 md:mb-16 reveal">
       <span class="s-label">Got Questions?</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900">Frequently<br/><em class="text-grad not-italic">Asked</em></h2>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Frequently<br/><em class="text-grad not-italic">Asked</em></h2>
     </div>
     <div class="space-y-0 reveal">
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">What is the minimum order quantity?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Flexible minimum order quantities starting from as few as 48 bottles for small gatherings. Contact us for specific pricing tiers and bulk discounts.</p></div></div>
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">How long does production and delivery take?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Standard lead time is 5–7 business days from design approval. Rush orders can be accommodated within 3 business days. We deliver pan-India with tracking provided.</p></div></div>
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">Can I upload my own design or logo?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Absolutely. Upload your logo, brand guidelines, event artwork, or custom design. Our designers adapt and optimize your artwork for premium label printing. All files are kept strictly confidential.</p></div></div>
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">What information can I include on the QR code?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">QR codes can link to any URL — websites, digital menus, social media, wedding albums, event schedules, registration forms, WhatsApp, YouTube, or any custom landing page. The destination can be changed anytime even after printing.</p></div></div>
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">What type of water is used in ClairMaunt bottles?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">ClairMaunt uses BIS-certified purified drinking water, processed through advanced RO + UV + Ozone treatment. All bottles comply with FSSAI standards and carry required quality certifications.</p></div></div>
-      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-6 text-left gap-6"><span class="font-semibold text-gray-900">How does the Partner Branding Program work?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Brands purchase label placement slots on bottles distributed at events. They provide artwork, QR links, and promotional content. Organizers receive subsidized or complimentary bottles. We manage all production and coordination. Contact us for media kits and placement rates.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">What is the minimum order quantity?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Flexible minimum order quantities starting from as few as 500 bottles for small gatherings. Contact us for specific pricing tiers and bulk discounts.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">How long does production and delivery take?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Standard lead time is 5–7 business days from design approval. Rush orders can be accommodated within 3 business days. We deliver pan-India with tracking provided.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">Can I upload my own design or logo?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Absolutely. Upload your logo, brand guidelines, event artwork, or custom design. Our designers adapt and optimize your artwork for premium label printing. All files are kept strictly confidential.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">What information can I include on the QR code?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">QR codes can link to any URL — websites, digital menus, social media, wedding albums, event schedules, registration forms, WhatsApp, YouTube, or any custom landing page. The destination can be changed anytime even after printing.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">What type of water is used in ClairMaunt bottles?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">ClairMaunt uses BIS-certified purified drinking water, processed through advanced RO + UV + Ozone treatment. All bottles comply with FSSAI standards and carry required quality certifications.</p></div></div>
+      <div class="faq-item border-b border-gray-200"><button onclick="toggleFaq(this)" class="w-full flex justify-between items-center py-5 md:py-6 text-left gap-4 md:gap-6"><span class="font-semibold text-gray-900 text-sm md:text-base">How does the Partner Branding Program work?</span><span class="material-icons faq-ico flex-shrink-0" style="color:#2929CC">add</span></button><div class="faq-ans"><p class="text-gray-500 font-light pb-6 leading-relaxed text-sm">Brands purchase label placement slots on bottles distributed at events. They provide artwork, QR links, and promotional content. Organizers receive subsidized or complimentary bottles. We manage all production and coordination. Contact us for media kits and placement rates.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- ── QUOTE FORM ── -->
-<section id="quote" class="py-28 relative overflow-hidden" style="background:#0E0E2C">
+<section id="quote" class="py-24 md:py-28 relative overflow-hidden" style="background:#0E0E2C">
   <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle,#2929CC 1px,transparent 1px);background-size:40px 40px"></div>
   <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,#2929CC,transparent)"></div>
   <div class="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
-    <div class="text-center mb-14 reveal">
+    <div class="text-center mb-10 md:mb-14 reveal">
       <span style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,170,113,.9);margin-bottom:1.25rem">Start Your Order</span>
-      <h2 class="font-display text-5xl md:text-6xl font-bold text-white leading-tight">Request a<br/><em class="text-grad not-italic">Custom Quote</em></h2>
-      <p class="text-white/50 font-light mt-5 text-lg">Tell us about your brand and event — we'll respond within 24 hours.</p>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">Request a<br/><em class="text-grad not-italic">Custom Quote</em></h2>
+      <p class="text-white/50 font-light mt-4 md:mt-5 text-base md:text-lg">Tell us about your brand and event — we'll respond within 24 hours.</p>
     </div>
-    <div class="glass p-10 md:p-12 reveal d1">
+    <div class="glass p-6 md:p-10 lg:p-12 reveal d1">
       <form id="q-form" onsubmit="submitForm(event)">
-        <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
           <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Your Name *</label><input type="text" required placeholder="Rahul Sharma" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
           <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Company Name</label><input type="text" placeholder="Your Company Pvt. Ltd." class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
           <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Email Address *</label><input type="email" required placeholder="rahul@company.com" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
           <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Phone Number *</label><input type="tel" required placeholder="+91 98765 43210" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
-          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Quantity Required *</label><input type="number" required placeholder="e.g. 500" min="48" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
+          <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Quantity Required *</label><input type="number" required placeholder="e.g. 500" min="500" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
           <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Event Type *</label><select required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="" style="background:#1a1a3e">Select event type</option><option value="wedding" style="background:#1a1a3e">Wedding</option><option value="hotel" style="background:#1a1a3e">Hotel / Resort</option><option value="restaurant" style="background:#1a1a3e">Restaurant / Cafe</option><option value="corporate" style="background:#1a1a3e">Corporate Event</option><option value="sports" style="background:#1a1a3e">Sports Tournament</option><option value="conference" style="background:#1a1a3e">Conference</option><option value="exhibition" style="background:#1a1a3e">Exhibition / Trade Fair</option><option value="education" style="background:#1a1a3e">Educational Institution</option><option value="partner" style="background:#1a1a3e">Partner Branding Program</option><option value="other" style="background:#1a1a3e">Other</option></select></div>
         </div>
         <div class="mb-6"><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Upload Logo / Brand Assets</label><div class="border border-dashed border-white/20 p-8 text-center cursor-pointer hover:border-royal transition-colors" onclick="document.getElementById('fi').click()"><span class="material-icons-outlined text-white/30 text-3xl mb-3 block">cloud_upload</span><p id="fu-label" class="text-white/40 text-sm">Drop files here or click to browse</p><p class="text-white/25 text-xs mt-1">PNG, JPG, PDF — Max 10MB</p></div><input id="fi" type="file" class="hidden" accept=".png,.jpg,.jpeg,.pdf,.ai,.eps,.svg"/></div>
@@ -856,9 +1095,9 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
 
 <!-- ── FOOTER ── -->
 <footer style="background:#07071A" class="text-white">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-10">
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-      <div class="lg:col-span-2">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-16 md:pt-20 pb-8 md:pb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12 lg:mb-16">
+      <div class="sm:col-span-2">
         <div class="flex items-center gap-3 mb-6">
           <svg width="44" height="32" viewBox="0 0 260 180" fill="none"><polygon points="10,143 60,55 85,92 50,143" fill="#4444E0"/><polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/><polygon points="62,143 130,18 198,143" fill="#4444E0"/><polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/><polygon points="175,92 200,55 250,143 210,143" fill="#4444E0"/><polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/><polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity=".4"/><line x1="10" y1="146" x2="250" y2="146" stroke="#4444E0" stroke-width="2.5"/></svg>
           <div><div class="font-heading font-bold text-xl tracking-wide">ClairMaunt</div><div class="text-[9px] tracking-[.2em] uppercase text-white/35 mt-0.5">Your Brand In Every Hand</div></div>
@@ -887,8 +1126,8 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
           <li><a href="#customization" class="text-white/45 hover:text-white transition-colors">Customization</a></li>
           <li><a href="#how-it-works" class="text-white/45 hover:text-white transition-colors">How It Works</a></li>
           <li><a href="#qr-bottles" class="text-white/45 hover:text-white transition-colors">QR Smart Bottles</a></li>
-          <li><a href="#partner" class="text-white/45 hover:text-white transition-colors">Partner Program</a></li>
-          <li><a href="#gallery" class="text-white/45 hover:text-white transition-colors">Gallery</a></li>
+          <li><a href="#advertise" class="text-white/45 hover:text-white transition-colors">Advertise</a></li>
+          <li><a href="#brand-experience" class="text-white/45 hover:text-white transition-colors">Brand Experience</a></li>
           <li><a href="#quote" class="text-white/45 hover:text-white transition-colors">Get a Quote</a></li>
         </ul>
       </div>
@@ -902,7 +1141,7 @@ input:focus,textarea:focus,select:focus{border-color:#2929CC!important}
         </ul>
       </div>
     </div>
-    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
       <span class="text-white/25 text-xs tracking-wider">© 2025 ClairMaunt. All rights reserved.</span>
       <div class="flex gap-6"><a href="#" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Privacy Policy</a><a href="#" class="text-white/25 hover:text-white/60 text-xs tracking-wider transition-colors">Terms of Service</a></div>
     </div>
