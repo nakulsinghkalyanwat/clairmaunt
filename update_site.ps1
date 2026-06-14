@@ -97,42 +97,6 @@ $brandExperienceHtml = @"
       </div>
     </div>
 
-    <!-- Section 5: SPONSOR BRANDING EXPERIENCE -->
-    <div class="bg-navy rounded-3xl p-10 md:p-16 text-white mb-28 reveal">
-      <div class="text-center mb-12">
-        <h3 class="font-heading text-4xl font-bold mb-4">One Bottle. Two Opportunities.</h3>
-        <p class="text-white/60 max-w-2xl mx-auto">Our unique split-branding design serves both the event host and the sponsor perfectly.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8 items-center">
-        <div class="space-y-6 text-right md:text-left">
-          <h4 class="text-xl font-bold text-gold">Event Organizer</h4>
-          <ul class="space-y-3 text-sm text-white/70">
-            <li class="flex justify-end md:justify-start items-center gap-2">Reduced beverage costs <span class="material-icons text-green-400 text-sm">check</span></li>
-            <li class="flex justify-end md:justify-start items-center gap-2">Premium branding <span class="material-icons text-green-400 text-sm">check</span></li>
-            <li class="flex justify-end md:justify-start items-center gap-2">Event visibility <span class="material-icons text-green-400 text-sm">check</span></li>
-          </ul>
-        </div>
-        
-        <div class="split-bottle">
-          <img src="hero_bottle_new.png" class="h-full object-contain opacity-30 absolute" alt="Bottle Base" />
-          <div class="bottle-mask-client" id="clientMask">75% Client Branding</div>
-          <div class="bottle-mask-sponsor" id="sponsorMask">25% Sponsor Branding</div>
-        </div>
-        
-        <div class="space-y-6">
-          <h4 class="text-xl font-bold text-royal-light">Brand Sponsor</h4>
-          <ul class="space-y-3 text-sm text-white/70">
-            <li class="flex items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> Advertising exposure</li>
-            <li class="flex items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> QR-enabled campaigns</li>
-            <li class="flex items-center gap-2"><span class="material-icons text-green-400 text-sm">check</span> Audience engagement</li>
-          </ul>
-        </div>
-      </div>
-      <div class="mt-8 text-center">
-        <input type="range" min="10" max="50" value="25" class="w-64 accent-gold" id="sponsorSlider" oninput="updateSponsorMask(this.value)" />
-        <div class="text-xs text-white/50 mt-2">Adjust Sponsor Branding Area (%)</div>
-      </div>
-    </div>
 
     <!-- Section 6: IMPACT METRICS & CLOSING -->
     <div class="text-center reveal">
@@ -154,20 +118,6 @@ $brandExperienceHtml = @"
   </div>
 </section>
 
-<!-- ── SCRIPT FOR BRAND EXPERIENCE ── -->
-<script>
-function updateSponsorMask(val) {
-  const s = document.getElementById('sponsorMask');
-  const c = document.getElementById('clientMask');
-  if(s && c) {
-    s.style.height = val + '%';
-    s.innerText = val + '% Sponsor Branding';
-    c.style.height = (80 - val) + '%';
-    c.innerText = (100 - val) + '% Client Branding';
-  }
-}
-</script>
-`r`n
 "@
 
 $advertiseHtml = @"
