@@ -50,29 +50,6 @@ $brandExperienceHtml = @"
       </div>
     </div>
 
-    <!-- Section 2: INDUSTRY EXPERIENCE CARDS -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-28 reveal">
-      <div class="f-card text-center">
-        <span class="material-icons-outlined text-royal text-4xl mb-4">celebration</span>
-        <h4 class="font-heading font-bold text-xl mb-3">Luxury Weddings</h4>
-        <p class="text-sm text-gray-500 font-light">Create personalized wedding bottles featuring monograms, event branding, and QR-linked wedding albums.</p>
-      </div>
-      <div class="f-card text-center">
-        <span class="material-icons-outlined text-royal text-4xl mb-4">restaurant</span>
-        <h4 class="font-heading font-bold text-xl mb-3">Restaurants &amp; Cafés</h4>
-        <p class="text-sm text-gray-500 font-light">Transform bottles into interactive menus, loyalty tools, and social media touchpoints.</p>
-      </div>
-      <div class="f-card text-center">
-        <span class="material-icons-outlined text-royal text-4xl mb-4">hotel</span>
-        <h4 class="font-heading font-bold text-xl mb-3">Hotels &amp; Resorts</h4>
-        <p class="text-sm text-gray-500 font-light">Elevate guest experiences through premium branded hydration in rooms and wellness centers.</p>
-      </div>
-      <div class="f-card text-center">
-        <span class="material-icons-outlined text-royal text-4xl mb-4">business_center</span>
-        <h4 class="font-heading font-bold text-xl mb-3">Corporate Events</h4>
-        <p class="text-sm text-gray-500 font-light">Generate brand visibility, sponsorship exposure, and attendee engagement.</p>
-      </div>
-    </div>
 
     <!-- Section 3: INTERACTIVE BOTTLE ECOSYSTEM & Section 4: TIMELINE -->
     <div class="grid lg:grid-cols-2 gap-16 items-center mb-28">
