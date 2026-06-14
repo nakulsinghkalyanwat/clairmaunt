@@ -51,19 +51,10 @@ $brandExperienceHtml = @"
     </div>
 
 
-    <!-- Section 3: INTERACTIVE BOTTLE ECOSYSTEM & Section 4: TIMELINE -->
-    <div class="grid lg:grid-cols-2 gap-16 items-center mb-28">
-      <div class="relative flex justify-center items-center h-[500px] reveal d1 bg-gray-50 rounded-2xl p-8 border border-gray-100 overflow-hidden">
-        <img src="hero_bottle_new.png" alt="Ecosystem" class="h-full object-contain drop-shadow-2xl z-10" />
-        
-        <!-- Floating Icons -->
-        <div class="eco-icon" style="top: 15%; left: 20%;"><span class="material-icons text-royal">language</span><div class="eco-tooltip">Direct visitors to your website instantly.</div></div>
-        <div class="eco-icon" style="top: 30%; right: 20%;"><span class="material-icons text-pink-500">camera_alt</span><div class="eco-tooltip">Increase followers through bottle QR scans.</div></div>
-        <div class="eco-icon" style="top: 50%; left: 15%;"><span class="material-icons text-orange-500">restaurant_menu</span><div class="eco-tooltip">Provide digital restaurant menus.</div></div>
-        <div class="eco-icon" style="top: 65%; right: 15%;"><span class="material-icons text-green-500">shopping_bag</span><div class="eco-tooltip">Product Catalogue</div></div>
-        <div class="eco-icon" style="bottom: 15%; left: 30%;"><span class="material-icons text-blue-500">event</span><div class="eco-tooltip">Event Information</div></div>
-        <div class="eco-icon" style="bottom: 30%; right: 25%;"><span class="material-icons text-red-500">play_circle</span><div class="eco-tooltip">Video Content</div></div>
-        <div class="eco-icon" style="top: 10%; right: 40%;"><span class="material-icons text-purple-500">contacts</span><div class="eco-tooltip">Contact Information</div></div>
+    <!-- Section 3: CUSTOMER JOURNEY IMAGE & Section 4: TIMELINE -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 md:mb-28">
+      <div class="relative flex justify-center items-center h-[500px] reveal d1 rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
+        <img src="customer_journey_scan.png" alt="Customer Scanning Custom Bottle QR" class="w-full h-full object-cover" />
       </div>
       
       <div class="reveal d2">
