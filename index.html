@@ -1137,8 +1137,7 @@ function updateSponsorMask(val) {
           <!-- Dynamic: Customized Water Bottles -->
           <div id="fields-custom" class="hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Event Type *</label><select id="q-event-type" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Event Type</option><option value="Wedding">Wedding</option><option value="Hotel">Hotel</option><option value="Restaurant">Restaurant</option><option value="Cafe">Cafe</option><option value="Corporate Event">Corporate Event</option><option value="Conference">Conference</option><option value="Exhibition">Exhibition</option><option value="Sports Event">Sports Event</option><option value="College Fest">College Fest</option><option value="Product Launch">Product Launch</option><option value="Other">Other</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Size *</label><select id="q-bottle-size" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Size</option><option value="250 ml">250 ml</option><option value="500 ml">500 ml</option><option value="750 ml">750 ml</option><option value="1 Litre">1 Litre</option><option value="Not Sure">Not Sure</option></select></div>
+              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Size *</label><select id="q-bottle-size" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Size</option><option value="250 ml">250 ml</option><option value="500 ml">500 ml</option><option value="1 Litre">1 Litre</option><option value="Not Sure">Not Sure</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Label Design Requirement *</label><select id="q-design-req" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="I Have My Own Design">I Have My Own Design</option><option value="Need ClairMaunt Design Team">Need ClairMaunt Design Team</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">QR Code Integration *</label><select id="q-qr" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Option</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Delivery Date *</label><input id="q-delivery-date" type="date" class="w-full px-4 py-3 text-sm text-white placeholder-white/30" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"/></div>
@@ -1151,7 +1150,6 @@ function updateSponsorMask(val) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Campaign Objective *</label><select id="q-campaign-obj" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Objective</option><option value="Brand Awareness">Brand Awareness</option><option value="Lead Generation">Lead Generation</option><option value="Product Launch">Product Launch</option><option value="Restaurant Promotion">Restaurant Promotion</option><option value="Website Traffic">Website Traffic</option><option value="QR Campaign">QR Campaign</option><option value="Event Sponsorship">Event Sponsorship</option><option value="Other">Other</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Preferred Event Type *</label><select id="q-ad-event" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Preference</option><option value="Sports Tournament">Sports Tournament</option><option value="College Fest">College Fest</option><option value="Marathon">Marathon</option><option value="Corporate Event">Corporate Event</option><option value="Conference">Conference</option><option value="Exhibition">Exhibition</option><option value="Any Suitable Event">Any Suitable Event</option></select></div>
-              <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Campaign Duration *</label><select id="q-duration" class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Duration</option><option value="One Event">One Event</option><option value="One Month">One Month</option><option value="Three Months">Three Months</option><option value="Six Months">Six Months</option><option value="Custom">Custom</option></select></div>
               <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Target Audience</label><textarea id="q-audience" rows="1" placeholder="e.g. College students, IT professionals" class="w-full px-4 py-3 text-sm text-white placeholder-white/30 resize-none" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)"></textarea></div>
             </div>
           </div>
@@ -1166,7 +1164,7 @@ function updateSponsorMask(val) {
         <div id="step-3" class="form-step hidden">
           <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 3: Quantity & Budget</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
-            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Quantity *</label><select id="q-qty-range" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Quantity</option><option value="100 - 500">100 – 500</option><option value="500 - 1,000">500 – 1,000</option><option value="1,000 - 5,000">1,000 – 5,000</option><option value="5,000 - 10,000">5,000 – 10,000</option><option value="10,000+">10,000+</option></select></div>
+            <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Bottle Quantity *</label><select id="q-qty-range" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Quantity</option><option value="500 - 1,000">500 – 1,000</option><option value="1,000 - 5,000">1,000 – 5,000</option><option value="5,000 - 10,000">5,000 – 10,000</option><option value="10,000+">10,000+</option></select></div>
             <div><label class="block text-white/55 text-[10px] uppercase tracking-widest mb-2">Estimated Budget *</label><select id="q-budget" required class="w-full px-4 py-3 text-sm text-white" style="background:#1a1a3e;border:1px solid rgba(255,255,255,.12)"><option value="">Select Budget</option><option value="Under ₹5,000">Under ₹5,000</option><option value="₹5,000 - ₹15,000">₹5,000 – ₹15,000</option><option value="₹15,000 - ₹50,000">₹15,000 – ₹50,000</option><option value="₹50,000 - ₹1,00,000">₹50,000 – ₹1,00,000</option><option value="₹1,00,000+">₹1,00,000+</option></select></div>
           </div>
           <div class="mb-6">
@@ -1444,21 +1442,19 @@ async function submitForm(e){
     state: document.getElementById('q-state').value,
     industry: document.getElementById('q-industry').value,
     service_type: document.querySelector('input[name="q_service"]:checked')?.value || null,
-    event_type: document.getElementById('q-event-type').value || null,
-    bottle_size: document.getElementById('q-bottle-size').value || null,
-    design_req: document.getElementById('q-design-req').value || null,
-    qr_req: document.getElementById('q-qr').value || null,
-    delivery_date: document.getElementById('q-delivery-date').value || null,
-    delivery_loc: document.getElementById('q-delivery-loc').value || null,
-    campaign_obj: document.getElementById('q-campaign-obj').value || null,
-    ad_event: document.getElementById('q-ad-event').value || null,
-    duration: document.getElementById('q-duration').value || null,
-    audience: document.getElementById('q-audience').value || null,
-    quantity: document.getElementById('q-qty-range').value || null,
-    budget: document.getElementById('q-budget').value || null,
+    bottle_size: document.getElementById('q-bottle-size')?.value || null,
+    design_req: document.getElementById('q-design-req')?.value || null,
+    qr_req: document.getElementById('q-qr')?.value || null,
+    delivery_date: document.getElementById('q-delivery-date')?.value || null,
+    delivery_loc: document.getElementById('q-delivery-loc')?.value || null,
+    campaign_obj: document.getElementById('q-campaign-obj')?.value || null,
+    ad_event: document.getElementById('q-ad-event')?.value || null,
+    audience: document.getElementById('q-audience')?.value || null,
+    quantity: document.getElementById('q-qty-range')?.value || null,
+    budget: document.getElementById('q-budget')?.value || null,
     frequency: document.querySelector('input[name="q_freq"]:checked')?.value || null,
-    source: document.getElementById('q-source').value || null,
-    details: document.getElementById('q-notes').value || null
+    source: document.getElementById('q-source')?.value || null,
+    details: document.getElementById('q-notes')?.value || null
   };
   
   let score = 0;
