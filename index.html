@@ -1700,59 +1700,53 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
               <div class="mb-6">
                 <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">What service are you interested in? *</label>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <!-- Premium Selection Card 1 -->
+                  <!-- Rectangular Card 1: Custom Bottles -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Customized Water Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
-                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
-                        <span class="material-icons-outlined text-2xl">water_drop</span>
+                    <div class="selection-card rounded-xl flex flex-row items-center gap-4 p-5" style="border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);">
+                      <div class="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center text-gold" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                        <span class="material-icons-outlined" style="font-size:22px;">water_drop</span>
                       </div>
-                      <div>
-                        <h4 class="font-heading font-bold text-white text-base">Custom Bottles</h4>
-                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Branded Water</p>
+                      <div class="flex-1 min-w-0">
+                        <h4 class="font-heading font-bold text-white text-sm leading-tight">Custom Bottles</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-0.5">Branded Water</p>
                       </div>
-                      <div class="check-badge">
-                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M1 4.5L3.5 7L9 1" />
-                        </svg>
+                      <div class="check-badge flex-shrink-0">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4.5L3.5 7L9 1"/></svg>
                       </div>
                     </div>
                   </label>
                   
-                  <!-- Premium Selection Card 2 -->
+                  <!-- Rectangular Card 2: Bottle Ads -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Advertise On Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
-                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
-                        <span class="material-icons-outlined text-2xl">campaign</span>
+                    <div class="selection-card rounded-xl flex flex-row items-center gap-4 p-5" style="border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);">
+                      <div class="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center text-gold" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                        <span class="material-icons-outlined" style="font-size:22px;">campaign</span>
                       </div>
-                      <div>
-                        <h4 class="font-heading font-bold text-white text-base">Bottle Ads</h4>
-                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Advertise program</p>
+                      <div class="flex-1 min-w-0">
+                        <h4 class="font-heading font-bold text-white text-sm leading-tight">Bottle Ads</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-0.5">Advertise program</p>
                       </div>
-                      <div class="check-badge">
-                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M1 4.5L3.5 7L9 1" />
-                        </svg>
+                      <div class="check-badge flex-shrink-0">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4.5L3.5 7L9 1"/></svg>
                       </div>
                     </div>
                   </label>
                   
-                  <!-- Premium Selection Card 3 -->
+                  <!-- Rectangular Card 3: Both Services -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Both Services" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
-                      <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
-                        <span class="material-icons-outlined text-2xl">layers</span>
+                    <div class="selection-card rounded-xl flex flex-row items-center gap-4 p-5" style="border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);">
+                      <div class="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center text-gold" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                        <span class="material-icons-outlined" style="font-size:22px;">layers</span>
                       </div>
-                      <div>
-                        <h4 class="font-heading font-bold text-white text-base">Both Services</h4>
-                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Full Partnership</p>
+                      <div class="flex-1 min-w-0">
+                        <h4 class="font-heading font-bold text-white text-sm leading-tight">Both Services</h4>
+                        <p class="text-white/45 text-[10px] uppercase tracking-wider mt-0.5">Full Partnership</p>
                       </div>
-                      <div class="check-badge">
-                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M1 4.5L3.5 7L9 1" />
-                        </svg>
+                      <div class="check-badge flex-shrink-0">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4.5L3.5 7L9 1"/></svg>
                       </div>
                     </div>
                   </label>
