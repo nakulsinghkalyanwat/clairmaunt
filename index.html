@@ -67,7 +67,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Nav Redesign: Floating Curved Rectangle with Optimized Size */
 .nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:50;padding:0.8rem 1.5rem;pointer-events:none;transition:padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
 .nav-wrapper.scrolled{padding:0.4rem 1.5rem}
-#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:80rem;margin:0 auto}
+#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:62rem;margin:0 auto}
 #nav.scrolled{background:rgba(14,14,44,0.92);border-color:rgba(41,41,204,0.25);box-shadow:0 20px 40px -10px rgba(41,41,204,0.2), 0 0 0 1px rgba(41, 41, 204, 0.15)}
 /* Page scroll progress bar */
 #page-progress {
@@ -1235,8 +1235,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
 <!-- ── NAVIGATION ── -->
 <div class="nav-wrapper" id="nav-wrap">
   <nav id="nav">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
+    <div class="px-5 lg:px-6">
+      <div class="flex justify-between items-center h-14">
 
         <!-- Logo -->
         <a href="#" class="logo-container flex items-center gap-3 flex-shrink-0">
@@ -1256,7 +1256,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
         </a>
 
         <!-- Desktop links -->
-        <div class="hidden lg:flex items-center gap-8 relative" id="desktop-links" style="position: relative;">
+        <div class="hidden lg:flex items-center gap-5 relative" id="desktop-links" style="position: relative;">
           <div id="nav-pill"></div>
           <a href="#why-us" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Why Us</a>
           <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Industries</a>
