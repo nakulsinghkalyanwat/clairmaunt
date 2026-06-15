@@ -67,7 +67,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Nav Redesign: Floating Curved Rectangle with Optimized Size */
 .nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:50;padding:0.8rem 1.5rem;pointer-events:none;transition:padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
 .nav-wrapper.scrolled{padding:0.4rem 1.5rem}
-#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:72rem;margin:0 auto}
+#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:78rem;margin:0 auto}
 #nav.scrolled{background:rgba(14,14,44,0.92);border-color:rgba(41,41,204,0.25);box-shadow:0 20px 40px -10px rgba(41,41,204,0.2), 0 0 0 1px rgba(41, 41, 204, 0.15)}
 /* Page scroll progress bar */
 #page-progress {
@@ -188,6 +188,13 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Navigation Quote Button */
 .btn-nav-quote {
   border-radius: 10px !important;
+  padding: 0.45rem 0.85rem !important;
+  font-size: 0.62rem !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  white-space: normal !important;
+  width: 52px;
+  letter-spacing: 0.08em !important;
 }
 
 /* Section label */
@@ -1262,8 +1269,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Industries</a>
           <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Customization</a>
           <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Advertise</a>
-          <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Brand Experience</a>
-          <a href="#quote" class="btn btn-blue btn-shimmer btn-nav-quote ml-2">Get a Quote</a>
+          <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3 whitespace-nowrap">Brand Experience</a>
+          <a href="#quote" class="btn btn-blue btn-shimmer btn-nav-quote ml-2">Get a<br>Quote</a>
         </div>
 
         <!-- Hamburger -->
@@ -3096,12 +3103,12 @@ function updateProgress() {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  if (pageProgress) {
-    pageProgress.style.width = pct + '%';
-    // Pin bar just below the nav's current bottom edge
-    if (nav) {
-      pageProgress.style.top = nav.getBoundingClientRect().bottom + 'px';
-    }
+
+  if (pageProgress && nav) {
+    const navRect = nav.getBoundingClientRect();
+    pageProgress.style.top = navRect.bottom + 'px';
+    pageProgress.style.left = navRect.left + 'px';
+    pageProgress.style.width = ((pct / 100) * navRect.width) + 'px';
   }
 }
 
