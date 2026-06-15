@@ -125,6 +125,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .btn-form-action::before { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%); background-size: 300% auto; animation: btn-shimmer 2.5s linear infinite; pointer-events: none; }
 .btn-form-action:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(41, 41, 204, 0.55), 0 4px 12px rgba(201, 170, 113, 0.35), 0 0 0 1px rgba(201, 170, 113, 0.25); color: #fff; }
 .btn-form-action:active { transform: translateY(-1px) scale(0.99); }
+.btn-form-secondary { border: 1.5px solid rgba(201, 170, 113, 0.4) !important; color: #C9AA71 !important; background: rgba(255, 255, 255, 0.02) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 10px !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.btn-form-secondary:hover { background: rgba(201, 170, 113, 0.08) !important; border-color: #C9AA71 !important; color: #e8c97a !important; transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 20px rgba(201, 170, 113, 0.2), 0 4px 10px rgba(0, 0, 0, 0.25); }
+.btn-form-secondary:active { transform: translateY(-1px) scale(0.99); }
 .btn-outline-w{border:1.5px solid #fff;color:#fff;background:transparent}.btn-outline-w:hover{background:#fff;color:#2929CC}
 .btn-outline-b{border:1.5px solid #2929CC;color:#2929CC;background:transparent}.btn-outline-b:hover{background:#2929CC;color:#fff}
 
@@ -2812,9 +2815,9 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
               <p class="text-white/45 font-light text-sm max-w-md mx-auto mb-10">Our team will review your requirements and respond within 24 hours.</p>
               
               <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="window.scrollTo(0,0); location.reload();" class="btn btn-outline-w">Return Home</button>
-                <a href="#customization" class="btn btn-blue">Explore Services</a>
-                <button onclick="resetQuotationForm()" class="btn btn-outline-w">Request Another Quote</button>
+                <button onclick="window.scrollTo(0,0); location.reload();" class="btn btn-form-secondary">Return Home</button>
+                <a href="#customization" class="btn btn-form-action">Explore Services</a>
+                <button onclick="resetQuotationForm()" class="btn btn-form-secondary">Request Another Quote</button>
               </div>
             </div>
           </div>
