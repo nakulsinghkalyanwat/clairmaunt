@@ -951,6 +951,46 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   box-shadow: 0 8px 30px rgba(41, 41, 204, 0.6), 0 4px 15px rgba(201, 170, 113, 0.4), 0 0 0 1px rgba(201, 170, 113, 0.3);
   color: #ffffff !important;
 }
+
+/* Brand Journey Icons Styling */
+.journey-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #EEF0FF 100%);
+  border: 1.5px solid rgba(41, 41, 204, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(41, 41, 204, 0.08), inset 0 1px 0 #ffffff;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.journey-icon-wrap .material-icons-outlined {
+  color: #2929CC;
+  font-size: 1.5rem;
+  transition: all 0.4s ease;
+}
+.journey-icon-wrap:hover {
+  transform: translateY(-4px);
+  border-color: #2929CC;
+  box-shadow: 0 12px 28px rgba(41, 41, 204, 0.16);
+}
+.journey-icon-wrap:hover .material-icons-outlined {
+  transform: scale(1.1);
+}
+
+.journey-icon-wrap.gold-theme {
+  background: linear-gradient(135deg, #ffffff 0%, #FDF6E7 100%);
+  border-color: rgba(201, 170, 113, 0.35);
+  box-shadow: 0 8px 20px rgba(201, 170, 113, 0.12), inset 0 1px 0 #ffffff;
+}
+.journey-icon-wrap.gold-theme .material-icons-outlined {
+  color: #C9AA71;
+}
+.journey-icon-wrap.gold-theme:hover {
+  border-color: #C9AA71;
+  box-shadow: 0 12px 28px rgba(201, 170, 113, 0.22);
+}
 </style>
 </head>
 <body>
@@ -1979,23 +2019,23 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
         <div class="md:hidden absolute top-0 left-1/2 w-[2px] h-full bg-gray-200 -z-10 -translate-x-1/2"></div>
         
         <div class="journey-step flex flex-col items-center gap-3 text-center">
-          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">verified</span></div>
+          <div class="journey-icon-wrap"><span class="material-icons-outlined">verified</span></div>
           <div class="font-semibold text-sm bg-white px-2 py-1">Your Brand</div>
         </div>
         <div class="journey-step flex flex-col items-center gap-3 text-center">
-          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">palette</span></div>
+          <div class="journey-icon-wrap"><span class="material-icons-outlined">palette</span></div>
           <div class="font-semibold text-sm bg-white px-2 py-1">Custom Design</div>
         </div>
         <div class="journey-step flex flex-col items-center gap-3 text-center">
-          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">water_drop</span></div>
+          <div class="journey-icon-wrap"><span class="material-icons-outlined">water_drop</span></div>
           <div class="font-semibold text-sm bg-white px-2 py-1">Premium Bottle</div>
         </div>
         <div class="journey-step flex flex-col items-center gap-3 text-center">
-          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-royal text-2xl">qr_code_scanner</span></div>
+          <div class="journey-icon-wrap"><span class="material-icons-outlined">qr_code_scanner</span></div>
           <div class="font-semibold text-sm bg-white px-2 py-1">Customer Scan</div>
         </div>
         <div class="journey-step flex flex-col items-center gap-3 text-center">
-          <div class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg"><span class="material-icons-outlined text-gold text-2xl">star</span></div>
+          <div class="journey-icon-wrap gold-theme"><span class="material-icons-outlined">star</span></div>
           <div class="font-semibold text-sm bg-white px-2 py-1">Brand Recall</div>
         </div>
       </div>
