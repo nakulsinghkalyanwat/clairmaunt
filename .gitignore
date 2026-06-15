@@ -16,3 +16,8 @@ desktop.ini
 
 # Logs
 *.log
+
+# Local build artifacts
+dist/
+package-lock.json
+
