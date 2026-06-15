@@ -138,12 +138,23 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .f-card:hover{border-color:rgba(41,41,204,.3);transform:translateY(-5px);box-shadow:0 24px 48px rgba(41,41,204,.08)}
 
 /* Industry card */
-.ind-card{position:relative;overflow:hidden;cursor:pointer;height:220px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-.ind-card:hover{transform:translateY(-6px)}
-.ind-card > div:not(.ind-overlay){transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
-.ind-card:hover > div:not(.ind-overlay){opacity:0 !important;transform:scale(0.95) !important}
-.ind-overlay{position:absolute;inset:0;opacity:0;z-index:20;transition:opacity .4s ease;display:flex;align-items:flex-end;padding:1.5rem;background:linear-gradient(to top,rgba(41,41,204,.95),rgba(41,41,204,.65));pointer-events:none}
-.ind-card:hover .ind-overlay{opacity:1;pointer-events:auto}
+.ind-card { position:relative; overflow:hidden; cursor:pointer; height:240px; border-radius:20px; transition:transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease; border:1px solid rgba(255,255,255,0.06); }
+.ind-card:hover { transform:translateY(-8px); box-shadow:0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,170,113,0.3); }
+.ind-card-bg { position:absolute; inset:0; transition:transform .5s cubic-bezier(.16,1,.3,1); }
+.ind-card:hover .ind-card-bg { transform:scale(1.06); }
+.ind-card-front { position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem; text-align:center; transition:opacity .4s ease, transform .4s ease; }
+.ind-card:hover .ind-card-front { opacity:0; transform:scale(0.92); pointer-events:none; }
+.ind-card-icon-orb { width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; margin-bottom:0.875rem; box-shadow:0 0 0 8px rgba(255,255,255,0.04); transition:box-shadow .4s ease; }
+.ind-card:hover .ind-card-icon-orb { box-shadow:0 0 0 12px rgba(201,170,113,0.1); }
+.ind-card-tag { display:inline-block; font-size:9px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(201,170,113,0.9); border:1px solid rgba(201,170,113,0.3); border-radius:20px; padding:2px 10px; margin-bottom:0.5rem; }
+.ind-card-bar { position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#2929CC,#C9AA71); opacity:0; transition:opacity .4s ease; }
+.ind-card:hover .ind-card-bar { opacity:1; }
+.ind-overlay { position:absolute; inset:0; opacity:0; z-index:20; transition:opacity .4s ease; display:flex; align-items:flex-end; padding:1.5rem; background:linear-gradient(to top, rgba(14,14,44,0.97) 0%, rgba(41,41,204,0.75) 60%, transparent 100%); pointer-events:none; }
+.ind-card:hover .ind-overlay { opacity:1; pointer-events:auto; }
+.ind-overlay-inner { width:100%; }
+.ind-overlay-divider { width:28px; height:2px; background:linear-gradient(90deg,#C9AA71,#2929CC); border-radius:2px; margin-bottom:0.6rem; }
+.ind-overlay h3 { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:0.35rem; line-height:1.3; }
+.ind-overlay p { color:rgba(255,255,255,0.75); font-size:0.78rem; font-weight:300; line-height:1.5; }
 
 /* Tab buttons */
 .tab-btn{padding:.7rem 1.5rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;transition:all .3s ease}
@@ -1085,14 +1096,135 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">Industries<br/><em class="text-grad not-italic">We Serve</em></h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-      <div class="ind-card reveal d1" style="background:#0E0E2C"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">celebration</span><h3 class="font-heading text-lg font-bold text-white">Weddings</h3><p class="text-white/45 text-xs mt-1">Personalized bridal designs</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Weddings</h3><p class="text-white/80 text-sm font-light mt-1">Custom bridal labels, wedding album QR codes, floral designs</p></div></div></div>
-      <div class="ind-card reveal d2" style="background:#111132"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">hotel</span><h3 class="font-heading text-lg font-bold text-white">Hotels &amp; Resorts</h3><p class="text-white/45 text-xs mt-1">Signature brand identity</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Hotels &amp; Resorts</h3><p class="text-white/80 text-sm font-light mt-1">Branded in-room water, dining menus, wellness centers</p></div></div></div>
-      <div class="ind-card reveal d3" style="background:#0f0f2b"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">restaurant</span><h3 class="font-heading text-lg font-bold text-white">Restaurants</h3><p class="text-white/45 text-xs mt-1">Menu QR &amp; brand storytelling</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Restaurants &amp; Cafes</h3><p class="text-white/80 text-sm font-light mt-1">Digital menus, loyalty QR codes, signature brand water</p></div></div></div>
-      <div class="ind-card reveal d4" style="background:#0d0d26"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">business_center</span><h3 class="font-heading text-lg font-bold text-white">Corporate Events</h3><p class="text-white/45 text-xs mt-1">Professional brand touchpoints</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Corporate Events</h3><p class="text-white/80 text-sm font-light mt-1">Brand launches, investor summits, award ceremonies</p></div></div></div>
-      <div class="ind-card reveal d1" style="background:#111132"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">sports</span><h3 class="font-heading text-lg font-bold text-white">Sports Events</h3><p class="text-white/45 text-xs mt-1">Sponsor branding &amp; hydration</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Sports Tournaments</h3><p class="text-white/80 text-sm font-light mt-1">Sponsor logos, team branding, energy partnerships</p></div></div></div>
-      <div class="ind-card reveal d2" style="background:#0E0E2C"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">groups</span><h3 class="font-heading text-lg font-bold text-white">Conferences</h3><p class="text-white/45 text-xs mt-1">Professional delegate experience</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Conferences</h3><p class="text-white/80 text-sm font-light mt-1">Speaker events, delegate packs, sponsor visibility</p></div></div></div>
-      <div class="ind-card reveal d3" style="background:#0f0f2b"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">campaign</span><h3 class="font-heading text-lg font-bold text-white">Exhibitions</h3><p class="text-white/45 text-xs mt-1">Premium brand activation</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Exhibitions &amp; PR</h3><p class="text-white/80 text-sm font-light mt-1">Trade fairs, product launches, media events, PR activations</p></div></div></div>
-      <div class="ind-card reveal d4" style="background:#0d0d26"><div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center"><span class="material-icons-outlined text-white text-4xl mb-3" style="opacity:.85">school</span><h3 class="font-heading text-lg font-bold text-white">Institutions</h3><p class="text-white/45 text-xs mt-1">Academic &amp; community events</p></div><div class="ind-overlay"><div><h3 class="font-heading text-lg font-bold text-white">Educational Institutions</h3><p class="text-white/80 text-sm font-light mt-1">College fests, graduation events, institutional branding</p></div></div></div>
+
+      <!-- 1: Weddings -->
+      <div class="ind-card reveal d1">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#1a0a2e 0%,#2929CC 60%,#1f1048 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">celebration</span></div>
+          <span class="ind-card-tag">Weddings</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Personalized<br/>Bridal Designs</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Weddings</h3>
+          <p>Custom bridal labels, wedding album QR codes, floral designs</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 2: Hotels & Resorts -->
+      <div class="ind-card reveal d2">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#0a1a2e 0%,#1a3a5c 55%,#0e1e35 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">hotel</span></div>
+          <span class="ind-card-tag">Hotels & Resorts</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Signature<br/>Brand Identity</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Hotels &amp; Resorts</h3>
+          <p>Branded in-room water, dining menus, wellness centers</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 3: Restaurants -->
+      <div class="ind-card reveal d3">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#1a0e0a 0%,#3a1a0e 50%,#2929CC 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">restaurant</span></div>
+          <span class="ind-card-tag">Restaurants</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Menu QR &<br/>Brand Storytelling</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Restaurants &amp; Cafes</h3>
+          <p>Digital menus, loyalty QR codes, signature brand water</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 4: Corporate Events -->
+      <div class="ind-card reveal d4">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#0e1a0e 0%,#1a3a1a 50%,#0d260d 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">business_center</span></div>
+          <span class="ind-card-tag">Corporate</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Professional<br/>Brand Touchpoints</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Corporate Events</h3>
+          <p>Brand launches, investor summits, award ceremonies</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 5: Sports Events -->
+      <div class="ind-card reveal d1">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#1a1a0a 0%,#3a2e00 55%,#2929CC 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">sports</span></div>
+          <span class="ind-card-tag">Sports</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Sponsor Branding<br/>&amp; Hydration</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Sports Tournaments</h3>
+          <p>Sponsor logos, team branding, energy partnerships</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 6: Conferences -->
+      <div class="ind-card reveal d2">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#0e0e2c 0%,#2929CC 55%,#1a0a2e 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">groups</span></div>
+          <span class="ind-card-tag">Conferences</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Professional<br/>Delegate Experience</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Conferences</h3>
+          <p>Speaker events, delegate packs, sponsor visibility</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 7: Exhibitions -->
+      <div class="ind-card reveal d3">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#1a0a0e 0%,#4a1a2a 50%,#2929CC 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">campaign</span></div>
+          <span class="ind-card-tag">Exhibitions</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Premium<br/>Brand Activation</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Exhibitions &amp; PR</h3>
+          <p>Trade fairs, product launches, media events, PR activations</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
+      <!-- 8: Institutions -->
+      <div class="ind-card reveal d4">
+        <div class="ind-card-bg" style="background:linear-gradient(145deg,#0a0e1a 0%,#1a2a4a 50%,#0e1830 100%)"></div>
+        <div class="ind-card-front">
+          <div class="ind-card-icon-orb"><span class="material-icons-outlined text-white" style="font-size:28px;">school</span></div>
+          <span class="ind-card-tag">Institutions</span>
+          <h3 class="font-heading text-base font-bold text-white leading-tight">Academic &<br/>Community Events</h3>
+        </div>
+        <div class="ind-overlay"><div class="ind-overlay-inner">
+          <div class="ind-overlay-divider"></div>
+          <h3>Educational Institutions</h3>
+          <p>College fests, graduation events, institutional branding</p>
+        </div></div>
+        <div class="ind-card-bar"></div>
+      </div>
+
     </div>
   </div>
 </section>
