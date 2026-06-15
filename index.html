@@ -124,6 +124,12 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .btn-outline-w{border:1.5px solid #fff;color:#fff;background:transparent}.btn-outline-w:hover{background:#fff;color:#2929CC}
 .btn-outline-b{border:1.5px solid #2929CC;color:#2929CC;background:transparent}.btn-outline-b:hover{background:#2929CC;color:#fff}
 
+/* Wedding Premium Button */
+@keyframes btn-shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+.btn-wedding { position:relative; overflow:hidden; border:none; color:#fff; font-weight:700; letter-spacing:.14em; background: linear-gradient(105deg, #1a1060 0%, #2929CC 30%, #C9AA71 55%, #e8c97a 65%, #2929CC 80%, #1a1060 100%); background-size:250% auto; animation:btn-shimmer 4s linear infinite; box-shadow: 0 4px 20px rgba(201,170,113,0.35), 0 2px 8px rgba(41,41,204,0.3); border-radius: inherit; transition: box-shadow 0.3s ease, transform 0.3s ease; }
+.btn-wedding::before { content:''; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%); background-size:300% auto; animation:btn-shimmer 2.5s linear infinite; pointer-events:none; }
+.btn-wedding:hover { transform:translateY(-3px); box-shadow: 0 8px 32px rgba(201,170,113,0.55), 0 4px 16px rgba(41,41,204,0.4), 0 0 0 1px rgba(201,170,113,0.4); color:#fff; }
+
 /* Section label */
 .s-label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#2929CC;margin-bottom:1.25rem}
 
@@ -1044,7 +1050,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Personalized couple's monogram</li>
           <li class="flex items-center gap-3 text-gray-600"><span class="material-icons text-royal text-sm">check_circle</span>Premium matte or gloss finish</li>
         </ul>
-        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-outline-b w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Wedding Bottles</a></div>
+        <div class="text-center lg:text-left"><a href="#quote" class="btn btn-wedding w-full sm:w-auto flex items-center justify-center min-h-[48px]">Order Wedding Bottles</a></div>
       </div>
       <div class="flex-1 flex justify-center reveal d2">
         <svg width="180" height="440" viewBox="0 0 200 480" fill="none" style="filter:drop-shadow(0 20px 40px rgba(201,170,113,.18))">
