@@ -130,6 +130,33 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .btn-wedding::before { content:''; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%); background-size:300% auto; animation:btn-shimmer 2.5s linear infinite; pointer-events:none; }
 .btn-wedding:hover { transform:translateY(-3px); box-shadow: 0 8px 32px rgba(201,170,113,0.55), 0 4px 16px rgba(41,41,204,0.4), 0 0 0 1px rgba(201,170,113,0.4); color:#fff; }
 
+/* Hero Premium Buttons */
+.btn-hero-quote {
+  background: linear-gradient(135deg, #2929CC 0%, #1a1a99 100%);
+  color: #fff;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 15px rgba(41, 41, 204, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.btn-hero-quote:hover {
+  background: linear-gradient(135deg, #3333e6 0%, #2222b3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(41, 41, 204, 0.45), 0 0 0 1px rgba(201, 170, 113, 0.2);
+  color: #fff;
+}
+.btn-hero-explore {
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  color: #fff;
+  background: transparent;
+  border-radius: 30px !important;
+}
+.btn-hero-explore:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #C9AA71 !important;
+  color: #C9AA71 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 170, 113, 0.15);
+}
+
 /* Section label */
 .s-label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#2929CC;margin-bottom:1.25rem}
 
@@ -867,8 +894,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           Transform every bottle into a powerful brand experience. Premium customization for weddings, hotels, corporate events &amp; beyond.
         </p>
         <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 reveal d3 justify-center lg:justify-start">
-          <a href="#quote" class="btn btn-blue w-full sm:w-auto min-h-[48px] flex items-center justify-center">Get a Quote</a>
-          <a href="#customization" class="btn btn-outline-w w-full sm:w-auto min-h-[48px] flex items-center justify-center">Explore Designs</a>
+          <a href="#quote" class="btn btn-hero-quote w-full sm:w-auto min-h-[48px] flex items-center justify-center">Get a Quote</a>
+          <a href="#customization" class="btn btn-hero-explore w-full sm:w-auto min-h-[48px] flex items-center justify-center">Explore Designs</a>
         </div>
         <!-- Stats -->
         <div class="grid grid-cols-3 sm:flex sm:flex-row gap-4 sm:gap-10 mt-12 pt-8 border-t border-white/10 reveal d4 justify-center lg:justify-start w-full">
