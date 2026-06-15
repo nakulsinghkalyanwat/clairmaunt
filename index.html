@@ -735,17 +735,37 @@ html { scroll-padding-top: 80px; }
 #q-form input[type="text"],
 #q-form input[type="email"],
 #q-form input[type="tel"],
-#q-form select,
 #q-form textarea {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   border-radius: 10px !important;
 }
+#q-form select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  border-radius: 12px !important;
+  background: rgba(26, 26, 62, 0.85) url("data:image/svg+xml;utf8,<svg fill='%23C9AA71' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 14px center / 22px !important;
+  padding-right: 42px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+#q-form select:hover {
+  border-color: rgba(201, 170, 113, 0.35) !important;
+  background-color: rgba(26, 26, 62, 0.95) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
 #q-form input[type="text"]:focus,
 #q-form input[type="email"]:focus,
 #q-form input[type="tel"]:focus,
-#q-form select:focus,
 #q-form textarea:focus {
   background: rgba(255, 255, 255, 0.08) !important;
+  border-color: #C9AA71 !important;
+  box-shadow: 0 0 15px rgba(201, 170, 113, 0.22), inset 0 2px 4px rgba(0,0,0,0.15) !important;
+  transform: translateY(-1px);
+}
+#q-form select:focus {
+  background-color: rgba(26, 26, 62, 0.95) !important;
   border-color: #C9AA71 !important;
   box-shadow: 0 0 15px rgba(201, 170, 113, 0.22), inset 0 2px 4px rgba(0,0,0,0.15) !important;
   transform: translateY(-1px);
