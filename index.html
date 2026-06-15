@@ -3006,6 +3006,33 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   </div>
 </div>
 
+<!-- WhatsApp Floating Action Button -->
+<a href="https://wa.me/918824967809" target="_blank" rel="noopener noreferrer" 
+   class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-[#128C7E] to-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group focus:outline-none wa-breath" 
+   aria-label="Chat on WhatsApp">
+  <!-- WhatsApp SVG Icon -->
+  <svg class="w-7 h-7 filter drop-shadow-md" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.437.002 9.861-4.416 9.863-9.864.001-2.639-1.024-5.12-2.885-6.983C16.388 1.874 13.907.85 11.267.85c-5.44.004-9.863 4.42-9.866 9.869-.001 1.52.4 3.004 1.16 4.31l-.993 3.627 3.71-.973c1.374.807 2.804 1.203 4.416 1.203zm10.457-7.79c-.29-.145-1.713-.847-1.978-.943-.264-.097-.457-.145-.65.145-.19.29-.738.943-.906 1.137-.168.19-.335.213-.625.068-1.588-.79-2.73-1.37-3.83-3.256-.29-.5-.625-.568-.906-.568-.266 0-.53.011-.79.03-.263.02-.693.118-1.05.5-.357.387-1.365 1.336-1.365 3.256 0 1.92 1.397 3.774 1.587 4.032.19.26 2.748 4.2 6.657 5.892.93.4 1.657.64 2.224.82.937.3 1.79.257 2.464.156.753-.112 2.316-.948 2.64-1.866.326-.918.326-1.706.23-1.866-.098-.16-.358-.258-.65-.403z"/>
+  </svg>
+  
+  <!-- Premium luxury glassmorphic tooltip on hover -->
+  <span class="absolute right-16 scale-0 transition-all duration-300 origin-right group-hover:scale-100 bg-[#0E0E2C]/90 border border-[#C9AA71]/40 text-white text-xs font-semibold py-2 px-4 rounded-xl shadow-2xl whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none flex items-center gap-1.5 backdrop-blur-md">
+    <span class="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></span>
+    Chat on WhatsApp
+  </span>
+</a>
+
+<style>
+@keyframes wa-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.wa-breath {
+  animation: wa-pulse 3s infinite ease-in-out;
+}
+</style>
+
 <!-- ── SCRIPTS ── -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
