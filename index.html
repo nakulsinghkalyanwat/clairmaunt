@@ -982,6 +982,21 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   </div>
 </div>
 
+<!-- Premium Why Card Styles -->
+<style>
+.why-card { position:relative; background:#fff; border:1px solid rgba(41,41,204,0.09); border-radius:20px; padding:2rem 1.75rem 1.75rem; overflow:hidden; transition:all 0.35s cubic-bezier(.16,1,.3,1); }
+.why-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#2929CC,#C9AA71); border-radius:20px 20px 0 0; opacity:0; transition:opacity 0.35s ease; }
+.why-card:hover { border-color:rgba(41,41,204,0.22); transform:translateY(-6px); box-shadow:0 20px 50px rgba(41,41,204,0.1), 0 4px 16px rgba(41,41,204,0.06); }
+.why-card:hover::before { opacity:1; }
+.why-card-num { position:absolute; top:1.25rem; right:1.5rem; font-size:2.5rem; font-weight:800; color:rgba(41,41,204,0.05); font-family:'Playfair Display',serif; line-height:1; }
+.why-card-icon { width:60px; height:60px; border-radius:16px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; background:linear-gradient(135deg,#EEF0FF,#d5d7fc); border:1px solid rgba(41,41,204,0.15); box-shadow:0 6px 18px rgba(41,41,204,0.14); transition:box-shadow 0.35s ease, transform 0.35s ease; }
+.why-card:hover .why-card-icon { box-shadow:0 10px 28px rgba(41,41,204,0.25); transform:scale(1.08) rotate(-3deg); }
+.why-card h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:#1a1a2e; margin-bottom:0.6rem; line-height:1.3; }
+.why-card p { color:#6b7280; font-weight:300; font-size:0.875rem; line-height:1.65; }
+.why-card-divider { width:32px; height:2px; background:linear-gradient(90deg,#2929CC,#C9AA71); border-radius:2px; margin-bottom:0.85rem; opacity:0.7; transition:width 0.35s ease; }
+.why-card:hover .why-card-divider { width:52px; opacity:1; }
+</style>
+
 <!-- ── WHY CLAIRMAUNT ── -->
 <section id="why-us" class="py-28 bg-white">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -991,12 +1006,73 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <p class="text-gray-500 mt-5 font-light text-lg">Unparalleled elegance and precision — turning every bottle into a premium branding medium.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="f-card reveal d1"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">workspace_premium</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">Premium Packaging</h3><p class="text-gray-500 font-light leading-relaxed text-sm">High-end bespoke packaging that exudes luxury and exclusivity at every brand touchpoint.</p></div>
-      <div class="f-card reveal d2"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">design_services</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">Custom Label Design</h3><p class="text-gray-500 font-light leading-relaxed text-sm">Expert designers create stunning personalized labels capturing your brand, event theme, or wedding design.</p></div>
-      <div class="f-card reveal d3"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">qr_code_scanner</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">QR Code Integration</h3><p class="text-gray-500 font-light leading-relaxed text-sm">Connect offline to online — menus, websites, social media, event albums at a simple scan.</p></div>
-      <div class="f-card reveal d1"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">local_shipping</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">Fast Delivery</h3><p class="text-gray-500 font-light leading-relaxed text-sm">Efficient production and precision logistics ensure your bottles arrive exactly when your event demands.</p></div>
-      <div class="f-card reveal d2"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">inventory</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">Low Minimum Order</h3><p class="text-gray-500 font-light leading-relaxed text-sm">Accessible luxury for events of any scale — flexible MOQs with no compromise on quality.</p></div>
-      <div class="f-card reveal d3"><div class="w-14 h-14 rounded-full flex items-center justify-center mb-7" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-2xl">diamond</span></div><h3 class="font-heading text-2xl font-bold text-gray-900 mb-3">Luxury Presentation</h3><p class="text-gray-500 font-light leading-relaxed text-sm">From bottle clarity to label finish — every detail meticulously crafted for a presentation that commands attention.</p></div>
+
+      <!-- Card 1: Premium Packaging -->
+      <div class="why-card reveal d1">
+        <div class="why-card-num">01</div>
+        <div class="why-card-icon">
+          <span class="material-icons-outlined text-royal" style="font-size:26px;">workspace_premium</span>
+        </div>
+        <div class="why-card-divider"></div>
+        <h3>Premium Packaging</h3>
+        <p>High-end bespoke packaging that exudes luxury and exclusivity at every brand touchpoint.</p>
+      </div>
+
+      <!-- Card 2: Custom Label Design -->
+      <div class="why-card reveal d2">
+        <div class="why-card-num">02</div>
+        <div class="why-card-icon">
+          <span class="material-icons-outlined text-royal" style="font-size:26px;">design_services</span>
+        </div>
+        <div class="why-card-divider"></div>
+        <h3>Custom Label Design</h3>
+        <p>Expert designers create stunning personalized labels capturing your brand, event theme, or wedding design.</p>
+      </div>
+
+      <!-- Card 3: QR Code Integration -->
+      <div class="why-card reveal d3">
+        <div class="why-card-num">03</div>
+        <div class="why-card-icon">
+          <span class="material-icons-outlined text-royal" style="font-size:26px;">qr_code_scanner</span>
+        </div>
+        <div class="why-card-divider"></div>
+        <h3>QR Code Integration</h3>
+        <p>Connect offline to online — menus, websites, social media, event albums at a simple scan.</p>
+      </div>
+
+      <!-- Card 4: Fast Delivery -->
+      <div class="why-card reveal d1">
+        <div class="why-card-num">04</div>
+        <div class="why-card-icon">
+          <span class="material-icons-outlined text-royal" style="font-size:26px;">local_shipping</span>
+        </div>
+        <div class="why-card-divider"></div>
+        <h3>Fast Delivery</h3>
+        <p>Efficient production and precision logistics ensure your bottles arrive exactly when your event demands.</p>
+      </div>
+
+      <!-- Card 5: Low Minimum Order -->
+      <div class="why-card reveal d2">
+        <div class="why-card-num">05</div>
+        <div class="why-card-icon">
+          <span class="material-icons-outlined text-royal" style="font-size:26px;">inventory</span>
+        </div>
+        <div class="why-card-divider"></div>
+        <h3>Low Minimum Order</h3>
+        <p>Accessible luxury for events of any scale — flexible MOQs with no compromise on quality.</p>
+      </div>
+
+      <!-- Card 6: Luxury Presentation -->
+      <div class="why-card reveal d3">
+        <div class="why-card-num">06</div>
+        <div class="why-card-icon" style="background:linear-gradient(135deg,#FDF6E7,#f5e4b8);border-color:rgba(201,170,113,0.3);box-shadow:0 6px 18px rgba(201,170,113,0.2);">
+          <span class="material-icons-outlined" style="font-size:26px;color:#a8863e;">diamond</span>
+        </div>
+        <div class="why-card-divider" style="background:linear-gradient(90deg,#C9AA71,#e8c97a);"></div>
+        <h3 style="color:#1a1a2e;">Luxury Presentation</h3>
+        <p>From bottle clarity to label finish — every detail meticulously crafted for a presentation that commands attention.</p>
+      </div>
+
     </div>
   </div>
 </section>
