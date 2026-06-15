@@ -90,25 +90,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   opacity: 1;
   transform: scale(1);
 }
-#scroll-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2.5px;
-  background: linear-gradient(90deg, #2929CC, #C9AA71, #2929CC);
-  background-size: 200% auto;
-  width: 0%;
-  transition: width 0.1s ease-out, opacity 0.2s ease;
-  border-radius: 0 0 0 12px;
-  z-index: 20;
-  animation: shine-scroll 3s linear infinite;
-  opacity: 0;
-}
-@keyframes shine-scroll {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+
 
 /* Shimmer on CTA button */
 .btn-shimmer{position:relative;overflow:hidden}
@@ -1286,8 +1268,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
     </div>
     <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
     
-    <!-- Scroll indicator -->
-    <div id="scroll-indicator"></div>
+
   </nav>
 </div>
 
@@ -3082,24 +3063,14 @@ document.getElementById('legal-modal').addEventListener('click', function(e) {
   if (e.target === this) closeLegalModal();
 });
 
-// Nav scroll & Reading Progress
+// Nav scroll
 const navWrap = document.getElementById('nav-wrap');
 const nav = document.getElementById('nav');
-const scrollIndicator = document.getElementById('scroll-indicator');
 
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 50;
   if (navWrap) navWrap.classList.toggle('scrolled', scrolled);
   if (nav) nav.classList.toggle('scrolled', scrolled);
-  
-  // Calculate reading progress percent
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolledPct = height > 0 ? (winScroll / height) * 100 : 0;
-  if (scrollIndicator) {
-    scrollIndicator.style.width = scrolledPct + '%';
-    scrollIndicator.style.opacity = scrolledPct > 0.5 ? '1' : '0';
-  }
 });
 
 // Desktop Links Sliding Pill Logic
