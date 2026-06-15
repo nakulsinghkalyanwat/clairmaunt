@@ -991,6 +991,53 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   border-color: #C9AA71;
   box-shadow: 0 12px 28px rgba(201, 170, 113, 0.22);
 }
+
+/* Brand Experience Custom CTA Buttons */
+.btn-brand-solid {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #2929CC 0%, #1a1060 100%);
+  color: #ffffff !important;
+  border-radius: 10px !important; /* Rectangle with curved edges */
+  box-shadow: 0 4px 18px rgba(41, 41, 204, 0.25);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-brand-solid:hover {
+  background: linear-gradient(135deg, #1e1e99 0%, #0c0836 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(41, 41, 204, 0.35);
+  color: #ffffff !important;
+}
+
+.btn-brand-outline {
+  display: inline-block;
+  padding: 0.85rem 2.15rem; /* account for 1.5px border */
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1.5px solid #2929CC;
+  background: transparent;
+  cursor: pointer;
+  color: #2929CC !important;
+  border-radius: 10px !important; /* Rectangle with curved edges */
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-brand-outline:hover {
+  background: rgba(41, 41, 204, 0.05);
+  border-color: #C9AA71;
+  color: #a8863e !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 170, 113, 0.15);
+}
 </style>
 </head>
 <body>
@@ -2136,8 +2183,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <div class="max-w-3xl mx-auto py-10 md:py-12 border-t border-gray-200">
         <h2 class="font-display text-3xl md:text-4xl italic text-gray-900 mb-8 leading-relaxed">"Every hand that holds a ClairMaunt bottle becomes a touchpoint for your brand."</h2>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="#quote" class="btn btn-blue">Start Your Brand Experience</a>
-          <a href="#quote" class="btn btn-outline-b">Request A Custom Mockup</a>
+          <a href="#quote" class="btn-brand-solid">Start Your Brand Experience</a>
+          <a href="#quote" class="btn-brand-outline">Request A Custom Mockup</a>
         </div>
       </div>
     </div>
