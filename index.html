@@ -132,29 +132,46 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 
 /* Hero Premium Buttons */
 .btn-hero-quote {
-  background: linear-gradient(135deg, #2929CC 0%, #1a1a99 100%);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(105deg, #1a1060 0%, #2929CC 35%, #C9AA71 55%, #2929CC 75%, #1a1060 100%);
+  background-size: 200% auto;
+  animation: btn-shimmer 4s linear infinite;
   color: #fff;
   border-radius: 30px !important;
-  box-shadow: 0 4px 15px rgba(41, 41, 204, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(41, 41, 204, 0.4), 0 2px 8px rgba(201, 170, 113, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-hero-quote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.18) 50%, transparent 60%);
+  background-size: 300% auto;
+  animation: btn-shimmer 2.5s linear infinite;
+  pointer-events: none;
 }
 .btn-hero-quote:hover {
-  background: linear-gradient(135deg, #3333e6 0%, #2222b3 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(41, 41, 204, 0.45), 0 0 0 1px rgba(201, 170, 113, 0.2);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(41, 41, 204, 0.6), 0 4px 15px rgba(201, 170, 113, 0.4), 0 0 0 1px rgba(201, 170, 113, 0.3);
   color: #fff;
 }
 .btn-hero-explore {
-  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
   color: #fff;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 30px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-hero-explore:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(201, 170, 113, 0.08);
   border-color: #C9AA71 !important;
-  color: #C9AA71 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(201, 170, 113, 0.15);
+  color: #e8c97a !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(201, 170, 113, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Section label */
