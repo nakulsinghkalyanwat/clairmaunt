@@ -915,6 +915,42 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   transform: scale(1.08) rotate(3deg);
   box-shadow: 0 4px 12px rgba(41, 41, 204, 0.25);
 }
+
+/* Become A Sponsor Premium Button */
+.btn-sponsor {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(105deg, #1a1060 0%, #2929CC 35%, #C9AA71 55%, #2929CC 75%, #1a1060 100%);
+  background-size: 200% auto;
+  animation: btn-shimmer 4s linear infinite;
+  color: #ffffff !important;
+  border-radius: 10px !important; /* Rectangle with curved edges */
+  box-shadow: 0 4px 20px rgba(41, 41, 204, 0.4), 0 2px 8px rgba(201, 170, 113, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-sponsor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.18) 50%, transparent 60%);
+  background-size: 300% auto;
+  animation: btn-shimmer 2.5s linear infinite;
+  pointer-events: none;
+}
+.btn-sponsor:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(41, 41, 204, 0.6), 0 4px 15px rgba(201, 170, 113, 0.4), 0 0 0 1px rgba(201, 170, 113, 0.3);
+  color: #ffffff !important;
+}
 </style>
 </head>
 <body>
@@ -1919,8 +1955,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <h3 class="font-display text-4xl font-bold text-white mb-4">Ready To Advertise On Bottles?</h3>
       <p class="text-white/60 mb-8 max-w-2xl mx-auto">Reach your audience through a marketing medium they carry, hold, use, and interact with throughout the event.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="#quote" class="btn btn-blue">Become A Sponsor</a>
-        <a href="#quote" class="btn btn-outline-w">Request Media Kit</a>
+        <a href="#quote" class="btn-sponsor">Become A Sponsor</a>
       </div>
     </div>
 
