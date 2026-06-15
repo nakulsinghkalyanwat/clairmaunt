@@ -166,6 +166,16 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 @keyframes scanring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.6);opacity:0}}
 .scan-ring{animation:scanring 2s ease-out infinite}
 
+/* QR Feature Cards */
+.qr-feature-card { position:relative; display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-radius:14px; background:linear-gradient(135deg,rgba(41,41,204,0.03) 0%,rgba(238,240,255,0.6) 100%); border:1px solid rgba(41,41,204,0.1); overflow:hidden; transition:all 0.28s ease; cursor:default; }
+.qr-feature-card:hover { background:linear-gradient(135deg,rgba(41,41,204,0.07) 0%,rgba(238,240,255,0.85) 100%); border-color:rgba(41,41,204,0.25); box-shadow:0 8px 28px rgba(41,41,204,0.1); transform:translateY(-2px) translateX(3px); }
+.qr-feature-accent { position:absolute; left:0; top:12%; bottom:12%; width:3px; border-radius:0 3px 3px 0; background:linear-gradient(to bottom,#2929CC,#C9AA71); opacity:0.7; transition:opacity 0.28s ease, height 0.28s ease; }
+.qr-feature-card:hover .qr-feature-accent { opacity:1; top:0; bottom:0; }
+.qr-feature-icon { flex-shrink:0; width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg,#EEF0FF,#d5d7fc); border:1px solid rgba(41,41,204,0.18); display:flex; align-items:center; justify-content:center; color:#2929CC; box-shadow:0 4px 12px rgba(41,41,204,0.15); transition:box-shadow 0.28s ease, transform 0.28s ease; }
+.qr-feature-card:hover .qr-feature-icon { box-shadow:0 6px 20px rgba(41,41,204,0.28); transform:scale(1.08); }
+.qr-feature-text { flex:1; }
+
+
 /* Step dot */
 .step-dot{width:3.5rem;height:3.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(41,41,204,.35),rgba(68,68,224,.15));border:1px solid rgba(41,41,204,.45)}
 
@@ -1338,11 +1348,56 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
         <span class="s-label">Digital Integration</span>
         <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">QR-Enabled<br/><em class="text-grad not-italic">Smart Bottles</em></h2>
         <p class="text-gray-500 font-light leading-relaxed mb-10 text-lg">Every ClairMaunt bottle can carry a smart QR code — turning a simple water bottle into an interactive digital portal for your brand.</p>
-        <div class="space-y-6">
-          <div class="flex gap-5 items-start"><div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-sm">restaurant_menu</span></div><div><h4 class="font-semibold text-gray-900 mb-1">Open Menus</h4><p class="text-gray-500 text-sm font-light">Link directly to digital menu for restaurants, hotels, and cafes.</p></div></div>
-          <div class="flex gap-5 items-start"><div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-sm">photo_album</span></div><div><h4 class="font-semibold text-gray-900 mb-1">View Wedding Albums</h4><p class="text-gray-500 text-sm font-light">Couples link to their gallery, thank-you message, or registry.</p></div></div>
-          <div class="flex gap-5 items-start"><div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-sm">event_note</span></div><div><h4 class="font-semibold text-gray-900 mb-1">Access Event Information</h4><p class="text-gray-500 text-sm font-light">Conference schedules, speaker bios, event apps, and portals.</p></div></div>
-          <div class="flex gap-5 items-start"><div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center" style="background:linear-gradient(135deg,#EEF0FF,#d5d7fc)"><span class="material-icons-outlined text-royal text-sm">share</span></div><div><h4 class="font-semibold text-gray-900 mb-1">Connect on Social Media</h4><p class="text-gray-500 text-sm font-light">Link to Instagram, LinkedIn, YouTube, or any platform instantly.</p></div></div>
+        <div class="space-y-4">
+
+          <!-- Feature 1: Open Menus -->
+          <div class="qr-feature-card group">
+            <div class="qr-feature-accent"></div>
+            <div class="qr-feature-icon">
+              <span class="material-icons-outlined" style="font-size:20px;">restaurant_menu</span>
+            </div>
+            <div class="qr-feature-text">
+              <h4 class="font-heading font-bold text-gray-900 text-sm mb-0.5">Open Menus</h4>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Link directly to digital menu for restaurants, hotels, and cafes.</p>
+            </div>
+          </div>
+
+          <!-- Feature 2: Wedding Albums -->
+          <div class="qr-feature-card group">
+            <div class="qr-feature-accent"></div>
+            <div class="qr-feature-icon">
+              <span class="material-icons-outlined" style="font-size:20px;">photo_album</span>
+            </div>
+            <div class="qr-feature-text">
+              <h4 class="font-heading font-bold text-gray-900 text-sm mb-0.5">View Wedding Albums</h4>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Couples link to their gallery, thank-you message, or registry.</p>
+            </div>
+          </div>
+
+          <!-- Feature 3: Event Info -->
+          <div class="qr-feature-card group">
+            <div class="qr-feature-accent"></div>
+            <div class="qr-feature-icon">
+              <span class="material-icons-outlined" style="font-size:20px;">event_note</span>
+            </div>
+            <div class="qr-feature-text">
+              <h4 class="font-heading font-bold text-gray-900 text-sm mb-0.5">Access Event Information</h4>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Conference schedules, speaker bios, event apps, and portals.</p>
+            </div>
+          </div>
+
+          <!-- Feature 4: Social Media -->
+          <div class="qr-feature-card group">
+            <div class="qr-feature-accent"></div>
+            <div class="qr-feature-icon">
+              <span class="material-icons-outlined" style="font-size:20px;">share</span>
+            </div>
+            <div class="qr-feature-text">
+              <h4 class="font-heading font-bold text-gray-900 text-sm mb-0.5">Connect on Social Media</h4>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Link to Instagram, LinkedIn, YouTube, or any platform instantly.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
