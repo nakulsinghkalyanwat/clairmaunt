@@ -98,10 +98,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   background: linear-gradient(90deg, #2929CC, #C9AA71, #2929CC);
   background-size: 200% auto;
   width: 0%;
-  transition: width 0.1s ease-out;
-  border-radius: 0 1px 1px 0;
+  transition: width 0.1s ease-out, opacity 0.2s ease;
+  border-radius: 0 0 0 12px;
   z-index: 20;
   animation: shine-scroll 3s linear infinite;
+  opacity: 0;
 }
 @keyframes shine-scroll {
   0% { background-position: 0% 50%; }
@@ -3097,6 +3098,7 @@ window.addEventListener('scroll', () => {
   const scrolledPct = height > 0 ? (winScroll / height) * 100 : 0;
   if (scrollIndicator) {
     scrollIndicator.style.width = scrolledPct + '%';
+    scrollIndicator.style.opacity = scrolledPct > 0.5 ? '1' : '0';
   }
 });
 
