@@ -206,8 +206,49 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .ind-overlay p { color:rgba(255,255,255,0.75); font-size:0.78rem; font-weight:300; line-height:1.5; }
 
 /* Tab buttons */
-.tab-btn{padding:.7rem 1.5rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;transition:all .3s ease}
-.tab-btn.active{color:#2929CC;border-bottom-color:#2929CC}
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b5563;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tab-btn .material-icons-outlined {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  transition: color 0.38s ease, transform 0.38s ease;
+}
+.tab-btn:hover {
+  color: #2929CC;
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(41, 41, 204, 0.1);
+  box-shadow: 0 4px 12px rgba(41, 41, 204, 0.05);
+  transform: translateY(-1px);
+}
+.tab-btn:hover .material-icons-outlined {
+  color: #2929CC;
+  transform: scale(1.1);
+}
+.tab-btn.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #2929CC 0%, #101048 100%) !important;
+  border-color: #2929CC;
+  box-shadow: 0 8px 20px -4px rgba(41, 41, 204, 0.35), 0 0 0 1px rgba(201, 170, 113, 0.2);
+  transform: translateY(-1px);
+}
+.tab-btn.active .material-icons-outlined {
+  color: #C9AA71 !important;
+  transform: scale(1.1);
+}
 
 /* Tab panes */
 .tab-pane{display:none}.tab-pane.active{display:flex}
@@ -1287,12 +1328,27 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <p class="text-gray-500 mt-4 md:mt-5 font-light text-base md:text-lg">From elegant wedding labels to dynamic corporate branding — every design crafted exclusively for your brand.</p>
     </div>
     <!-- Tabs -->
-    <div class="flex flex-wrap justify-center gap-2 mb-10 reveal border-b border-gray-200">
-      <button onclick="switchTab('wedding')" id="tb-wedding" class="tab-btn active">Wedding</button>
-      <button onclick="switchTab('hotel')" id="tb-hotel" class="tab-btn">Hotel</button>
-      <button onclick="switchTab('corporate')" id="tb-corporate" class="tab-btn">Corporate</button>
-      <button onclick="switchTab('restaurant')" id="tb-restaurant" class="tab-btn">Restaurant</button>
-      <button onclick="switchTab('event')" id="tb-event" class="tab-btn">Event</button>
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3 p-1.5 bg-[#EEF0FF]/50 border border-[#2929CC]/10 rounded-2xl sm:rounded-full max-w-2xl mx-auto mb-12 reveal">
+      <button onclick="switchTab('wedding')" id="tb-wedding" class="tab-btn active">
+        <span class="material-icons-outlined">celebration</span>
+        <span>Wedding</span>
+      </button>
+      <button onclick="switchTab('hotel')" id="tb-hotel" class="tab-btn">
+        <span class="material-icons-outlined">hotel</span>
+        <span>Hotel</span>
+      </button>
+      <button onclick="switchTab('corporate')" id="tb-corporate" class="tab-btn">
+        <span class="material-icons-outlined">business_center</span>
+        <span>Corporate</span>
+      </button>
+      <button onclick="switchTab('restaurant')" id="tb-restaurant" class="tab-btn">
+        <span class="material-icons-outlined">restaurant</span>
+        <span>Restaurant</span>
+      </button>
+      <button onclick="switchTab('event')" id="tb-event" class="tab-btn">
+        <span class="material-icons-outlined">event</span>
+        <span>Event</span>
+      </button>
     </div>
 
     <!-- Wedding -->
