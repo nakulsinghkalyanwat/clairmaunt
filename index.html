@@ -1038,6 +1038,34 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(201, 170, 113, 0.15);
 }
+
+/* Testimonial Feedback Cards Styling */
+.feedback-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 245, 255, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(41, 41, 204, 0.1);
+  border-radius: 16px; /* Rectangle with curved edges */
+  box-shadow: 0 10px 30px rgba(41, 41, 204, 0.04);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.feedback-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.5px;
+  background: linear-gradient(90deg, #2929CC, #C9AA71);
+  opacity: 0.85;
+}
+.feedback-card:hover {
+  border-color: rgba(41, 41, 204, 0.22);
+  box-shadow: 0 15px 35px rgba(41, 41, 204, 0.08);
+  transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -2200,17 +2228,17 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Trusted By<br/><em class="text-grad not-italic">The Best</em></h2>
     </div>
     <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-8 md:pb-0 hide-scrollbar" style="scrollbar-width:none;-ms-overflow-style:none;">
-      <div class="glass-light p-8 md:p-10 reveal d1 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
+      <div class="feedback-card p-8 md:p-10 reveal d1 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
         <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"ClairMaunt bottles were the highlight of our wedding. Every guest was amazed by the personalized design with our QR code linking to our photo album. Absolutely premium quality!"</p>
         <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">U</div><div><div class="font-semibold text-gray-900 text-sm">Udaybhan</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Wedding, Dausa</div></div></div>
       </div>
-      <div class="glass-light p-8 md:p-10 reveal d2 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
+      <div class="feedback-card p-8 md:p-10 reveal d2 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
         <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"We ordered ClairMaunt for our regular business meets. The branded bottles impressed everyone Exceptional ROI."</p>
         <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">LS</div><div><div class="font-semibold text-gray-900 text-sm">Lavjeet singh</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Thar Breeze Aircon, Jaipur</div></div></div>
       </div>
-      <div class="glass-light p-8 md:p-10 reveal d3 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
+      <div class="feedback-card p-8 md:p-10 reveal d3 min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center">
         <div class="flex mb-6"><span class="text-yellow-400 text-lg">★★★★★</span></div>
         <p class="text-gray-700 font-light leading-relaxed mb-8 italic text-sm">"Our hotel partnered with ClairMaunt for in-room branded water. Guests frequently compliment the luxury feel. The menu QR code reduced our printing costs significantly."</p>
         <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background:linear-gradient(135deg,#2929CC,#4444E0)">MS</div><div><div class="font-semibold text-gray-900 text-sm">Manvendra singh</div><div class="text-gray-500 text-xs uppercase tracking-wide mt-0.5">Sundervan villas, Sawai Madhopur</div></div></div>
