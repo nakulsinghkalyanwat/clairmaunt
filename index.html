@@ -174,6 +174,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   box-shadow: 0 8px 24px rgba(201, 170, 113, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Navigation Quote Button */
+.btn-nav-quote {
+  border-radius: 10px !important;
+}
+
 /* Section label */
 .s-label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#2929CC;margin-bottom:1.25rem}
 
@@ -853,7 +858,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Customization</a>
           <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Advertise</a>
           <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Brand Experience</a>
-          <a href="#quote" class="btn btn-blue btn-shimmer ml-2">Get a Quote</a>
+          <a href="#quote" class="btn btn-blue btn-shimmer btn-nav-quote ml-2">Get a Quote</a>
         </div>
 
         <!-- Hamburger -->
@@ -874,7 +879,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
         <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
         <a href="#advertise" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
         <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
-        <a href="#quote" onclick="closeMob()" class="btn btn-blue text-center mt-4">Get a Quote</a>
+        <a href="#quote" onclick="closeMob()" class="btn btn-blue btn-nav-quote text-center mt-4">Get a Quote</a>
       </div>
     </div>
     <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
