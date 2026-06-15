@@ -121,9 +121,10 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Buttons */
 .btn{display:inline-block;padding:.9rem 2.2rem;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);text-align:center;border:none}
 .btn-blue{background:#2929CC;color:#fff}.btn-blue:hover{background:#1E1E99;transform:translateY(-2px);box-shadow:0 12px 30px rgba(41,41,204,.3)}
-.btn-form-action { position: relative; overflow: hidden; background: linear-gradient(135deg, #2929CC 0%, #4444E0 50%, #C9AA71 100%); background-size: 200% auto; color: #fff; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 10px !important; box-shadow: 0 4px 15px rgba(41, 41, 204, 0.3), 0 2px 6px rgba(201, 170, 113, 0.15); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-.btn-form-action:hover { background-position: right center; transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(41, 41, 204, 0.45), 0 4px 12px rgba(201, 170, 113, 0.3); color: #fff; }
-.btn-form-action:active { transform: translateY(0) scale(1); }
+.btn-form-action { position: relative; overflow: hidden; background: linear-gradient(105deg, #1A1A3E 0%, #2929CC 30%, #C9AA71 50%, #2929CC 70%, #1A1A3E 100%); background-size: 250% auto; animation: btn-shimmer 4s linear infinite; color: #fff; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 10px !important; box-shadow: 0 4px 15px rgba(41, 41, 204, 0.35), 0 2px 6px rgba(201, 170, 113, 0.15); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(255, 255, 255, 0.08); }
+.btn-form-action::before { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%); background-size: 300% auto; animation: btn-shimmer 2.5s linear infinite; pointer-events: none; }
+.btn-form-action:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(41, 41, 204, 0.55), 0 4px 12px rgba(201, 170, 113, 0.35), 0 0 0 1px rgba(201, 170, 113, 0.25); color: #fff; }
+.btn-form-action:active { transform: translateY(-1px) scale(0.99); }
 .btn-outline-w{border:1.5px solid #fff;color:#fff;background:transparent}.btn-outline-w:hover{background:#fff;color:#2929CC}
 .btn-outline-b{border:1.5px solid #2929CC;color:#2929CC;background:transparent}.btn-outline-b:hover{background:#2929CC;color:#fff}
 
@@ -2467,7 +2468,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <div id="q-form-card" class="glass p-6 md:p-10 lg:p-12 reveal d2 relative overflow-hidden">
           <div id="q-card-glow"></div>
           
-          <form id="q-form" class="relative z-10" onsubmit="submitForm(event)">
+          <form id="q-form" novalidate class="relative z-10" onsubmit="submitForm(event)">
             <!-- STEP 1: Contact Details -->
             <div id="step-1" class="form-step">
               <h3 class="font-heading text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Step 1: Contact Details</h3>
@@ -3190,6 +3191,24 @@ function toggleServiceFields() {
 }
 
 function reviewStep() {
+  // Validate Step 3 fields before proceeding to review
+  const activeStep = document.getElementById('step-3');
+  const required = activeStep.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(el => {
+    if(!el.value) {
+      el.classList.add('invalid-input');
+      valid = false;
+    } else {
+      el.classList.remove('invalid-input');
+    }
+    if (!el.dataset.shakeBound) {
+      el.addEventListener('input', () => el.classList.remove('invalid-input'));
+      el.dataset.shakeBound = 'true';
+    }
+  });
+  if(!valid) { alert("Please fill in all required fields."); return; }
+
   nextStep('review');
   const name = document.getElementById('q-name').value;
   const company = document.getElementById('q-company').value;
