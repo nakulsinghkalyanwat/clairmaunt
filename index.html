@@ -732,9 +732,6 @@ html { scroll-padding-top: 80px; }
 }
 
 /* Custom Form Animations & Focus Glows */
-#q-form-card {
-  border-radius: 20px !important;
-}
 #q-form input[type="text"],
 #q-form input[type="email"],
 #q-form input[type="tel"],
@@ -869,11 +866,19 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
 }
 #q-form-card {
   z-index: 10;
-  border-radius: 20px;
+  border-radius: 20px !important;
+  background: radial-gradient(circle at 15% 15%, rgba(41, 41, 204, 0.15) 0%, rgba(14, 14, 44, 0.94) 75%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: 1.5px solid rgba(201, 170, 113, 0.35) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(41, 41, 204, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 #q-form-card:hover {
-  border-color: rgba(201, 170, 113, 0.22) !important;
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(41, 41, 204, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  border-top-color: rgba(201, 170, 113, 0.65) !important;
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.65), 0 0 50px rgba(41, 41, 204, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 #q-card-glow {
   display: none !important;
