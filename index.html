@@ -209,23 +209,23 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.35rem;
-  font-size: 0.75rem;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #4b5563;
   border: 1px solid transparent;
   background: transparent;
   cursor: pointer;
-  border-radius: 10px; /* Rectangle with curved edges */
+  border-radius: 9999px; /* Capsule shape inside */
   flex-shrink: 0;
   white-space: nowrap;
   transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tab-btn .material-icons-outlined {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #9ca3af;
   transition: color 0.38s ease, transform 0.38s ease;
 }
@@ -1337,7 +1337,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <p class="text-gray-500 mt-4 md:mt-5 font-light text-base md:text-lg">From elegant wedding labels to dynamic corporate branding — every design crafted exclusively for your brand.</p>
     </div>
     <!-- Tabs -->
-    <div class="flex flex-nowrap overflow-x-auto justify-start md:justify-center gap-2 sm:gap-3 p-1.5 bg-[#EEF0FF]/50 border border-[#2929CC]/10 rounded-xl max-w-2xl mx-auto mb-12 reveal tabs-container">
+    <div class="flex flex-nowrap overflow-x-auto justify-start md:justify-center gap-1.5 p-1.5 px-3 bg-[#EEF0FF]/50 border border-[#2929CC]/10 rounded-xl max-w-3xl mx-auto mb-12 reveal tabs-container">
       <button onclick="switchTab('wedding')" id="tb-wedding" class="tab-btn active">
         <span class="material-icons-outlined">celebration</span>
         <span>Wedding</span>
