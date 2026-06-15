@@ -64,11 +64,89 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 .reveal.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
 
-/* Nav Redesign: Floating Curved Rectangle with Optimized Size */
-.nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:50;padding:0.75rem 0.8rem;pointer-events:none;transition:padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
-.nav-wrapper.scrolled{padding:0.4rem 0.8rem}
-#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:10px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:96rem;margin:0 auto}
-#nav.scrolled{background:rgba(14,14,44,0.97);border-color:rgba(41,41,204,0.25);box-shadow:0 20px 40px -10px rgba(41,41,204,0.2), 0 0 0 1px rgba(41, 41, 204, 0.15)}
+/* ── LUXURY NAV REDESIGN ── */
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 1.1rem 2.5%;
+  pointer-events: none;
+  transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-wrapper.scrolled { padding: 0.6rem 2.5%; }
+#nav {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 90px;
+  padding: 0 2.5rem;
+  background: linear-gradient(105deg, #1B1A3A 0%, #151533 50%, #0F1030 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(90, 90, 255, 0.25);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px rgba(59, 61, 255, 0.08),
+    0 0 40px rgba(59, 61, 255, 0.18),
+    0 0 80px rgba(59, 61, 255, 0.09),
+    0 24px 64px rgba(0, 0, 0, 0.45);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#nav.scrolled {
+  height: 70px;
+  border-color: rgba(90, 90, 255, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(59, 61, 255, 0.12),
+    0 0 30px rgba(59, 61, 255, 0.25),
+    0 0 60px rgba(59, 61, 255, 0.12),
+    0 12px 40px rgba(0, 0, 0, 0.55);
+}
+/* Nav logo */
+.nav-logo-zone { display:flex; align-items:center; flex-shrink:0; min-width:190px; }
+/* Nav links - absolutely centered */
+.nav-links-zone {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.nav-link-item {
+  position: relative;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  padding: 0.55rem 1.1rem;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+  z-index: 1;
+}
+.nav-link-item:hover { color: #fff; }
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  height: 1.5px;
+  background: #C7A86B;
+  border-radius: 2px;
+  transition: left 0.3s cubic-bezier(0.16,1,0.3,1), right 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-link-item:hover::after { left: 1.1rem; right: 1.1rem; }
+/* Nav CTA zone */
+.nav-cta-zone { display:flex; align-items:center; justify-content:flex-end; flex-shrink:0; min-width:190px; }
 /* Page scroll progress bar */
 #page-progress {
   position: fixed;
@@ -89,27 +167,13 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   will-change: width;
   pointer-events: none;
 }
-.nav-a{position:relative;text-decoration:none;z-index:1}
+/* Nav-pill hidden (not used in new layout) */
+#nav-pill { display: none; }
+/* Logo peak hover animations */
 .logo-container:hover .logo-peak-1{transform:translateY(-3px)}
 .logo-container:hover .logo-peak-2{transform:translateY(-5px)}
 .logo-container:hover .logo-peak-3{transform:translateY(-2px)}
 .logo-peak{transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);transform-origin:bottom}
-#nav-pill {
-  position: absolute;
-  background: rgba(41, 41, 204, 0.15);
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.38s ease;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 0;
-  transform: scale(0.9);
-}
-#nav-pill.active {
-  border-color: rgba(201, 170, 113, 0.35);
-  opacity: 1;
-  transform: scale(1);
-}
 
 
 /* Shimmer on CTA button */
@@ -185,16 +249,32 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   box-shadow: 0 8px 24px rgba(201, 170, 113, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Navigation Quote Button */
+/* Navigation CTA Button */
 .btn-nav-quote {
-  border-radius: 8px !important;
-  padding: 0.65rem 1.4rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #3B3DFF 0%, #2A2DD8 100%) !important;
+  border-radius: 16px !important;
+  height: 56px !important;
+  width: 200px !important;
   font-size: 0.7rem !important;
-  line-height: 1 !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  letter-spacing: 0.13em !important;
   font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #fff !important;
+  white-space: nowrap !important;
+  padding: 0 !important;
+  border: none !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 24px rgba(59, 61, 255, 0.45), 0 0 0 1px rgba(59, 61, 255, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.btn-nav-quote:hover {
+  transform: scale(1.04) translateY(-1px) !important;
+  background: linear-gradient(135deg, #4C4EFF 0%, #3336E8 100%) !important;
+  box-shadow: 0 8px 36px rgba(59, 61, 255, 0.65), 0 0 0 1px rgba(59, 61, 255, 0.35), 0 0 24px rgba(59, 61, 255, 0.3) !important;
+  color: #fff !important;
 }
 
 /* Section label */
@@ -1242,60 +1322,60 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
 <!-- ── NAVIGATION ── -->
 <div class="nav-wrapper" id="nav-wrap">
   <nav id="nav">
-        <div class="px-5 lg:px-7">
-      <div class="flex justify-between items-center h-[52px]">
 
-        <!-- Logo -->
-        <a href="#" class="logo-container flex items-center gap-3 flex-shrink-0">
-          <svg width="44" height="32" viewBox="0 0 260 180" fill="none" style="overflow:hidden;display:block">
-            <polygon class="logo-peak logo-peak-1" points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
-            <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
-            <polygon class="logo-peak logo-peak-2" points="62,143 130,18 198,143" fill="#4444E0"/>
-            <polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/>
-            <polygon class="logo-peak logo-peak-3" points="175,92 200,55 250,143 210,143" fill="#4444E0"/>
-            <polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/>
-            <polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity="0.55"/>
-          </svg>
-          <div class="flex flex-col leading-none">
-            <span class="font-heading font-bold text-lg tracking-wide text-white">ClairMaunt</span>
-            <span class="text-[9px] tracking-[.2em] uppercase text-white/50 mt-0.5">Your Brand In Every Hand</span>
-          </div>
-        </a>
-
-        <!-- Desktop links -->
-        <div class="hidden lg:flex items-center gap-7 relative" id="desktop-links" style="position: relative;">
-          <div id="nav-pill"></div>
-          <a href="#why-us" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Why Us</a>
-          <a href="#industries" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Industries</a>
-          <a href="#customization" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Customization</a>
-          <a href="#advertise" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3">Advertise</a>
-          <a href="#brand-experience" class="nav-a text-[11px] uppercase tracking-[.18em] font-medium text-white/75 hover:text-white transition-colors py-2 px-3 whitespace-nowrap">Brand Experience</a>
-          <a href="#quote" class="btn btn-blue btn-shimmer btn-nav-quote ml-3">Get a Quote</a>
+    <!-- Logo (left) -->
+    <div class="nav-logo-zone">
+      <a href="#" class="logo-container flex items-center gap-3 flex-shrink-0">
+        <svg width="48" height="36" viewBox="0 0 260 180" fill="none" style="overflow:hidden;display:block">
+          <polygon class="logo-peak logo-peak-1" points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
+          <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
+          <polygon class="logo-peak logo-peak-2" points="62,143 130,18 198,143" fill="#4444E0"/>
+          <polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/>
+          <polygon class="logo-peak logo-peak-3" points="175,92 200,55 250,143 210,143" fill="#4444E0"/>
+          <polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/>
+          <polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity="0.55"/>
+        </svg>
+        <div class="flex flex-col leading-none">
+          <span class="font-heading font-bold text-xl tracking-wide text-white">ClairMaunt</span>
+          <span class="text-[8.5px] tracking-[.22em] uppercase mt-1" style="color:rgba(255,255,255,0.45)">Your Brand In Every Hand</span>
         </div>
-
-        <!-- Hamburger -->
-        <button id="mob-toggle" class="lg:hidden text-white p-2">
-          <span class="material-icons">menu</span>
-        </button>
-      </div>
+      </a>
     </div>
+
+    <!-- Desktop links (centered absolutely) -->
+    <div class="hidden lg:flex nav-links-zone" id="desktop-links">
+      <div id="nav-pill"></div>
+      <a href="#why-us"           class="nav-link-item">Why Us</a>
+      <a href="#industries"       class="nav-link-item">Industries</a>
+      <a href="#customization"    class="nav-link-item">Customization</a>
+      <a href="#advertise"        class="nav-link-item">Advertise</a>
+      <a href="#brand-experience" class="nav-link-item">Brand Experience</a>
+    </div>
+
+    <!-- CTA + Hamburger (right) -->
+    <div class="nav-cta-zone">
+      <a href="#quote" class="hidden lg:inline-flex btn-nav-quote btn-shimmer">Get a Quote</a>
+      <button id="mob-toggle" class="lg:hidden text-white p-2 ml-2">
+        <span class="material-icons">menu</span>
+      </button>
+    </div>
+
     <!-- Mobile menu -->
-    <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm duration-300 z-[60]" style="background:rgba(14,14,44,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s ease;">
+    <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm duration-300 z-[60]" style="background:rgba(15,16,48,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s ease;">
       <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
         <div class="flex justify-between items-center mb-4">
           <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
           <button onclick="closeMob()" class="text-white"><span class="material-icons">close</span></button>
         </div>
-        <a href="#why-us" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
-        <a href="#industries" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
-        <a href="#customization" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
-        <a href="#advertise" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
+        <a href="#why-us"           onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
+        <a href="#industries"       onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
+        <a href="#customization"    onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
+        <a href="#advertise"        onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
         <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
-        <a href="#quote" onclick="closeMob()" class="btn btn-blue btn-nav-quote text-center mt-4">Get a Quote</a>
+        <a href="#quote"            onclick="closeMob()" class="btn-nav-quote text-center mt-4" style="height:48px;width:100%;border-radius:12px">Get a Quote</a>
       </div>
     </div>
     <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
-    
 
   </nav>
 </div>
