@@ -211,36 +211,17 @@ html { scroll-padding-top: 80px; }
 
 /* Multi-step form styles */
 .step-indicator { display:flex; flex-direction:column; align-items:center; gap:0.5rem; z-index:10; }
-.step-circle { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:12px; border:2px solid; transition:all 0.3s; }
-.step-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.4); transition:all 0.3s; }
+.step-circle { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:12px; border:2px solid; }
+.step-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.4); }
 .step-indicator.active .step-circle { background:#2929CC; color:#fff; border-color:#2929CC; }
 .step-indicator.active .step-label { color:#fff; }
 .step-indicator.completed .step-circle { background:#fff; color:#2929CC; border-color:#fff; }
-.form-step { width: 100%; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.form-step { width: 100%; }
 
-/* SVG Progress wave movement animation */
-@keyframes wave-move {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-160px, 0, 0); }
-}
-.wave-front {
-  animation: wave-move 2.5s linear infinite;
-}
-.wave-back {
-  animation: wave-move 4s linear infinite reverse;
-}
-
-/* Water Ripple Animation */
-.water-ripple-span {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(41, 41, 204, 0.28) 0%, rgba(41, 41, 204, 0) 70%);
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 1;
-  transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 0.5s ease-out;
-  z-index: 50;
-}
+/* SVG Progress wave movement animation disabled */
+.wave-front {}
+.wave-mid {}
+.wave-back {}
 
 /* Color scheme fixes for native dropdown selects on Windows */
 #q-form select {
@@ -270,7 +251,7 @@ html { scroll-padding-top: 80px; }
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .footer-link:hover {
-  color: #ffffff !important;
+  color: #C9AA71 !important;
   transform: translateX(6px);
 }
 .footer-link:hover::after {
@@ -289,7 +270,7 @@ html { scroll-padding-top: 80px; }
   text-shadow: 0 0 10px rgba(201, 170, 113, 0.4);
 }
 .footer-contact-item:hover a {
-  color: #ffffff !important;
+  color: #C9AA71 !important;
 }
 .footer-contact-item .material-icons-outlined, .footer-contact-item a {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -341,24 +322,62 @@ html { scroll-padding-top: 80px; }
   background-color: #1a1a3e !important;
   color: #ffffff !important;
 }
-.cursor-pointer input[type="radio"] + div {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+/* Selection Card Styles (Feature 3) */
+.selection-card {
+  position: relative;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-.cursor-pointer:hover input[type="radio"]:not(:checked) + div {
-  border-color: rgba(201, 170, 113, 0.4) !important;
-  background: rgba(201, 170, 113, 0.05) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(201, 170, 113, 0.08);
+.cursor-pointer:hover .selection-card {
+  border-color: rgba(201, 170, 113, 0.35) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
-.cursor-pointer input[type="radio"]:checked + div {
-  border-color: #C9AA71 !important;
-  background: rgba(41, 41, 204, 0.22) !important;
+input[type="radio"]:checked + .selection-card {
+  border-color: #2929CC !important;
+  background: rgba(41, 41, 204, 0.16) !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 25px -5px rgba(41, 41, 204, 0.35);
-  transform: translateY(-2px) scale(1.02);
 }
+
+/* Checkmark badge scaling */
+.selection-card .check-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+}
+input[type="radio"]:checked + .selection-card .check-badge {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  background: #2929CC !important;
+  border-color: #2929CC !important;
+}
+.selection-card .check-badge svg {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 0;
+}
+input[type="radio"]:checked + .selection-card .check-badge svg {
+  stroke-dashoffset: 0;
+}
+
+/* Invalid Input Style (No shaking) */
+.invalid-input {
+  border-color: #e05d5d !important;
+  box-shadow: 0 0 15px rgba(224, 93, 93, 0.22), inset 0 2px 4px rgba(0,0,0,0.15) !important;
+}
+
+/* Success Splash Droplets disabled */
+.splash-active {}
 .step-indicator.active .step-circle {
-  transform: scale(1.15);
   box-shadow: 0 0 20px rgba(41, 41, 204, 0.45) !important;
   background: #2929CC !important;
   border-color: #2929CC !important;
@@ -408,7 +427,6 @@ html { scroll-padding-top: 80px; }
   pointer-events: none;
 }
 #q-form-card {
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
   z-index: 10;
 }
 #q-form-card:hover {
@@ -416,17 +434,7 @@ html { scroll-padding-top: 80px; }
   box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(41, 41, 204, 0.08) !important;
 }
 #q-card-glow {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(201, 170, 113, 0.12) 0%, rgba(41, 41, 204, 0.06) 50%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 0;
-  filter: blur(50px);
+  display: none !important;
 }
 </style>
 </head>
@@ -1257,7 +1265,7 @@ html { scroll-padding-top: 80px; }
                   <!-- Premium Selection Card 1 -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Customized Water Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
                       <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
                         <span class="material-icons-outlined text-2xl">water_drop</span>
                       </div>
@@ -1265,8 +1273,10 @@ html { scroll-padding-top: 80px; }
                         <h4 class="font-heading font-bold text-white text-base">Custom Bottles</h4>
                         <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Branded Water</p>
                       </div>
-                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
-                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      <div class="check-badge">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
                       </div>
                     </div>
                   </label>
@@ -1274,7 +1284,7 @@ html { scroll-padding-top: 80px; }
                   <!-- Premium Selection Card 2 -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Advertise On Bottles" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
                       <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
                         <span class="material-icons-outlined text-2xl">campaign</span>
                       </div>
@@ -1282,8 +1292,10 @@ html { scroll-padding-top: 80px; }
                         <h4 class="font-heading font-bold text-white text-base">Bottle Ads</h4>
                         <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Advertise program</p>
                       </div>
-                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
-                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      <div class="check-badge">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
                       </div>
                     </div>
                   </label>
@@ -1291,7 +1303,7 @@ html { scroll-padding-top: 80px; }
                   <!-- Premium Selection Card 3 -->
                   <label class="cursor-pointer group">
                     <input type="radio" name="q_service" value="Both Services" class="hidden peer" onchange="toggleServiceFields()"/>
-                    <div class="p-6 border border-white/12 rounded-2xl bg-white/3 hover:bg-white/7 transition-all duration-300 flex flex-col items-center text-center gap-4 peer-checked:border-gold peer-checked:bg-royal/15 peer-checked:shadow-[0_0_25px_rgba(41,41,204,0.25)] relative overflow-hidden group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    <div class="selection-card p-6 rounded-2xl flex flex-col items-center text-center gap-4 overflow-hidden">
                       <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold/10 transition-colors">
                         <span class="material-icons-outlined text-2xl">layers</span>
                       </div>
@@ -1299,8 +1311,10 @@ html { scroll-padding-top: 80px; }
                         <h4 class="font-heading font-bold text-white text-base">Both Services</h4>
                         <p class="text-white/45 text-[10px] uppercase tracking-wider mt-1">Full Partnership</p>
                       </div>
-                      <div class="check-badge absolute top-3 right-3 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center opacity-0 transition-opacity">
-                        <span class="material-icons text-[12px] text-[#0E0E2C] font-bold">check</span>
+                      <div class="check-badge">
+                        <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
                       </div>
                     </div>
                   </label>
@@ -1364,10 +1378,50 @@ html { scroll-padding-top: 80px; }
               <div class="mb-6">
                 <label class="block text-white/55 text-[10px] uppercase tracking-widest mb-4">Expected Requirement *</label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="One-Time Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">One-Time</div></label>
-                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Monthly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Monthly</div></label>
-                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Quarterly Requirement" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Quarterly</div></label>
-                  <label class="cursor-pointer"><input type="radio" name="q_freq" value="Long-Term Partnership" class="hidden peer"/><div class="p-3 border border-white/20 rounded text-center text-xs text-white/70 peer-checked:border-royal peer-checked:bg-royal/20 transition-all">Long-Term</div></label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="q_freq" value="One-Time Requirement" class="hidden peer"/>
+                    <div class="selection-card p-4 rounded-xl text-center text-xs text-white/70 flex flex-col items-center justify-center min-h-[60px] relative">
+                      <span>One-Time</span>
+                      <div class="check-badge">
+                        <svg width="8" height="8" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
+                      </div>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="q_freq" value="Monthly Requirement" class="hidden peer"/>
+                    <div class="selection-card p-4 rounded-xl text-center text-xs text-white/70 flex flex-col items-center justify-center min-h-[60px] relative">
+                      <span>Monthly</span>
+                      <div class="check-badge">
+                        <svg width="8" height="8" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
+                      </div>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="q_freq" value="Quarterly Requirement" class="hidden peer"/>
+                    <div class="selection-card p-4 rounded-xl text-center text-xs text-white/70 flex flex-col items-center justify-center min-h-[60px] relative">
+                      <span>Quarterly</span>
+                      <div class="check-badge">
+                        <svg width="8" height="8" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
+                      </div>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="q_freq" value="Long-Term Partnership" class="hidden peer"/>
+                    <div class="selection-card p-4 rounded-xl text-center text-xs text-white/70 flex flex-col items-center justify-center min-h-[60px] relative">
+                      <span>Long-Term</span>
+                      <div class="check-badge">
+                        <svg width="8" height="8" viewBox="0 0 10 8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 4.5L3.5 7L9 1" />
+                        </svg>
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -1414,10 +1468,20 @@ html { scroll-padding-top: 80px; }
           
           <!-- SUCCESS EXPERIENCE (Feature 6) -->
           <div id="q-success" class="hidden text-center py-8 relative z-10 opacity-0 transition-opacity duration-500">
+            <!-- Ambient Glow behind bottle -->
+            <div id="success-glow" class="absolute rounded-full pointer-events-none opacity-0 transition-opacity duration-1000 blur-[50px]" style="background: radial-gradient(circle, rgba(201,170,113,0.25) 0%, rgba(41,41,204,0.18) 50%, transparent 70%); width: 280px; height: 280px; left: 50%; top: 35%; transform: translate(-50%, -50%); z-index: 0;"></div>
             <!-- Large Hyper-realistic Filling Success Bottle -->
-            <div class="w-64 h-[350px] mx-auto relative mb-8 flex items-center justify-center">
-              <svg id="success-bottle-svg" width="160" height="340" viewBox="0 0 160 360" fill="none" class="mx-auto filter drop-shadow-[0_12px_24px_rgba(41,41,204,0.35)]">
+            <div class="w-64 h-[350px] mx-auto relative mb-8 flex items-center justify-center z-10">
+              <svg id="success-bottle-svg" width="160" height="360" viewBox="0 0 160 360" fill="none" class="mx-auto filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
                 <defs>
+                  <linearGradient id="success-luxury-gold-cap" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8a6f3e" />
+                    <stop offset="20%" stop-color="#C9AA71" />
+                    <stop offset="40%" stop-color="#fdf3cd" />
+                    <stop offset="60%" stop-color="#C9AA71" />
+                    <stop offset="80%" stop-color="#9d7e48" />
+                    <stop offset="100%" stop-color="#5c4928" />
+                  </linearGradient>
                   <linearGradient id="success-liquid-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#2929CC" stop-opacity="0.85" />
                     <stop offset="50%" stop-color="#4444E0" stop-opacity="0.9" />
@@ -1427,24 +1491,36 @@ html { scroll-padding-top: 80px; }
                     <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" />
                   </clipPath>
                   <linearGradient id="success-glass-reflection" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
-                    <stop offset="30%" stop-color="#ffffff" stop-opacity="0.05" />
-                    <stop offset="70%" stop-color="#ffffff" stop-opacity="0" />
-                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+                    <stop offset="25%" stop-color="#ffffff" stop-opacity="0.05" />
+                    <stop offset="75%" stop-color="#ffffff" stop-opacity="0" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
                   </linearGradient>
                 </defs>
-                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+                
+                <!-- Ambient Back-glass Shadow & Tint -->
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5" />
+                
+                <!-- Animated Water Liquid inside clip path -->
                 <g clip-path="url(#success-bottle-clip)">
-                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.04)" />
-                  <!-- Success Liquid Group: animated translateY controlled by script -->
+                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.03)" />
+                  <!-- Success Liquid Group: translateY controlled by script -->
                   <g id="success-liquid-group" transform="translate(0, 345)" style="transition: transform 2.5s cubic-bezier(0.25, 0.8, 0.25, 1);">
-                    <path class="wave-back" d="M 0,-10 Q 40,-20 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="#2929CC" opacity="0.4" />
-                    <path class="wave-front" d="M 0,-10 Q 40,0 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="url(#success-liquid-grad)" />
+                    <g class="liquid-slosh-element" style="transform-origin: 80px 0px;">
+                      <!-- Back Wave (slow, dark, opacity 0.3) -->
+                      <path class="wave-back" d="M -160,-5 Q -120,-18 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="#1b1b8f" opacity="0.3" />
+                      <!-- Mid Wave (medium, semi-transparent) -->
+                      <path class="wave-mid" d="M -160,-5 Q -120,-10 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="#2020a8" opacity="0.45" />
+                      <!-- Front Wave (fast, premium gradient) -->
+                      <path class="wave-front" d="M -160,-5 Q -120,-15 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="url(#success-liquid-grad)" />
+                    </g>
                   </g>
                 </g>
+                
+                <!-- Label (layered on top of water) -->
                 <g id="success-bottle-label">
-                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1" />
-                  <!-- Real ClairMaunt Logo -->
+                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1.2" />
+                  <!-- Logo -->
                   <g transform="translate(64.5, 172) scale(0.12)">
                     <polygon points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
                     <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
@@ -1457,11 +1533,60 @@ html { scroll-padding-top: 80px; }
                   <text x="80" y="215" text-anchor="middle" font-family="Playfair Display, serif" font-size="8" font-weight="700" fill="white" letter-spacing="0.5">ClairMaunt</text>
                   <text x="80" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.5" fill="#C9AA71" letter-spacing="1">PREMIUM</text>
                   <line x1="50" y1="232" x2="110" y2="232" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" />
-                  <text x="80" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#C9AA71">✓</text>
+                  <text x="80" y="246" text-anchor="middle" font-size="9" fill="#C9AA71">✓</text>
                 </g>
+                
+                <!-- Front Glass Details, Reflections & Droplets -->
+                <!-- Glass Reflection Overlay -->
                 <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="url(#success-glass-reflection)" pointer-events="none" />
-                <rect x="66" y="5" width="28" height="17" rx="2" fill="#C9AA71" stroke="#ffffff" stroke-width="0.5" />
-                <circle id="success-splash-ring" cx="80" cy="22" r="0" stroke="#C9AA71" stroke-width="1.5" fill="none" opacity="0" style="transition: all 0.6s ease-out;" />
+                
+                <!-- Sharp Studio Highlights -->
+                <path d="M 40,110 L 40,320" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2.5" stroke-linecap="round" pointer-events="none" />
+                <path d="M 42,112 L 42,318" stroke="rgba(255, 255, 255, 0.6)" stroke-width="0.8" stroke-linecap="round" pointer-events="none" />
+                <path d="M 120,110 L 120,320" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round" pointer-events="none" />
+                <path d="M 72,25 L 72,58" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" pointer-events="none" />
+                <path d="M 42,112 Q 70,85 70,62" fill="none" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1.8" stroke-linecap="round" pointer-events="none" />
+                
+                <!-- Gold Metal Cap -->
+                <rect x="66" y="5" width="28" height="17" rx="2" fill="url(#success-luxury-gold-cap)" stroke="#ffffff" stroke-width="0.3" />
+                <!-- Cap Ridges -->
+                <line x1="71" y1="5" x2="71" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="76" y1="5" x2="76" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="81" y1="5" x2="81" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="84" y1="5" x2="84" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="89" y1="5" x2="89" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="66" y1="9" x2="94" y2="9" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                
+                <!-- Condensation Droplets group -->
+                <g class="condensation-droplets" opacity="0.8">
+                  <ellipse cx="48" cy="130" rx="1.8" ry="2.2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="47.3" cy="128.8" r="0.5" fill="#ffffff" />
+                  
+                  <ellipse cx="112" cy="150" rx="2" ry="2.5" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="111.3" cy="148.8" r="0.6" fill="#ffffff" />
+
+                  <circle cx="55" cy="280" r="1.5" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="54.4" cy="279.4" r="0.4" fill="#ffffff" />
+
+                  <path d="M 115,220 Q 116,230 114,240" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" fill="none" />
+                  <ellipse cx="114" cy="241" rx="1.8" ry="2.2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="113.3" cy="239.8" r="0.5" fill="#ffffff" />
+
+                  <ellipse cx="108" cy="290" rx="1.6" ry="2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="107.4" cy="289" r="0.4" fill="#ffffff" />
+                </g>
+                
+                <!-- Splash Effects elements -->
+                <circle id="success-splash-ring-1" cx="80" cy="22" r="0" stroke="#C9AA71" stroke-width="1.5" fill="none" opacity="0" style="transition: all 0.8s cubic-bezier(0.1, 0.8, 0.3, 1);" />
+                <circle id="success-splash-ring-2" cx="80" cy="22" r="0" stroke="#2929CC" stroke-width="1.0" fill="none" opacity="0" style="transition: all 0.8s cubic-bezier(0.1, 0.8, 0.3, 1);" />
+                
+                <g id="success-splash-droplets" class="success-splash-droplets" opacity="0" style="transform-origin: 80px 22px; transition: all 0.8s;">
+                  <circle cx="75" cy="18" r="1.5" fill="#C9AA71" />
+                  <circle cx="85" cy="18" r="1.5" fill="#C9AA71" />
+                  <circle cx="80" cy="12" r="1.8" fill="#2929CC" />
+                  <path d="M 77,20 Q 74,13 70,11" stroke="#2929CC" stroke-width="1" fill="none" stroke-linecap="round" />
+                  <path d="M 83,20 Q 86,13 90,11" stroke="#2929CC" stroke-width="1" fill="none" stroke-linecap="round" />
+                </g>
               </svg>
             </div>
             
@@ -1492,8 +1617,16 @@ html { scroll-padding-top: 80px; }
             
             <!-- Dynamic SVG Progress Bottle -->
             <div class="w-48 h-96 relative flex items-center justify-center">
-              <svg id="progress-bottle-svg" width="160" height="360" viewBox="0 0 160 360" fill="none" class="filter drop-shadow-[0_10px_20px_rgba(41,41,204,0.3)]">
+              <svg id="progress-bottle-svg" width="160" height="360" viewBox="0 0 160 360" fill="none" class="filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)]">
                 <defs>
+                  <linearGradient id="luxury-gold-cap" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8a6f3e" />
+                    <stop offset="20%" stop-color="#C9AA71" />
+                    <stop offset="40%" stop-color="#fdf3cd" />
+                    <stop offset="60%" stop-color="#C9AA71" />
+                    <stop offset="80%" stop-color="#9d7e48" />
+                    <stop offset="100%" stop-color="#5c4928" />
+                  </linearGradient>
                   <linearGradient id="liquid-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#2929CC" stop-opacity="0.85" />
                     <stop offset="50%" stop-color="#4444E0" stop-opacity="0.9" />
@@ -1503,27 +1636,36 @@ html { scroll-padding-top: 80px; }
                     <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" />
                   </clipPath>
                   <linearGradient id="glass-reflection" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
-                    <stop offset="30%" stop-color="#ffffff" stop-opacity="0.05" />
-                    <stop offset="70%" stop-color="#ffffff" stop-opacity="0" />
-                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+                    <stop offset="25%" stop-color="#ffffff" stop-opacity="0.05" />
+                    <stop offset="75%" stop-color="#ffffff" stop-opacity="0" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
                   </linearGradient>
                 </defs>
                 
-                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+                <!-- Ambient Back-glass Shadow & Tint -->
+                <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5" />
                 
+                <!-- Animated Water Liquid inside clip path -->
                 <g clip-path="url(#bottle-clip)">
-                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.05)" />
-                  <!-- Water level: starts at 278px Y translation for Step 1 (25% filled) -->
+                  <rect x="0" y="0" width="160" height="360" fill="rgba(255, 255, 255, 0.03)" />
+                  <!-- Progress Liquid Group: translateY controlled by script -->
                   <g id="progress-liquid-group" transform="translate(0, 278)" style="transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-                    <path class="wave-back" d="M 0,-10 Q 40,-20 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="#2929CC" opacity="0.4" />
-                    <path class="wave-front" d="M 0,-10 Q 40,0 80,-10 T 160,-10 T 240,-10 T 320,-10 L 320,360 L 0,360 Z" fill="url(#liquid-grad)" />
+                    <g class="liquid-slosh-element" style="transform-origin: 80px 0px;">
+                      <!-- Back Wave (slow, dark, opacity 0.3) -->
+                      <path class="wave-back" d="M -160,-5 Q -120,-18 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="#1b1b8f" opacity="0.3" />
+                      <!-- Mid Wave (medium, semi-transparent) -->
+                      <path class="wave-mid" d="M -160,-5 Q -120,-10 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="#2020a8" opacity="0.45" />
+                      <!-- Front Wave (fast, premium gradient) -->
+                      <path class="wave-front" d="M -160,-5 Q -120,-15 -80,-5 T 0,-5 T 80,-5 T 160,-5 T 240,-5 T 320,-5 L 320,360 L -160,360 Z" fill="url(#liquid-grad)" />
+                    </g>
                   </g>
                 </g>
                 
+                <!-- Label (layered on top of water) -->
                 <g id="progress-bottle-label">
-                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1" />
-                  <!-- Real ClairMaunt Logo -->
+                  <rect x="42" y="165" width="76" height="95" rx="4" fill="#0E0E2C" stroke="#C9AA71" stroke-width="1.2" />
+                  <!-- Logo -->
                   <g transform="translate(64.5, 172) scale(0.12)">
                     <polygon points="10,143 60,55 85,92 50,143" fill="#4444E0"/>
                     <polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/>
@@ -1539,9 +1681,45 @@ html { scroll-padding-top: 80px; }
                   <text x="80" y="242" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.5" fill="white" opacity="0.5">500 ml</text>
                 </g>
                 
+                <!-- Front Glass Details, Reflections & Droplets -->
+                <!-- Glass Reflection Overlay -->
                 <path d="M 68,22 L 92,22 L 92,60 Q 92,80 125,110 L 125,320 Q 125,345 100,345 L 60,345 Q 35,345 35,320 L 35,110 Q 68,80 68,60 Z" fill="url(#glass-reflection)" pointer-events="none" />
-                <rect x="66" y="5" width="28" height="17" rx="2" fill="#C9AA71" stroke="#ffffff" stroke-width="0.5" />
-                <path d="M 42,120 Q 40,220 42,310" stroke="white" stroke-width="2" opacity="0.25" stroke-linecap="round" pointer-events="none" />
+                
+                <!-- Sharp Studio Highlights -->
+                <path d="M 40,110 L 40,320" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2.5" stroke-linecap="round" pointer-events="none" />
+                <path d="M 42,112 L 42,318" stroke="rgba(255, 255, 255, 0.6)" stroke-width="0.8" stroke-linecap="round" pointer-events="none" />
+                <path d="M 120,110 L 120,320" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round" pointer-events="none" />
+                <path d="M 72,25 L 72,58" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" pointer-events="none" />
+                <path d="M 42,112 Q 70,85 70,62" fill="none" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1.8" stroke-linecap="round" pointer-events="none" />
+                
+                <!-- Gold Metal Cap -->
+                <rect x="66" y="5" width="28" height="17" rx="2" fill="url(#luxury-gold-cap)" stroke="#ffffff" stroke-width="0.3" />
+                <!-- Cap Ridges -->
+                <line x1="71" y1="5" x2="71" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="76" y1="5" x2="76" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="81" y1="5" x2="81" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="84" y1="5" x2="84" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="89" y1="5" x2="89" y2="22" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" />
+                <line x1="66" y1="9" x2="94" y2="9" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                
+                <!-- Condensation Droplets group -->
+                <g class="condensation-droplets" opacity="0.8">
+                  <ellipse cx="48" cy="130" rx="1.8" ry="2.2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="47.3" cy="128.8" r="0.5" fill="#ffffff" />
+                  
+                  <ellipse cx="112" cy="150" rx="2" ry="2.5" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="111.3" cy="148.8" r="0.6" fill="#ffffff" />
+
+                  <circle cx="55" cy="280" r="1.5" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="54.4" cy="279.4" r="0.4" fill="#ffffff" />
+
+                  <path d="M 115,220 Q 116,230 114,240" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" fill="none" />
+                  <ellipse cx="114" cy="241" rx="1.8" ry="2.2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="113.3" cy="239.8" r="0.5" fill="#ffffff" />
+
+                  <ellipse cx="108" cy="290" rx="1.6" ry="2" fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.15)" stroke-width="0.2" />
+                  <circle cx="107.4" cy="289" r="0.4" fill="#ffffff" />
+                </g>
               </svg>
             </div>
             
@@ -1586,38 +1764,34 @@ html { scroll-padding-top: 80px; }
       <div class="sm:col-span-2">
         <div class="flex items-center gap-3 mb-6">
           <svg width="44" height="32" viewBox="0 0 260 180" fill="none"><polygon points="10,143 60,55 85,92 50,143" fill="#4444E0"/><polygon points="60,55 72,78 62,143 50,143 85,92" fill="#2929CC"/><polygon points="62,143 130,18 198,143" fill="#4444E0"/><polygon points="130,18 150,58 138,143 122,143 110,58" fill="#2929CC"/><polygon points="175,92 200,55 250,143 210,143" fill="#4444E0"/><polygon points="200,55 213,78 198,143 210,143 175,92" fill="#2929CC"/><polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity=".4"/><line x1="10" y1="146" x2="250" y2="146" stroke="#4444E0" stroke-width="2.5"/></svg>
-          <div><div class="font-heading font-bold text-xl tracking-wide">ClairMaunt</div><div class="text-[9px] tracking-[.2em] uppercase text-white/35 mt-0.5">Your Brand In Every Hand</div></div>
+          <div><div class="font-heading font-bold text-xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gold">ClairMaunt</div><div class="text-[9px] tracking-[.2em] uppercase text-white/35 mt-0.5">Your Brand In Every Hand</div></div>
         </div>
         <p class="text-white/45 font-light leading-relaxed text-sm max-w-sm">Premium luxury customized water bottles for weddings, hotels, corporate events, and beyond. Every bottle, a brand experience.</p>
         <div class="flex gap-4 mt-8">
           <!-- WhatsApp -->
-          <a href="https://wa.me/918824967809" target="_blank" rel="noopener" title="WhatsApp" class="w-10 h-10 rounded-full flex items-center justify-center transition-all footer-social-icon" style="background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.35)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <a href="https://wa.me/918824967809" target="_blank" rel="noopener" title="WhatsApp" class="footer-social-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
           <!-- Instagram -->
-          <a href="https://instagram.com/clairmaunt" target="_blank" rel="noopener" title="Instagram" class="w-10 h-10 rounded-full flex items-center justify-center transition-all footer-social-icon" style="background:rgba(225,48,108,.15);border:1px solid rgba(225,48,108,.35)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="url(#ig-grad)"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <a href="https://instagram.com/clairmaunt" target="_blank" rel="noopener" title="Instagram" class="footer-social-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
           <!-- Facebook -->
-          <a href="https://facebook.com/clairmaunt" target="_blank" rel="noopener" title="Facebook" class="w-10 h-10 rounded-full flex items-center justify-center transition-all footer-social-icon" style="background:rgba(24,119,242,.15);border:1px solid rgba(24,119,242,.35)">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <a href="https://facebook.com/clairmaunt" target="_blank" rel="noopener" title="Facebook" class="footer-social-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
           <!-- X (formerly Twitter) -->
-          <a href="https://x.com/clairmaunt" target="_blank" rel="noopener" title="X (Twitter)" class="w-10 h-10 rounded-full flex items-center justify-center transition-all footer-social-icon" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFFFFF">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
+          <a href="https://x.com/clairmaunt" target="_blank" rel="noopener" title="X (Twitter)" class="footer-social-icon">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
           <!-- LinkedIn -->
-          <a href="https://linkedin.com/company/clairmaunt" target="_blank" rel="noopener" title="LinkedIn" class="w-10 h-10 rounded-full flex items-center justify-center transition-all footer-social-icon" style="background:rgba(10,102,194,.15);border:1px solid rgba(10,102,194,.35)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#0A66C2">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
+          <a href="https://linkedin.com/company/clairmaunt" target="_blank" rel="noopener" title="LinkedIn" class="footer-social-icon">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
         </div>
       </div>
       <div>
-        <h4 class="font-semibold text-xs uppercase tracking-widest mb-6 text-white/65">Quick Links</h4>
+        <h4 class="font-heading font-bold text-sm uppercase tracking-widest mb-6 text-gold">Quick Links</h4>
         <ul class="space-y-3 text-sm font-light">
           <li><a href="#why-us" class="text-white/45 hover:text-white transition-colors footer-link">Why ClairMaunt</a></li>
           <li><a href="#industries" class="text-white/45 hover:text-white transition-colors footer-link">Industries</a></li>
@@ -1630,7 +1804,7 @@ html { scroll-padding-top: 80px; }
         </ul>
       </div>
       <div>
-        <h4 class="font-semibold text-xs uppercase tracking-widest mb-6 text-white/65">Contact</h4>
+        <h4 class="font-heading font-bold text-sm uppercase tracking-widest mb-6 text-gold">Contact</h4>
         <ul class="space-y-4">
           <li class="flex items-start gap-3 footer-contact-item"><span class="material-icons-outlined text-sm mt-0.5" style="color:#4444E0">mail</span><a href="mailto:clairmaunt@gmail.com" class="text-white/45 hover:text-white text-sm font-light transition-colors">clairmaunt@gmail.com</a></li>
           <li class="flex items-start gap-3 footer-contact-item"><span class="material-icons-outlined text-sm mt-0.5" style="color:#4444E0">phone</span><a href="tel:+918824967809" class="text-white/45 hover:text-white text-sm font-light transition-colors">+91-8824967809</a></li>
@@ -1864,6 +2038,10 @@ function toggleFaq(btn){
 let currentStep = 1;
 const totalSteps = 4;
 
+function triggerSlosh(liquidGroup) {
+  // Deleted animation
+}
+
 function updateProgress() {
   const line = document.getElementById('progress-line');
   const stepNum = (currentStep === 'review') ? 4 : currentStep;
@@ -1908,81 +2086,24 @@ function nextStep(step) {
     const activeStep = document.getElementById('step-'+currentStep);
     const required = activeStep.querySelectorAll('[required]');
     let valid = true;
-    required.forEach(el => { if(!el.value) { el.style.borderColor = 'red'; valid = false; } else { el.style.borderColor = 'rgba(255,255,255,.12)'; } });
+    required.forEach(el => {
+      if(!el.value) {
+        el.classList.add('invalid-input');
+        valid = false;
+      } else {
+        el.classList.remove('invalid-input');
+      }
+      if (!el.dataset.shakeBound) {
+        el.addEventListener('input', () => el.classList.remove('invalid-input'));
+        el.dataset.shakeBound = 'true';
+      }
+    });
     if(!valid) { alert("Please fill in all required fields."); return; }
   }
   
-  const currentEl = document.getElementById('step-' + currentStep) || document.querySelector('.form-step:not(.hidden)');
   const nextEl = document.getElementById('step-' + step);
-  
-  if (currentEl && currentEl !== nextEl) {
-    const currentIdx = (currentStep === 'review') ? 5 : parseInt(currentStep);
-    const nextIdx = (step === 'review') ? 5 : parseInt(step);
-    const isForward = nextIdx > currentIdx;
-    
-    // Smooth Height Transition for Form Container
-    const form = document.getElementById('q-form');
-    const startHeight = form.offsetHeight;
-    form.style.height = startHeight + 'px';
-    form.style.position = 'relative';
-    form.style.overflow = 'hidden';
-    form.style.transition = 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    
-    // Transition Outgoing Step
-    currentEl.style.position = 'absolute';
-    currentEl.style.width = '100%';
-    currentEl.style.top = '0';
-    currentEl.style.left = '0';
-    currentEl.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    
-    // Transition Incoming Step
-    nextEl.classList.remove('hidden');
-    nextEl.style.position = 'absolute';
-    nextEl.style.width = '100%';
-    nextEl.style.top = '0';
-    nextEl.style.left = '0';
-    nextEl.style.opacity = '0';
-    nextEl.style.transform = isForward ? 'translate3d(80px, 0, 0)' : 'translate3d(-80px, 0, 0)';
-    nextEl.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    
-    // Force DOM repaint to get next step height
-    const targetHeight = nextEl.offsetHeight;
-    
-    // Animate height and horizontal slide/fade
-    nextEl.offsetHeight; // force reflow
-    form.style.height = targetHeight + 'px';
-    
-    currentEl.style.opacity = '0';
-    currentEl.style.transform = isForward ? 'translate3d(-80px, 0, 0)' : 'translate3d(80px, 0, 0)';
-    
-    nextEl.style.opacity = '1';
-    nextEl.style.transform = 'translate3d(0, 0, 0)';
-    
-    setTimeout(() => {
-      // Reset transition styles post-animation
-      currentEl.classList.add('hidden');
-      currentEl.style.position = '';
-      currentEl.style.width = '';
-      currentEl.style.top = '';
-      currentEl.style.left = '';
-      currentEl.style.transform = '';
-      currentEl.style.opacity = '';
-      currentEl.style.transition = '';
-      
-      nextEl.style.position = '';
-      nextEl.style.width = '';
-      nextEl.style.top = '';
-      nextEl.style.left = '';
-      nextEl.style.transform = '';
-      nextEl.style.opacity = '';
-      nextEl.style.transition = '';
-      
-      form.style.height = '';
-      form.style.overflow = '';
-      form.style.transition = '';
-    }, 400);
-  } else {
-    document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+  if (nextEl) {
     nextEl.classList.remove('hidden');
   }
   
@@ -2194,7 +2315,6 @@ function loadProgress() {
 }
 window.addEventListener('DOMContentLoaded', () => {
   loadProgress();
-  initInputRipples();
   initStatsCounter();
   updateProgress();
 });
@@ -2273,185 +2393,59 @@ async function submitForm(e){
   const form = document.getElementById('q-form');
   const success = document.getElementById('q-success');
   
-  form.style.transition = 'opacity .4s, transform .4s';
-  form.style.opacity = '0';
-  form.style.transform = 'scale(.97)';
+  form.style.display = 'none';
+  success.classList.remove('hidden');
+  success.style.opacity = '1';
   
-  setTimeout(() => {
-    form.style.display = 'none';
-    success.classList.remove('hidden');
-    success.style.opacity = '0';
-    
-    // Reset success components
-    const successLiquid = document.getElementById('success-liquid-group');
-    const successSplash = document.getElementById('success-splash-ring');
-    const successMsg = document.getElementById('success-message-content');
-    
-    if (successLiquid) successLiquid.style.transform = 'translate(0, 345px)';
-    if (successSplash) {
-      successSplash.style.transition = 'none';
-      successSplash.setAttribute('r', '0');
-      successSplash.style.opacity = '0';
-    }
-    if (successMsg) {
-      successMsg.style.opacity = '0';
-      successMsg.style.transform = 'translate3d(0, 15px, 0)';
-    }
-    
-    setTimeout(() => {
-      success.style.transition = 'opacity 0.5s';
-      success.style.opacity = '1';
-      
-      // Start bottle filling animation
-      setTimeout(() => {
-        if (successLiquid) {
-          successLiquid.style.transform = 'translate(0, 22px)';
-        }
-        
-        // After 2.5s (filling duration), trigger splash ring ripple and reveal message
-        setTimeout(() => {
-          if (successSplash) {
-            successSplash.style.transition = 'all 0.8s cubic-bezier(0.1, 0.8, 0.3, 1)';
-            successSplash.setAttribute('r', '35');
-            successSplash.style.opacity = '0.8';
-            
-            setTimeout(() => {
-              successSplash.style.opacity = '0';
-            }, 500);
-          }
-          
-          // Reveal luxury success message content
-          if (successMsg) {
-            successMsg.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            successMsg.style.transform = 'translate3d(0, 0, 0)';
-            successMsg.style.opacity = '1';
-          }
-        }, 2500);
-      }, 300);
-    }, 50);
-  }, 400);
-}
-
-// Wrap input/select/textarea dynamically to support ripple (Feature 2)
-function initInputRipples() {
-  const inputs = document.querySelectorAll('#q-form input:not([type="file"]):not([type="radio"]), #q-form select, #q-form textarea');
-  inputs.forEach(input => {
-    let wrapper = input.parentElement;
-    
-    // Wrap with relative div if parent is not already a wrapper/relative layout container
-    if (!wrapper.classList.contains('relative') && !wrapper.classList.contains('input-ripple-wrapper')) {
-      const newWrapper = document.createElement('div');
-      newWrapper.className = 'input-ripple-wrapper relative w-full';
-      input.parentNode.insertBefore(newWrapper, input);
-      newWrapper.appendChild(input);
-      wrapper = newWrapper;
-    }
-    
-    // Bind click and focus triggers
-    input.addEventListener('click', (e) => {
-      createRipple(e, wrapper);
-    });
-    input.addEventListener('focus', () => {
-      createRipple(null, wrapper);
-    });
-  });
+  const successLiquid = document.getElementById('success-liquid-group');
+  const successSplashRing1 = document.getElementById('success-splash-ring-1');
+  const successSplashRing2 = document.getElementById('success-splash-ring-2');
+  const successSplashDroplets = document.getElementById('success-splash-droplets');
+  const successGlow = document.getElementById('success-glow');
+  const successMsg = document.getElementById('success-message-content');
   
-  // Custom styled radio options select elements
-  const radioLabels = document.querySelectorAll('#q-form label.cursor-pointer');
-  radioLabels.forEach(label => {
-    label.addEventListener('click', (e) => {
-      createRipple(e, label);
-    });
-  });
-}
-
-function createRipple(event, container) {
-  // Remove existing active ripples
-  container.querySelectorAll('.water-ripple-span').forEach(r => r.remove());
-  
-  const ripple = document.createElement('span');
-  ripple.className = 'water-ripple-span';
-  
-  let x, y;
-  if (event) {
-    const rect = container.getBoundingClientRect();
-    x = event.clientX - rect.left;
-    y = event.clientY - rect.top;
-  } else {
-    // Fallback: center ripple point on focus event
-    x = container.offsetWidth / 2;
-    y = container.offsetHeight / 2;
+  if (successLiquid) {
+    successLiquid.style.transition = 'none';
+    successLiquid.style.transform = 'translate(0, 22px)';
   }
-  
-  ripple.style.left = `${x}px`;
-  ripple.style.top = `${y}px`;
-  
-  const size = Math.max(container.offsetWidth, container.offsetHeight) * 1.6;
-  ripple.style.width = `${size}px`;
-  ripple.style.height = `${size}px`;
-  
-  container.appendChild(ripple);
-  
-  // Execute scale and fade transitions
-  requestAnimationFrame(() => {
-    ripple.style.transform = 'translate(-50%, -50%) scale(1)';
-    ripple.style.opacity = '0';
-  });
-  
-  setTimeout(() => {
-    ripple.remove();
-  }, 500);
+  if (successSplashRing1) {
+    successSplashRing1.style.transition = 'none';
+    successSplashRing1.setAttribute('r', '0');
+    successSplashRing1.style.opacity = '0';
+  }
+  if (successSplashRing2) {
+    successSplashRing2.style.transition = 'none';
+    successSplashRing2.setAttribute('r', '0');
+    successSplashRing2.style.opacity = '0';
+  }
+  if (successSplashDroplets) {
+    successSplashDroplets.classList.remove('splash-active');
+    successSplashDroplets.style.opacity = '0';
+  }
+  if (successGlow) {
+    successGlow.style.transition = 'none';
+    successGlow.style.opacity = '1';
+  }
+  if (successMsg) {
+    successMsg.style.opacity = '1';
+    successMsg.style.transform = 'translate3d(0, 0, 0)';
+    Array.from(successMsg.children).forEach(child => {
+      child.style.opacity = '1';
+      child.style.transform = 'translate3d(0, 0, 0)';
+      child.style.transition = 'none';
+      child.style.transitionDelay = '0ms';
+    });
+  }
 }
 
-// Intersection Observer staggered countup trust stats (Feature 5)
 function initStatsCounter() {
   const statsSection = document.getElementById('trust-stats-grid');
   if (!statsSection) return;
-
-  const countUp = (el) => {
-    const target = parseInt(el.getAttribute('data-target'));
-    const duration = 2000;
-    const start = 0;
-    const startTime = performance.now();
-
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const ease = 1 - Math.pow(1 - progress, 3);
-      const currentVal = Math.floor(ease * (target - start) + start);
-      
-      if (target >= 1000) {
-        el.textContent = currentVal.toLocaleString('en-IN');
-      } else {
-        el.textContent = currentVal;
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        el.textContent = target >= 1000 ? target.toLocaleString('en-IN') : target;
-      }
-    };
-
-    requestAnimationFrame(animate);
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const counters = entry.target.querySelectorAll('.stat-count');
-        counters.forEach((counter, idx) => {
-          setTimeout(() => {
-            countUp(counter);
-          }, idx * 150);
-        });
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  observer.observe(statsSection);
+  const counters = statsSection.querySelectorAll('.stat-count');
+  counters.forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    counter.textContent = target >= 1000 ? target.toLocaleString('en-IN') : target;
+  });
 }
 
 // Form reset handling function
@@ -2462,15 +2456,14 @@ function resetQuotationForm() {
   if (form) {
     form.reset();
     form.style.display = 'block';
-    form.style.opacity = '1';
-    form.style.transform = 'none';
-    form.style.height = '';
   }
   
   if (success) {
     success.classList.add('hidden');
-    success.style.opacity = '0';
   }
+  
+  // Clear any validation shakes/shading
+  document.querySelectorAll('#q-form .invalid-input').forEach(el => el.classList.remove('invalid-input'));
   
   const fuLogo = document.getElementById('fu-label-logo');
   if (fuLogo) fuLogo.textContent = 'Drag & Drop or Click (Images only)';
@@ -2496,26 +2489,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click
 // Init first tab reveals
 document.querySelectorAll('#tp-wedding .reveal').forEach(el=>el.classList.add('in'));
 
-// Form card spotlight glow tracking
-(() => {
-  const card = document.getElementById('q-form-card');
-  const glow = document.getElementById('q-card-glow');
-  if (!card || !glow) return;
-  
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    glow.style.left = `${x}px`;
-    glow.style.top = `${y}px`;
-    glow.style.opacity = '1';
-  });
-  
-  card.addEventListener('mouseleave', () => {
-    glow.style.opacity = '0';
-  });
-})();
+// Form card spotlight glow tracking disabled
 </script>
 </body>
 </html>
