@@ -67,8 +67,44 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 /* Nav Redesign: Floating Curved Rectangle with Optimized Size */
 .nav-wrapper{position:fixed;top:0;left:0;width:100%;z-index:50;padding:0.8rem 1.5rem;pointer-events:none;transition:padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
 .nav-wrapper.scrolled{padding:0.4rem 1.5rem}
-#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:80rem;margin:0 auto}
+#nav{pointer-events:auto;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);border:1px solid rgba(255, 255, 255, 0.08);background:rgba(14,14,44,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;box-shadow:0 10px 40px -10px rgba(0, 0, 0, 0.4);position:relative;max-width:80rem;margin:0 auto;overflow:hidden}
 #nav.scrolled{background:rgba(14,14,44,0.92);border-color:rgba(41,41,204,0.25);box-shadow:0 20px 40px -10px rgba(41,41,204,0.2), 0 0 0 1px rgba(41, 41, 204, 0.15)}
+/* Page scroll progress bar */
+#page-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: linear-gradient(90deg,
+    #2929CC 0%,
+    #4444E0 30%,
+    #7B6FF0 55%,
+    #C9AA71 80%,
+    #E8C97D 100%
+  );
+  border-radius: 0;
+  transition: width 0.08s linear;
+  z-index: 10;
+  will-change: width;
+}
+#page-progress::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C9AA71;
+  box-shadow: 0 0 6px 2px rgba(201,170,113,0.8), 0 0 14px 4px rgba(201,170,113,0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#page-progress.active::after {
+  opacity: 1;
+}
 .nav-a{position:relative;text-decoration:none;z-index:1}
 .logo-container:hover .logo-peak-1{transform:translateY(-3px)}
 .logo-container:hover .logo-peak-2{transform:translateY(-5px)}
@@ -1251,6 +1287,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           <span class="material-icons">menu</span>
         </button>
       </div>
+      <!-- Scroll Progress Bar -->
+      <div id="page-progress"></div>
     </div>
     <!-- Mobile menu -->
     <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm duration-300 z-[60]" style="background:rgba(14,14,44,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s ease;">
@@ -3064,15 +3102,27 @@ document.getElementById('legal-modal').addEventListener('click', function(e) {
   if (e.target === this) closeLegalModal();
 });
 
-// Nav scroll
+// Nav scroll + Page progress bar
 const navWrap = document.getElementById('nav-wrap');
 const nav = document.getElementById('nav');
+const pageProgress = document.getElementById('page-progress');
+
+function updateProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  if (pageProgress) {
+    pageProgress.style.width = pct + '%';
+    pageProgress.classList.toggle('active', pct > 0.5);
+  }
+}
 
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 50;
   if (navWrap) navWrap.classList.toggle('scrolled', scrolled);
   if (nav) nav.classList.toggle('scrolled', scrolled);
-});
+  requestAnimationFrame(updateProgress);
+}, { passive: true });
 
 // Desktop Links Sliding Pill Logic
 (() => {
