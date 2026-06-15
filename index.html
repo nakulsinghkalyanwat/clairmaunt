@@ -77,15 +77,16 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 #nav-pill {
   position: absolute;
   background: rgba(41, 41, 204, 0.15);
-  border: 1px solid rgba(201, 170, 113, 0.35);
+  border: 1px solid transparent;
   border-radius: 9999px;
-  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.38s ease;
   pointer-events: none;
   opacity: 0;
   z-index: 0;
   transform: scale(0.9);
 }
 #nav-pill.active {
+  border-color: rgba(201, 170, 113, 0.35);
   opacity: 1;
   transform: scale(1);
 }
