@@ -3007,11 +3007,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
 </div>
 
 <!-- WhatsApp Floating Action Button -->
-<div class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center wa-container">
-  <!-- Luxury Dual-Color Ripples (Green & Gold) -->
-  <span class="absolute w-16 h-16 rounded-full bg-[#C9AA71] opacity-60 wa-ripple-gold pointer-events-none"></span>
-  <span class="absolute w-15 h-15 rounded-full bg-[#25D366] opacity-60 wa-ripple-green pointer-events-none"></span>
-
+<div class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center">
   <a href="https://wa.me/918824967809" target="_blank" rel="noopener noreferrer" 
      class="relative z-10 flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-[#128C7E] via-[#25D366] to-[#C9AA71] text-white rounded-full shadow-[0_8px_32px_rgba(37,211,102,0.3)] hover:shadow-[0_12px_40px_rgba(201,170,113,0.5)] border-2 border-[#C9AA71]/40 hover:border-[#C9AA71] transition-all duration-500 hover:scale-110 active:scale-95 group focus:outline-none bg-size-200 hover:bg-right-bottom" 
      aria-label="Chat on WhatsApp">
@@ -3034,33 +3030,6 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
 <style>
 .bg-size-200 {
   background-size: 200% 200%;
-}
-@keyframes wa-luxury-float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-@keyframes wa-ripple-luxury {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-.wa-container {
-  animation: wa-luxury-float 5s infinite ease-in-out;
-}
-.wa-ripple-green {
-  animation: wa-ripple-luxury 3.5s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
-}
-.wa-ripple-gold {
-  animation: wa-ripple-luxury 3.5s infinite cubic-bezier(0.1, 0.8, 0.3, 1) 1.75s;
 }
 </style>
 
