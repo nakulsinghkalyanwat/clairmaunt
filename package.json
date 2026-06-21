@@ -1,0 +1,10 @@
+{
+  "name": "clairmaunt",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "validator": "^13.11.0",
+    "xss": "^1.0.14"
+  }
+}
