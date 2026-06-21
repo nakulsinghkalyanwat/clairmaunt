@@ -10,6 +10,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/assets/**/*.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/assets/**/*.svg",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.jpg",
       "use": "@vercel/static"
     }
@@ -23,6 +31,12 @@
   "headers": [
     {
       "source": "/(.*)\\.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.svg",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
