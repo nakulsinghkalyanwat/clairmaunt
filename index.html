@@ -107,11 +107,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
+  width: 95%; /* Default for mobile/tablet */
   max-width: 1600px;
   margin: 0 auto;
   height: 90px;
-  padding: 0 2.5rem;
+  padding: 0 1rem; /* Compact padding on mobile */
   background: linear-gradient(105deg, #1B1A3A 0%, #151533 50%, #0F1030 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -133,8 +133,46 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
     0 0 60px rgba(59, 61, 255, 0.12),
     0 12px 40px rgba(0, 0, 0, 0.55);
 }
+@media (min-width: 768px) {
+  #nav {
+    padding: 0 1.5rem; /* Tablet padding */
+  }
+}
+@media (min-width: 1024px) {
+  #nav {
+    width: 90%; /* More breathing room on small desktops */
+    padding: 0 2.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  #nav {
+    width: 85%; /* Original width on large desktops */
+  }
+}
+
 /* Nav logo */
-.nav-logo-zone { display:flex; align-items:center; flex-shrink:0; min-width:190px; }
+.nav-logo-zone { display:flex; align-items:center; flex-shrink:0; }
+@media (min-width: 1024px) {
+  .nav-logo-zone { min-width:190px; }
+}
+
+/* Dynamic Logo Text Scaling to prevent wraps and excessive height */
+@media (max-width: 639px) {
+  .logo-subtext {
+    font-size: 7.5px !important;
+    letter-spacing: 0.14em !important;
+  }
+}
+@media (max-width: 359px) {
+  .logo-subtext {
+    font-size: 6.8px !important;
+    letter-spacing: 0.1em !important;
+  }
+  .logo-title {
+    font-size: 1.1rem !important;
+  }
+}
+
 /* Nav links - absolutely centered */
 .nav-links-zone {
   display: flex;
@@ -169,8 +207,24 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   transition: left 0.3s cubic-bezier(0.16,1,0.3,1), right 0.3s cubic-bezier(0.16,1,0.3,1);
 }
 .nav-link-item:hover::after { left: 1.1rem; right: 1.1rem; }
+
+/* Scale link padding on medium screens to prevent cramping */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-link-item {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.62rem;
+  }
+  .nav-link-item:hover::after {
+    left: 0.6rem;
+    right: 0.6rem;
+  }
+}
+
 /* Nav CTA zone */
-.nav-cta-zone { display:flex; align-items:center; justify-content:flex-end; flex-shrink:0; min-width:190px; }
+.nav-cta-zone { display:flex; align-items:center; justify-content:flex-end; flex-shrink:0; }
+@media (min-width: 1024px) {
+  .nav-cta-zone { min-width:190px; }
+}
 /* Page scroll progress bar */
 #page-progress {
   position: fixed;
@@ -312,6 +366,15 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
   background: linear-gradient(135deg, #4C4EFF 0%, #3336E8 100%) !important;
   box-shadow: 0 8px 36px rgba(59, 61, 255, 0.65), 0 0 0 1px rgba(59, 61, 255, 0.35), 0 0 24px rgba(59, 61, 255, 0.3) !important;
   color: #fff !important;
+}
+
+/* Scale down Quote CTA on medium screens to prevent cramping */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .btn-nav-quote {
+    width: 145px !important;
+    height: 48px !important;
+    font-size: 0.65rem !important;
+  }
 }
 
 /* Section label */
@@ -586,6 +649,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1A1A2E;-webkit-font-s
 #mob-menu {
   transform: translateX(-110%);
   visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 #mob-menu.open {
   transform: translateX(0);
@@ -1371,8 +1436,8 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
           <polygon points="120,62 130,18 140,62 133,85 127,85" fill="white" opacity="0.55"/>
         </svg>
         <div class="flex flex-col leading-none text-left">
-          <span class="font-heading font-bold text-xl tracking-wide text-white">ClairMaunt</span>
-          <span class="text-[8.5px] tracking-[.22em] uppercase mt-1" style="color:rgba(255,255,255,0.45)">Your Brand In Every Hand</span>
+          <span class="logo-title font-heading font-bold text-xl tracking-wide text-white">ClairMaunt</span>
+          <span class="logo-subtext text-[8.5px] tracking-[.22em] uppercase mt-1" style="color:rgba(255,255,255,0.45)">Your Brand In Every Hand</span>
         </div>
       </a>
     </div>
@@ -1390,7 +1455,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
     <!-- CTA + Hamburger (right) -->
     <div class="nav-cta-zone">
       <a href="#quote" class="hidden lg:inline-flex btn-nav-quote btn-shimmer">Get a Quote</a>
-      <button id="mob-toggle" class="lg:hidden text-white p-2 ml-2">
+      <button id="mob-toggle" aria-label="Open menu" aria-expanded="false" class="lg:hidden text-white p-2 ml-2">
         <span class="material-icons">menu</span>
       </button>
     </div>
@@ -1400,7 +1465,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
       <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
         <div class="flex justify-between items-center mb-4">
           <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
-          <button onclick="closeMob()" class="text-white"><span class="material-icons">close</span></button>
+          <button onclick="closeMob()" aria-label="Close menu" class="text-white"><span class="material-icons">close</span></button>
         </div>
         <a href="#why-us"           onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
         <a href="#industries"       onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
@@ -3213,6 +3278,9 @@ window.addEventListener('load', updateNavProgress);
   navLinks.forEach(link => {
     link.addEventListener('mouseenter', () => updatePill(link));
     link.addEventListener('focus', () => updatePill(link));
+    link.addEventListener('blur', () => {
+      navPill.classList.remove('active');
+    });
   });
 
   desktopLinks.addEventListener('mouseleave', () => {
@@ -3226,6 +3294,7 @@ const mobOverlay = document.getElementById('mob-overlay');
 
 document.getElementById('mob-toggle').addEventListener('click', () => {
   mobMenu.classList.add('open');
+  document.getElementById('mob-toggle').setAttribute('aria-expanded', 'true');
   mobOverlay.classList.remove('hidden');
   requestAnimationFrame(() => {
     mobOverlay.classList.add('opacity-100');
@@ -3235,6 +3304,7 @@ document.getElementById('mob-toggle').addEventListener('click', () => {
 
 function closeMob() {
   mobMenu.classList.remove('open');
+  document.getElementById('mob-toggle').setAttribute('aria-expanded', 'false');
   mobOverlay.classList.add('opacity-0');
   mobOverlay.classList.remove('opacity-100');
   setTimeout(() => {
