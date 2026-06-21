@@ -28,6 +28,8 @@
 <meta name="twitter:description" content="Transform every bottle into a powerful brand experience. Premium custom-labelled water bottles for hotels, resorts, restaurants, weddings, corporate events, exhibitions and hospitality brands."/>
 <meta name="twitter:image" content="https://clairmaunt.com/public/assets/og-image.png"/>
 
+<link rel="preconnect" href="https://cdn.tailwindcss.com" />
+<link rel="preload" href="clairmaunt_hero_premium_bottle_blended.png" as="image" />
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1464,7 +1466,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
             <div id="hero-bottle-glow" class="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none rounded-full blur-[60px]" style="background: radial-gradient(circle at 50% 50%, rgba(41, 41, 204, 0.45) 0%, transparent 70%); width: 80%; height: 80%; left: 10%; top: 10%; z-index: 0;"></div>
             
             <!-- Bottle Image (translated in Z-space) -->
-            <img id="hero-bottle-img" src="clairmaunt_hero_premium_bottle_blended.png" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:contain;image-rendering:high-quality;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.55)); transform: translateZ(30px); position:relative; z-index:10; pointer-events:none; -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 65%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 65%);"/>
+            <img id="hero-bottle-img" fetchpriority="high" src="clairmaunt_hero_premium_bottle_blended.png" alt="ClairMaunt luxury bottle" style="width:100%;height:100%;object-fit:contain;image-rendering:high-quality;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.55)); transform: translateZ(30px); position:relative; z-index:10; pointer-events:none; -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 65%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 65%);"/>
             
             <!-- Floating badge top-right (further translated in Z-space for parallax depth) -->
             <div class="glass absolute rounded-xl px-4 py-3 z-20" style="top:5%;right:5%;animation:float 6s ease-in-out 1s infinite; transform: translateZ(55px);">
@@ -2402,7 +2404,7 @@ input[type="radio"]:checked + .selection-card .check-badge svg {
     <!-- Section 3: CUSTOMER JOURNEY IMAGE & Section 4: TIMELINE -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20 md:mb-28">
       <div class="relative flex justify-center items-center h-[500px] reveal d1 rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-        <img src="clairmaunt_marketing_ecosystem.png" alt="ClairMaunt Luxury Marketing Ecosystem Infographic showing Use Cases and Outcomes" class="w-full h-full object-cover" />
+        <img loading="lazy" src="clairmaunt_marketing_ecosystem.png" alt="ClairMaunt Luxury Marketing Ecosystem Infographic showing Use Cases and Outcomes" class="w-full h-full object-cover" />
       </div>
       
       <div class="reveal d2" style="height:500px;display:flex;flex-direction:column;justify-content:flex-start;">
