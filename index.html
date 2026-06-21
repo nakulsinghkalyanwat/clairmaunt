@@ -2436,6 +2436,16 @@ async function submitForm(e){
       child.style.transitionDelay = '0ms';
     });
   }
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('There was an error submitting your quote. Please try again.');
+    btn.textContent = originalText;
+    btn.disabled = false;
+    if (window.turnstile) {
+      turnstile.reset('#turnstile-widget');
+      currentTurnstileToken = null;
+    }
+  }
 }
 
 function initStatsCounter() {
