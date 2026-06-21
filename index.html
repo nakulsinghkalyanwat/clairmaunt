@@ -82,25 +82,26 @@
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm duration-300 z-[60]" style="background:rgba(15,16,48,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s ease;">
-      <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
-        <div class="flex justify-between items-center mb-4">
-          <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
-          <button onclick="closeMob()" aria-label="Close menu" class="text-white"><span class="material-icons">close</span></button>
-        </div>
-        <a href="#why-us"           onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
-        <a href="#industries"       onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
-        <a href="#customization"    onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
-        <a href="#advertise"        onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
-        <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
-        <a href="#quote"            onclick="closeMob()" class="btn-nav-quote text-center mt-4" style="height:48px;width:100%;border-radius:12px">Get a Quote</a>
-      </div>
-    </div>
-    <div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
-
   </nav>
 </div>
+
+<!-- Mobile menu -->
+<div id="mob-menu" class="fixed top-0 left-0 h-full w-4/5 max-w-sm duration-300 z-[60]" style="background:rgba(15,16,48,.98);backdrop-filter:blur(20px); box-shadow: 10px 0 30px rgba(0,0,0,0.5); transition: transform 0.3s ease, visibility 0.3s ease;">
+  <div class="px-6 py-8 flex flex-col gap-6 relative h-full">
+    <div class="flex justify-between items-center mb-4">
+      <div class="font-heading font-bold text-xl text-white">ClairMaunt</div>
+      <button onclick="closeMob()" aria-label="Close menu" class="text-white"><span class="material-icons">close</span></button>
+    </div>
+    <a href="#why-us"           onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Why Us</a>
+    <a href="#industries"       onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Industries</a>
+    <a href="#customization"    onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Customization</a>
+    <a href="#advertise"        onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Advertise</a>
+    <a href="#brand-experience" onclick="closeMob()" class="text-white/80 text-sm uppercase tracking-widest font-medium border-b border-white/10 pb-4">Brand Experience</a>
+    <a href="#quote"            onclick="closeMob()" class="btn-nav-quote text-center mt-4" style="height:48px;width:100%;border-radius:12px">Get a Quote</a>
+  </div>
+</div>
+<div id="mob-overlay" onclick="closeMob()" class="fixed inset-0 bg-black/60 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
+
 <!-- Page scroll progress bar -->
 <div id="page-progress"></div>
 
