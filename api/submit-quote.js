@@ -34,8 +34,7 @@ module.exports = async (req, res) => {
       quantity,
       frequency,
       source,
-      details,
-      turnstileToken
+      details
     } = req.body || {};
 
     // 2. Retrieve client IP address
@@ -66,30 +65,8 @@ module.exports = async (req, res) => {
       return res.status(429).json({ error: 'Too many requests. You can submit up to 5 quotes every 15 minutes. Please try again later.' });
     }
 
-    // 5. Bot Protection: Cloudflare Turnstile token validation
-    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA'; // Fallback to CF test secret key
-    
-    if (!turnstileToken) {
-      return res.status(400).json({ error: 'Bot verification token is missing. Please try again.' });
-    }
+    // 5. Bot Protection: Cloudflare Turnstile token validation disabled
 
-    // Call Cloudflare Turnstile siteverify API
-    const verifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-    const response = await fetch(verifyUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        secret: turnstileSecret,
-        response: turnstileToken,
-        remoteip: ip
-      })
-    });
-
-    const verifyData = await response.json();
-    if (!verifyData.success) {
-      console.error('Turnstile verification failed:', verifyData['error-codes']);
-      return res.status(400).json({ error: 'Bot verification failed. Please refresh and try again.' });
-    }
 
     // 6. Validation & Length Constraints
     // Required fields check
